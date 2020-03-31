@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  Sayyar
+
+  Created by Abdalrahim Abdullah on 10/02/2020.
+  Copyright © 2020 Teracit. All rights reserved.
+*/
+
+"syyar" = "سيار";
+"select.from" = "حدد وجهتك";
+"home.canvas" = "لوحة الرسم";
+"add.pin" = "تأكيد الوجهة";
+"where.to.go?" = "أين تود الذهاب؟";
+"notifications" = "الاشعارات";
+"payment.method" = "طريقة الدفع";
+"help" = "المساعدة";
+"contact.us" = "تواصل معنا";
+"settings" = "الاعدادات";
+"join.us" = "انضم لفريقنا";
+"how.was.trip?" = "كيف كانت رحلتك مع";
+"rate.me" = "...اكتب تعليق للسائق";
+"send" = "ارسال";
+"accept.offer" = "قبول العرض";
+"offers.page" = "عروض السائقين";
+"km" = "كم";
+"sr" = "ر.س";
+"timer" = "وقت العرض";
