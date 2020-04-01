@@ -13,6 +13,8 @@ struct OfferCard: View {
     @State var progressBarValue : CGFloat = 1
     
     @State var currentDate = Date()
+    
+    @State var isTaxi = true
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var addOffer: () -> ()
@@ -21,17 +23,17 @@ struct OfferCard: View {
         VStack {
             HStack {
                 Image("person")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 64, height: 64)
-                    .cornerRadius(60)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 60, height: 60)
+                .cornerRadius(30)
                     .overlay(
                         RoundedRectangle(cornerRadius: 60)
                             .strokeBorder(style: StrokeStyle(lineWidth: 1))
                             .foregroundColor(.gray)
                 )
         
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 0) {
                     HStack {
                         Text(offer.driverName)
                             .font(.custom("Cairo-SemiBold", size: 12))
@@ -43,10 +45,17 @@ struct OfferCard: View {
                         
                         Text("\(NSNumber(value: offer.rating))")
                             .font(.custom("Cairo-SemiBold", size: 10))
-                        
+                        .padding(.horizontal, -6)
                     }
-                    Text("\(offer.carMake) • \(offer.carModel)"+" • \(offer.carYear)")
-                        .font(.custom("Cairo-SemiBold", size: 12))
+                    
+                    HStack {
+                        Text("\(offer.carMake) • \(offer.carModel)"+" • \(offer.carYear)")
+                            .font(.custom("Cairo-SemiBold", size: 12))
+                        if isTaxi {
+                            Image("taxi-sign")
+                        }
+                    }
+                    
                 }
                 
                 Spacer()
@@ -108,7 +117,7 @@ struct OfferCard: View {
             
         }
         .padding(5)
-        .background(Color("bg"))
+        .background(bgColor)
         .cornerRadius(10)
             .onReceive(timer) { input in
                 self.currentDate = input
@@ -155,7 +164,7 @@ struct OfferCard_Previews: PreviewProvider {
                     .environment(\.locale, locale)
                     .previewDisplayName(Locale.current.localizedString(forIdentifier: locale.identifier))
                     .colorScheme(scheme)
-                    .previewLayout(.fixed(width: 300, height: 200))
+                    .previewLayout(.fixed(width: 350, height: 200))
             }
         }
         

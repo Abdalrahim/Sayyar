@@ -14,8 +14,11 @@ import UserNotifications
 import SZTextView
 
 let purple = Color("purple")
+let bgColor = Color("bg")
 let lightPurple = Color(#colorLiteral(red: 0.6666666667, green: 0.6235294118, blue: 0.7215686275, alpha: 1))
+let red = Color(#colorLiteral(red: 0.8078431373, green: 0.2784313725, blue: 0.4, alpha: 1))
 let dark = Color(#colorLiteral(red: 0.231372549, green: 0.2745098039, blue: 0.3411764706, alpha: 1))
+let gray = Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1))
 
 struct HomeView : View {
     
@@ -24,7 +27,7 @@ struct HomeView : View {
     
     let gmap = MapView()
     let quantity = NumberFormatter.localizedString(from: 1000, number: .decimal)
-    let transText = "You have sold %@ apps in %#@months@"
+    let transText = "%#@v1_min_count@"
      
     let pathDynamic = GMSMutablePath()
     
@@ -52,8 +55,8 @@ struct HomeView : View {
     
     @State var places : [FavPlace] = [
         FavPlace(name: "home", pType: .home, location: "10mins"),
-        FavPlace(name: "work", pType: .work, location: "30mins"),
-        FavPlace(name: "meeting", pType: .other, location: "5mins")
+//        FavPlace(name: "work", pType: .work, location: "30mins"),
+//        FavPlace(name: "meeting", pType: .other, location: "5mins")
     ]
     
     var selectedPlace : FavPlace?
@@ -80,11 +83,12 @@ struct HomeView : View {
         // 2.
         
         UINavigationBar.appearance().largeTitleTextAttributes = [
-            .foregroundColor: UIColor.darkGray,
+            .foregroundColor: UIColor(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)),
             .font : UIFont(name:"Cairo-Bold", size: 40)!]
 
         // 3.
         UINavigationBar.appearance().titleTextAttributes = [
+            .foregroundColor: UIColor(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)),
             .font : UIFont(name:"Cairo-Bold", size: 20)!]
         
         //Config.shared.set(defaults: ["buttonText": "Add Pin" as NSObject])
@@ -116,6 +120,7 @@ struct HomeView : View {
                         .onAppear {
                             self.gmap.map.padding = UIEdgeInsets(top: 20, left: 10, bottom: 240, right: 10)
                     }
+                    Text("%u".localizewithnumber(count: 2))
                     
                     self.centerImage
                         .foregroundColor(Color.black)
@@ -123,14 +128,16 @@ struct HomeView : View {
                     
                     if self.showRating {
                         RatingView(rate: self.rate, textRating: self.textRating)
+                    } else {
+                        DestinationView(places: self.places, addedPin: {
+                            self.addPin()
+                        }, showSearch: {
+                            self.showSearch.toggle()
+                        }, newFav: {
+                            self.newFavPlace.toggle()
+                        })
                     }
-                    DestinationView(places: self.places, addedPin: {
-                        self.addPin()
-                    }, showSearch: {
-                        self.showSearch.toggle()
-                    }, newFav: {
-                        self.newFavPlace.toggle()
-                    })
+                    
                 }
                     //.offset(x: self.showMenu ? geometry.size.width/1.5 : 0)
                     .disabled(self.showMenu ? true : false)
@@ -147,7 +154,7 @@ struct HomeView : View {
                     
                     Sidemenu()
                         .edgesIgnoringSafeArea(.all)
-                        .frame(width: geometry.size.width/1.5)
+                        .frame(width: geometry.size.width/1.3)
                         .transition(.move(edge: .leading))
                 }
                 
@@ -173,7 +180,7 @@ struct HomeView : View {
                 .sheet(isPresented: self.$showSearch, content: {
                     SearchView()
                 })
-                
+            .navigationBarHidden(self.showMenu)
         }.sheet(isPresented: self.$newFavPlace, content: {
             NewFavPlaceView()
         })
@@ -253,13 +260,14 @@ struct HomeView_Previews: PreviewProvider {
             ].map(Locale.init(identifier:))
         
         return ForEach(supportedLocales, id: \.identifier) { locale in
-            
-            ForEach([ColorScheme.dark, .light], id: \.self) { scheme in
-                HomeView()
-                    .environment(\.locale, locale)
-                    .previewDisplayName(Locale.current.localizedString(forIdentifier: locale.identifier))
-                    .colorScheme(scheme)
-            }
+            HomeView()
+                .environment(\.locale, locale)
+//            ForEach([ColorScheme.dark, .light], id: \.self) { scheme in
+//                HomeView()
+//                    .environment(\.locale, locale)
+//                    .previewDisplayName(Locale.current.localizedString(forIdentifier: locale.identifier))
+//                    .colorScheme(scheme)
+//            }
         }
         //HomeView()//.previewDevice(PreviewDevice(stringLiteral: "iPhone 8"))
     }

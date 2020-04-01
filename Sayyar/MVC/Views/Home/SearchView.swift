@@ -13,12 +13,21 @@ struct SearchView : View {
     @State var places : [FavPlace] = [
         FavPlace(name: "home", pType: .home, location: "10mins"),
         FavPlace(name: "work", pType: .work, location: "30mins"),
-        FavPlace(name: "meeting", pType: .other, location: "5mins"),
-        FavPlace(name: "meeting", pType: .place, location: "5mins")
+        FavPlace(name: "meeting", pType: .other, location: "5mins")
     ]
+    
+    init() {
+        UITableView.appearance().separatorInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 20)
+        UITableView.appearance().tableFooterView = UIView()
+    }
     
     var body: some View {
         VStack {
+            
+            Capsule()
+            .foregroundColor(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)))
+                .frame(width: 100, height: 2)
+                .padding(.top)
             
             SearchBar(searchText: self.$textRating, search: {
                 print(self.textRating)
@@ -72,9 +81,9 @@ struct SearchCell : View {
             .scaledToFill()
             .frame(width: 35, height: 35)
             
-            VStack(alignment: .leading) {
-                Text(place.name).font(.custom("Cairo-SemiBold", size: 18))
-                Text(place.name).font(.custom("Cairo-SemiBold", size: 16)).foregroundColor(Color.init(white: 0.8))
+            VStack(alignment: .leading, spacing: -2) {
+                Text(place.name).font(.custom("Cairo-SemiBold", size: 16))
+                Text(place.name).font(.custom("Cairo-SemiBold", size: 14)).foregroundColor(Color.init(white: 0.8))
             }
             Spacer()
             Image(systemName: "star.fill")

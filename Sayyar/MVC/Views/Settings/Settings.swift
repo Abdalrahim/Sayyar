@@ -163,7 +163,7 @@ struct CustomRow: View {
             .background(Color.init(white: 0.95))
             .cornerRadius(5)
         }
-        .background(Color("bg"))
+        .background(bgColor)
         .cornerRadius(5)
         .animation(.easeIn)
         .onTapGesture {

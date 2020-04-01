@@ -6,17 +6,22 @@
   Copyright © 2020 Teracit. All rights reserved.
 */
 
-"syyar" = "Syyar";
-"select.from" = "Select Destination";
-"home.canvas" = "Canvas";
-"add.pin" = "Add Pin";
-"where.to.go?" = "Where to go?";
+/// MARK: Side Menu
 "notifications" = "Notifications";
 "payment.method" = "Payment Method";
 "help" = "Help";
 "contact.us" = "Contact Us";
 "settings" = "Settings";
 "join.us" = "Join Us";
+"trip.log" = "Trip Log";
+
+/// MARK: Home View
+"syyar" = "Syyar";
+"select.from" = "Select Destination";
+"home.canvas" = "Canvas";
+"add.pin" = "Add Pin";
+"where.to.go?" = "Where to go?";
+
 "how.was.trip?" = "How was your trip";
 "rate.me" = "Write a comment...";
 "send" = "Send";
@@ -25,3 +30,7 @@
 "sr" = "SR";
 "timer" = "Timer";
 "add.place" = "New Place";
+
+/// MARK: Registration
+"sign.in" = "Sign In";
+"resend" = "Resend";

@@ -39,9 +39,10 @@ struct RatingView: View {
                 Text("send").font(.custom("Cairo-Bold", size: 12)).foregroundColor((rate.rate() != 0) ? purple : Color.gray)
                 
             }).padding(.bottom, 10)
-        }.background(Color("bg"))
-            .cornerRadius(10)
-            .padding()
+        }
+        .background(bgColor)
+        .cornerRadius(10)
+        .padding()
         .modifier(DismissingKeyboard())
     }
 }

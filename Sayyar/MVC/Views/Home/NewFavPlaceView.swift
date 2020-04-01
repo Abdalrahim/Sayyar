@@ -13,11 +13,15 @@ struct NewFavPlaceView : View {
     
     let gmap = MapView()
     
-    @State var placename : String = ""
+    @State var placeName : String = ""
+    
+    @State var placeDetails : String = ""
     
     @State var showTypeList : Bool = false
     
     @State var showDetail : Bool = false
+    
+//    var place : FavPlace = FavPlace(name: <#T##String#>, pType: <#T##type#>, location: <#T##String#>)
     
     var body: some View {
         
@@ -40,7 +44,7 @@ struct NewFavPlaceView : View {
                         Spacer()
                     }
                     .padding(20)
-                    .background(Color("bg"))
+                    .background(bgColor)
                 }
                 .frame(height: 200, alignment: .center)
                 .cornerRadius(10)
@@ -48,11 +52,11 @@ struct NewFavPlaceView : View {
                 
                 
                 HStack {
-                    customTextField(placeholder: "place.name", placename: self.$placename) {
+                    customTextField(placeholder: "place.name", placename: self.$placeName) {
                         
                     }
                     ZStack(alignment: .trailing) {
-                        customTextField(placeholder: "type", placename: self.$placename) {}
+                        customTextField(placeholder: "type", placename: self.$placeName) {}
                             .disabled(true)
                             .frame(width: 120)
                             .onTapGesture {
@@ -76,7 +80,7 @@ struct NewFavPlaceView : View {
                 
                 ZStack(alignment: .trailing) {
                     if self.showDetail {
-                        customTextField(placeholder: "place.details", placename: self.$placename) {
+                        customTextField(placeholder: "place.details", placename: self.$placeDetails) {
                             
                         }
                         
@@ -121,46 +125,6 @@ struct NewFavPlaceView_Previews: PreviewProvider {
     }
 }
 
-struct customTextField: View {
-    
-    @State var placeholder : String
-    
-    @State var textFieldActive : Bool = false
-    @Binding var placename : String
-    
-    var commit: () -> ()
-    
-    var body: some View {
-        
-        ZStack(alignment: .leading) {
-            
-            
-            TextField(placeholder, text: $placename, onEditingChanged: {edited in
-                withAnimation {
-                    self.textFieldActive = edited
-                }
-            }, onCommit: {
-                self.commit()
-            }).frame(height: 44).padding(.horizontal)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(textFieldActive ? purple : Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)), lineWidth: 1)
-            )
-            
-            if textFieldActive {
-                Text(placeholder)
-                    .font(.custom("Cairo-Bold", size: 12))
-                    .foregroundColor(purple)
-                    .padding(2)
-                    .background(Color.white)
-                    .padding(.leading)
-                    .padding(.bottom, 45)
-                    .animation(.easeIn)
-                    .transition(.move(edge: .bottom))
-            }
-        }
-    }
-}
 
 struct TypeView: View {
     

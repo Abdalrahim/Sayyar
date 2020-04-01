@@ -31,6 +31,7 @@ struct Sidemenu: View {
         }
     }()
     
+    
     var body: some View {
         
         ScrollView {
@@ -52,10 +53,10 @@ struct Sidemenu: View {
                             .offset(y: -geometry.frame(in: .global).minY)
                     }
                 }
-            }.frame(height: 250)
+            }.frame(height: UIDevice.isSmallScreen() ? 200 : 250)
             
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing : UIDevice.isSmallScreen() ? -2.0 : 0.0) {
                 
                 HStack {
                     Spacer()
@@ -71,11 +72,12 @@ struct Sidemenu: View {
                         ).cornerRadius(30)
                         
                         Text("Abdullah Mohammed")
-                            .font(.custom("Cairo-Bold", size: 22)).lineLimit(1)
+                            .font(.custom("Cairo-Bold", size: 20))
+                            .lineLimit(1)
                             .foregroundColor(.white)
-//
+                        
                         HStack {
-                            Image(systemName: "creditcard.fill")
+                            Image("wallet")
                                 .foregroundColor(.white)
                                 .imageScale(.large)
                             
@@ -83,7 +85,7 @@ struct Sidemenu: View {
                                 .font(.custom("Cairo-SemiBold", size: 17))
                                 .foregroundColor(.white)
                         }
-                    }.padding(.top, -200)
+                    }.padding(.top, UIDevice.isSmallScreen() ? -150 : -200)
                     Spacer()
                 }
                 
@@ -93,10 +95,14 @@ struct Sidemenu: View {
                 }.padding()
 
                 NavigationLink(destination: OrderView()) {
+                    SideMenuButton(image: Image("trip log"), text: "trip.log")
+                }.padding()
+                
+                NavigationLink(destination: OrderView()) {
                     SideMenuButton(image: Image(systemName: "creditcard.fill"), text: "payment.method")
                 }.padding()
 
-                NavigationLink(destination: Settings()) {
+                NavigationLink(destination: OfferView()) {
                     SideMenuButton(image: Image(systemName: "questionmark.circle.fill"), text: "help")
                 }.padding()
 
@@ -105,10 +111,10 @@ struct Sidemenu: View {
                 }.padding()
 
                 NavigationLink(destination: Settings()) {
-                    SideMenuButton(image: Image(systemName: "gear"), text: "settings")
+                    SideMenuButton(image: Image("settings"), text: "settings")
                 }.padding()
                 
-                Spacer(minLength: 40)
+                Spacer(minLength: UIDevice.isSmallScreen() ? 20 : 40)
                 
                 HStack(alignment: .center) {
                     Spacer()
@@ -134,7 +140,9 @@ struct Sidemenu: View {
             }.background(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)))
             .edgesIgnoringSafeArea(.all)
         
-        
+            .onAppear(){
+                print(UIDevice.isSmallScreen())
+        }
     }
     
     func loginAnon() {

@@ -11,6 +11,10 @@ import Firebase
 import GoogleMaps
 
 struct OrderView: View {
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    
     let gmap = MapView()
     
     @State var locations: [CLLocationCoordinate2D] = []
@@ -21,8 +25,20 @@ struct OrderView: View {
     @State var i: UInt = 0
     
     @State var isTaxi = true
+    @State var isArriving = true
+    @State var showMenu = false
     
     @State var room = ""
+    
+    var btnBack : some View { Button(action: {
+        self.presentationMode.wrappedValue.dismiss()
+        }) {
+            Image(systemName: "line.horizontal.3")
+            .foregroundColor(purple)
+            .imageScale(.large)
+            .scaleEffect(CGSize(width: 1.3, height: 1.7))
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -40,95 +56,51 @@ struct OrderView: View {
                 ).frame(height: 80)
                     .cornerRadius(20)
                     .padding(.bottom, -50)
-                 
-                VStack {
-                    HStack(alignment : .center) {
-                        Image(systemName: "phone.fill")
-                            .resizable()
-                            .frame(width: 15, height: 15)
-                            .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
-                            .padding(6)
-                            .overlay(
-                                Circle()
-                                    .stroke(Color.init(white: 0.8), lineWidth: 1)
-                        )
-                        
-                        Image("person")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 80, height: 80)
-                            .cornerRadius(40)
-                            .padding(.horizontal)
-                        
-                        ///##Chat Room Bugs Canvas
-//                        NavigationLink(destination: ChatView(room: TextNetworkManager(room: room))) {
-//                            Image(systemName: "text.bubble.fill")
-//                                .resizable()
-//                                .frame(width: 15, height: 15)
-//                                .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
-//                                .padding(6)
-//                            .overlay(
-//                                    Circle()
-//                                        .stroke(Color.init(white: 0.8), lineWidth: 1)
-//                            )
-//                        }
-                        
-                        
+                
+                VStack(spacing: 15) {
+                    if isArriving {
+                        PartnerArriveView(isTaxi: self.$isTaxi)
                     }
-                    HStack {
-                        Text("Mohammed")
-                            .font(.custom("Cairo-SemiBold", size: 15))
-                        
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                        Text("4.9")
-                            .font(.custom("Cairo-SemiBold", size: 13))
-                    }.padding(.vertical, -10)
-                    Text("5152 AK")
-                        .font(.custom("Cairo-Bold", size: 15)).padding(.horizontal, 5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.init(white: 0.8), lineWidth: 1)
-                    )
                     
-                    HStack(spacing: 4) {
-                        Text("Toyota").font(.custom("Cairo-SemiBold", size: 15))
-                        Text("•").font(.custom("Cairo-SemiBold", size: 15))
-                        Text("Camry").font(.custom("Cairo-SemiBold", size: 15))
-                        Text("•").font(.custom("Cairo-SemiBold", size: 15))
-                        Text("2020").font(.custom("Cairo-SemiBold", size: 15))
-                        
-                        if isTaxi {
-                            Image("taxi-sign")
+                    HStack(spacing: 15) {
+                        Image("destination").padding(.bottom, 17)
+                        VStack(alignment: .leading, spacing: 0) {
+                            VStack(alignment : .leading, spacing: -5) {
+                                Text("from.destination")
+                                    .font(.custom("Cairo-SemiBold", size: 18))
+                                Text("Azizyah rd")
+                                    .font(.custom("Cairo-SemiBold", size: 17))
+                                    .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
+                            }
+                            
+                            VStack(alignment: .leading, spacing: -5) {
+                                Text("to.destination")
+                                    .font(.custom("Cairo-SemiBold", size: 18))
+                                Text("Azizyah rd")
+                                    .font(.custom("Cairo-SemiBold", size: 17))
+                                    .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
+                            }
                         }
+                        
+                        Spacer()
                     }.padding(.vertical, -15)
                     
                     Divider()
                     
-                    HStack {
-                        Image("destination")
-                        VStack(spacing: 20) {
-                            VStack(alignment : .leading) {
-                                Text("from destination")
-                                    .font(.custom("Cairo-SemiBold", size: 16))
-                                Text("Azizyah rd")
-                                    .font(.custom("Cairo-SemiBold", size: 15))
-                                    .foregroundColor(.gray)
-                            }.padding(.vertical, -5)
-                            
-                            VStack(alignment : .leading) {
-                                Text("from destination")
-                                    .font(.custom("Cairo-SemiBold", size: 16))
-                                Text("Azizyah rd")
-                                    .font(.custom("Cairo-SemiBold", size: 15))
-                                    .foregroundColor(.gray)
-                            }.padding(.vertical, -5)
-                        }
-                        
-                        Spacer()
-                    }.padding(.vertical, -5)
+                    if !isArriving {
+                        PartnerOnTripView(isTaxi: self.$isTaxi)
+                        Divider()
+                    }
                     
-                    Divider()
+                    if !isArriving {
+                        HStack {
+                            Image("safety")
+                            Text("safety.procedures")
+                                .font(.custom("Cairo-SemiBold", size: 15))
+                        }.padding(.vertical, -10)
+                        
+                        Divider()
+                    }
                     
                     Button(action: {
                         self.addPin()
@@ -140,10 +112,12 @@ struct OrderView: View {
                     
                 }
                 .padding()
-                .background(Color("bg"))
+                .background(bgColor)
                 .cornerRadius(20)
             }
             .edgesIgnoringSafeArea(.all)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: btnBack)
         }.onDisappear {
             
         }
@@ -218,5 +192,132 @@ struct OrderView: View {
 struct OrderView_Previews: PreviewProvider {
     static var previews: some View {
         OrderView()
+    }
+}
+
+struct PartnerArriveView: View {
+    @Binding var isTaxi : Bool
+    var body: some View {
+        Group {
+            HStack(alignment : .center) {
+                Image(systemName: "phone.fill")
+                    .resizable()
+                    .frame(width: 15, height: 15)
+                    .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
+                    .padding(6)
+                    .overlay(
+                        Circle()
+                            .stroke(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)), lineWidth: 1)
+                )
+                
+                Image("person")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(40)
+                    .padding(.horizontal)
+                
+                ///##Chat Room Bugs Canvas
+                NavigationLink(destination: Settings()) {
+                    Image(systemName: "text.bubble.fill")
+                        .resizable()
+                        .frame(width: 15, height: 15)
+                        .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
+                        .padding(6)
+                        .overlay(
+                            Circle()
+                                .stroke(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)), lineWidth: 1)
+                    )
+                }
+                
+                
+            }
+            HStack {
+                Text("Mohammed")
+                    .font(.custom("Cairo-SemiBold", size: 15))
+                
+                Image(systemName: "star.fill")
+                    .resizable().frame(width: 13, height: 13)
+                    .foregroundColor(.yellow)
+                Text("4.9")
+                    .font(.custom("Cairo-SemiBold", size: 13))
+            }.padding(.vertical, -10)
+            Text("5152 AK")
+                .font(.custom("Cairo-Bold", size: 15)).padding(.horizontal, 5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color.init(white: 0.8), lineWidth: 1)
+            )
+            
+            HStack(spacing: 4) {
+                Text("Toyota").font(.custom("Cairo-SemiBold", size: 15))
+                Text("•").font(.custom("Cairo-SemiBold", size: 15))
+                Text("Camry").font(.custom("Cairo-SemiBold", size: 15))
+                Text("•").font(.custom("Cairo-SemiBold", size: 15))
+                Text("2020").font(.custom("Cairo-SemiBold", size: 15))
+                
+                if isTaxi {
+                    Image("taxi-sign")
+                }
+            }.padding(.vertical, -10)
+            
+            Divider()
+        }
+    }
+}
+
+struct PartnerOnTripView: View {
+    @Binding var isTaxi : Bool
+    var body: some View {
+        HStack {
+            Image("person")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 80, height: 80)
+                .cornerRadius(40)
+            VStack(alignment:.leading, spacing:0) {
+                HStack {
+                    Text("Mohammed")
+                        .font(.custom("Cairo-SemiBold", size: 15))
+                    
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                    Text("4.9")
+                        .font(.custom("Cairo-SemiBold", size: 13))
+                }
+                Text("5152 AK")
+                    .font(.custom("Cairo-Bold", size: 15)).padding(.horizontal, 5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color.init(white: 0.8), lineWidth: 1)
+                )
+                HStack(spacing: 4) {
+                    Text("Toyota").font(.custom("Cairo-SemiBold", size: 15))
+                    Text("•").font(.custom("Cairo-SemiBold", size: 15))
+                    Text("Camry").font(.custom("Cairo-SemiBold", size: 15))
+                    Text("•").font(.custom("Cairo-SemiBold", size: 15))
+                    Text("2020").font(.custom("Cairo-SemiBold", size: 15))
+                    
+                    if isTaxi {
+                        Image("taxi-sign")
+                    }
+                }
+            }
+            Spacer()
+            VStack(spacing: 20){
+                Image(systemName: "phone.fill")
+                    .resizable()
+                    .frame(width: 15, height: 15)
+                    .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
+                    .padding(6)
+                NavigationLink(destination: Settings()) {
+                    Image(systemName: "text.bubble.fill")
+                        .resizable()
+                        .frame(width: 15, height: 15)
+                        .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
+                        .padding(6)
+                }
+            }.padding(.vertical, 5)
+        }.padding(.vertical, -10)
     }
 }

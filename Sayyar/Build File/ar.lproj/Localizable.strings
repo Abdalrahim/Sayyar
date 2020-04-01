@@ -6,17 +6,22 @@
   Copyright © 2020 Teracit. All rights reserved.
 */
 
-"syyar" = "سيار";
-"select.from" = "حدد وجهتك";
-"home.canvas" = "لوحة الرسم";
-"add.pin" = "تأكيد الوجهة";
-"where.to.go?" = "أين تود الذهاب؟";
+/// MARK: Side Menu
 "notifications" = "الاشعارات";
 "payment.method" = "طريقة الدفع";
 "help" = "المساعدة";
 "contact.us" = "تواصل معنا";
 "settings" = "الاعدادات";
 "join.us" = "انضم لفريقنا";
+"trip.log" = "سجل الرحلات";
+
+/// MARK: Home View
+"syyar" = "سيار";
+"select.from" = "حدد وجهتك";
+"home.canvas" = "لوحة الرسم";
+"add.pin" = "تأكيد الوجهة";
+"where.to.go?" = "أين تود الذهاب؟";
+
 "how.was.trip?" = "كيف كانت رحلتك مع";
 "rate.me" = "...اكتب تعليق للسائق";
 "send" = "ارسال";
@@ -25,3 +30,7 @@
 "km" = "كم";
 "sr" = "ر.س";
 "timer" = "وقت العرض";
+
+/// MARK: Registration
+"sign.in" = "تسجيل دخول";
+"resend" = "إعادة إرسال";

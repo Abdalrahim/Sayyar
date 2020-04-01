@@ -9,11 +9,12 @@
 
 import SwiftUI
 import GoogleMaps
+import Pages
 
 struct OfferView: View {
     
     @State var currenOffer : Int = 1
-    
+    @State var index: Int = 1
 //    var clusterManager     : GMUClusterManager?
     
     @State var offers : [OfferData] = [
@@ -48,47 +49,70 @@ struct OfferView: View {
     
     var body: some View {
         NavigationView {
-            GeometryReader { geometry in
-                ZStack {
-                    self.gmap
-                        .edgesIgnoringSafeArea(.all)
+            
+            ZStack {
+                self.gmap
+                    .edgesIgnoringSafeArea(.all)
                     .onAppear {
-                            self.gmap.map.padding = UIEdgeInsets(top: 20, left: 5, bottom: 200, right: 5)
-                    }
-                    VStack {
-                        Spacer()
-                        
-                        VStack(spacing: 10) {
-                            scrollbar(selected: self.$currenOffer, page: self.offers.count).frame(height: 5)
-                            
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                
-                                HStack{
-                                    Spacer(minLength: 20)
-                                    
-                                    ForEach(self.offers) { offer in
-                                        
-                                        OfferCard(offer: offer, addOffer: {
-                                            
-                                        })
-                                            .frame(width: geometry.size.width - geometry.size.width/8)
-                                            .onAppear {
-                                                self.addPin(offer: offer)
-                                        }
-                                            .onTapGesture{
-                                                //self.currenOffer = offer
-                                        }
-                                        
-                                    }
-                                    Spacer(minLength: 20)
-                                }
-                            }
-                        }
-                        .frame(height:200)
-                        .padding(.bottom)
-                    }
+                        self.gmap.map.padding = UIEdgeInsets(top: 20, left: 5, bottom: 200, right: 5)
                 }
-            }.navigationBarTitle("offers.page", displayMode: .inline)
+                VStack {
+                    Spacer()
+                    
+                    VStack(spacing: 10) {
+                        scrollbar(selected: self.$index, page: self.offers.count).frame(height: 5)
+                        
+                        ModelPages (self.offers, currentPage: $index, hasControl: false) { (pageIndex, offer) in
+                            GeometryReader { geometry in
+                                OfferCard(offer: offer, addOffer: {
+                                    print(Double(geometry.frame(in: .global).minX))
+                                    })
+                                    .rotation3DEffect(Angle(degrees:
+                                        Double((geometry.frame(in: .global).minX) / -20)
+                                    ), axis: (x: 10.0, y: 10.0, z: 10.0))
+                                    .onAppear {
+                                        self.addPin(offer: offer)
+                                        print(Double(geometry.frame(in: .global).minX))
+                                }
+                                .onTapGesture{
+                                    //self.currenOffer = offer
+                                }
+                            }.frame(width: UIScreen.main.bounds.width/1.1)
+                        }
+                        
+//                        ScrollView(.horizontal, showsIndicators: false) {
+//
+//                            HStack{
+//                                Spacer(minLength: 20)
+//
+//                                ForEach(self.offers) { offer in
+//                                    GeometryReader { geometry in
+//                                        OfferCard(offer: offer, addOffer: {
+//                                            print(Double(geometry.frame(in: .global).minX))
+//                                            })
+//                                            .rotation3DEffect(Angle(degrees:
+//                                                Double((geometry.frame(in: .global).minX) / -20)
+//                                            ), axis: (x: 10.0, y: 10.0, z: 10.0))
+//                                            .onAppear {
+//                                                self.addPin(offer: offer)
+//                                                print(Double(geometry.frame(in: .global).minX))
+//                                        }
+//                                        .onTapGesture{
+//                                            //self.currenOffer = offer
+//                                        }
+//                                    }.frame(width: UIScreen.main.bounds.width/1.1)
+//
+//                                }
+//                                Spacer(minLength: 20)
+//                            }
+//                        }
+                    }
+                    .frame(height:200)
+                    .padding(.bottom)
+                }
+                
+            }
+            .navigationBarTitle(Text("offers.page").foregroundColor(Color.gray), displayMode: .inline)
         }
     }
     
@@ -166,7 +190,7 @@ struct ProgressCircle: View {
     
     func getime(_ value:CGFloat) -> String {
         let intValue = (second - Int(value * 10))
-        print(value)
+//        print(value)
         
         return "\(minute) : \(intValue)"
     }
