@@ -11,13 +11,14 @@ import SwiftUI
 struct NotificationView: View {
     
     @State var notifications : [NotificationData] = [
-        NotificationData(title: "Discount for National day 🇸🇦", image: Image("sidemenuBg"), publishedDate: Date())
+        NotificationData(title: "Discount for National day 🇸🇦", image: Image("nationalday"), publishedDate: Date()),
+        NotificationData(title: "Discount for Ramadan 🌙", image: Image("ramadan"), publishedDate: Date())
     ]
     
     var body: some View {
         VStack {
             List(notifications) { notification in
-                NotificationCell(Notification: notification).shadow(radius: 1)
+                NotificationCell(Notification: notification).shadow(radius: 3)
             }.background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
         }
     }
@@ -53,7 +54,9 @@ struct NotificationCell : View {
         VStack(spacing: 0) {
             self.Notification.image
                 .resizable()
-                .frame(height: 130, alignment: .center)
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 120, alignment: .center)
+                .clipped()
             
             HStack(alignment: .center) {
                 Text(self.Notification.title)
@@ -62,7 +65,7 @@ struct NotificationCell : View {
                 Text(self.Notification.publishedDate.weekday)
                     .font(.custom("Cairo-SemiBold", size: 15))
                     .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
-            }
+            }.background(Color.white)
             .padding(7)
         }
         .background(Color.white)
