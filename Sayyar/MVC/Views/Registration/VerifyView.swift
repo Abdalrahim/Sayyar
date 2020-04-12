@@ -22,6 +22,10 @@ struct VerifyView: View {
     
     var body: some View {
         VStack(alignment: .center) {
+            HStack {
+                Image(systemName: "arrow.left").imageScale(.large)
+                Spacer()
+            }.foregroundColor(dark)
             Spacer()
             
             Text("Insert the code that is sent to \(self.phone)")

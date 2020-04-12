@@ -10,13 +10,13 @@ import SwiftUI
 
 struct RegisterView: View {
     
-    @State var firstName : String = ""
-    @State var lastName : String = ""
-    @State var phoneNumber : String = ""
-    @State var email : String = ""
+    @State var firstName : String = "Majid"
+    @State var lastName : String = "AlSaqer"
+    @State var phoneNumber : String = "0539128374"
+    @State var email : String = "majed@gmail.com"
     
-    @State var notRegister : Bool = true
-    @State var checked : Bool = false
+    @State var notRegister : Bool = false
+    @State var checked : Bool = true
     
     var body: some View {
         VStack {
@@ -49,7 +49,7 @@ struct RegisterView: View {
                                         HStack(spacing: 5) {
                                             Image(systemName: "arrowtriangle.down.fill")
                                                 .resizable()
-                                                .frame(width: 16, height: 7)
+                                                .frame(width: 13, height: 7)
                                             
                                             Text("966")
                                                 .font(.custom("Cairo-SemiBold", size: 15))

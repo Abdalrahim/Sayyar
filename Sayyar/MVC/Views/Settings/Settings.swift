@@ -28,9 +28,6 @@ struct Settings: View {
         
         return ScrollView {
             VStack(alignment: .center, spacing: 25) {
-                Text("Settings")
-                .font(.custom("Cairo-Bold", size: 24))
-                
                 Image("person")
                     .resizable()
                     .scaledToFill()
@@ -38,8 +35,11 @@ struct Settings: View {
                     .cornerRadius(40)
                     .padding(.horizontal)
                 
-                CustomRow(model: self.data, firstName: $firstName, lastName: $lastName)
-                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("account.info")
+                    .font(.custom("Cairo-SemiBold", size: 16))
+                    CustomRow(model: self.data, firstName: $firstName, lastName: $lastName)
+                }
                 VStack(alignment: .leading, spacing: 10) {
                     Text("fav.place")
                         .font(.custom("Cairo-SemiBold", size: 16))
@@ -62,7 +62,9 @@ struct Settings: View {
                 .background(Color.init(white: 0.95))
                 .cornerRadius(5)
             }.padding()
-        }.onAppear {
+        }
+        .navigationBarTitle("settings")
+        .onAppear {
             self.firstName = self.data.firstName
             
             self.lastName = self.data.lastName
@@ -146,22 +148,6 @@ struct CustomRow: View {
             .background(Color.init(white: 0.95))
             .cornerRadius(5)
             
-            HStack(alignment: .bottom) {
-                
-                Text("password")
-                    .font(.custom("Cairo-SemiBold", size: 16))
-                    .padding(.leading)
-                
-                Text("change.password")
-                    .font(.custom("Cairo-SemiBold", size: 15))
-                    .foregroundColor(Color(#colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)))
-                
-                Spacer()
-                
-            }
-            .frame(height: 44)
-            .background(Color.init(white: 0.95))
-            .cornerRadius(5)
         }
         .background(bgColor)
         .cornerRadius(5)
@@ -176,6 +162,18 @@ struct CustomRow: View {
 struct FavPlaceSettingRow : View {
     @State var favPlace : FavPlace
     
+    var image : Image {
+        switch favPlace.pType {
+        case .home:
+            return Image("homeSettings")
+        case .work:
+            return Image("workSettings")
+        case .place:
+            return Image("favSettings")
+        case .other:
+            return Image("favSettings")
+        }
+    }
     var body: some View {
         HStack {
             
@@ -184,12 +182,11 @@ struct FavPlaceSettingRow : View {
                 .padding(.leading)
             Spacer()
             
-            self.favPlace.image
+            self.image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 30, height: 30)
+                .frame(width: 25, height: 25)
                 .padding(.trailing)
-            
             
         }
         .frame(height: 44)

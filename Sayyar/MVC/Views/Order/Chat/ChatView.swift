@@ -16,6 +16,26 @@ struct ChatView: View {
     
     @ObservedObject var room: TextNetworkManager
     
+    @State var messages:[TextMessage] = [
+        TextMessage(doc: [
+            "text" : "Hello my name is sam and I like cold show",
+            "time" : Timestamp(date: Date()),
+            "senderId" : "Me"
+        ])
+        ,
+        TextMessage(doc: [
+            "text" : "Hello my name is sam and I like cold show",
+            "time" : Timestamp(date: Date()),
+            "senderId" : "Me"
+        ])
+        ,
+        TextMessage(doc: [
+            "text" : "Hello my name is sam",
+            "time" : Timestamp(date: Date()),
+            "senderId" : "sa"
+        ])
+    ]
+    
     @State var tfMessage = ""
     
     var body: some View {
@@ -23,7 +43,7 @@ struct ChatView: View {
         VStack(spacing: 8) {
             ReverseScrollView {
                 VStack(alignment: .leading, spacing: 10) {
-                    ForEach(self.room.messages) { message in
+                    ForEach(self.messages) { message in
                         return MessageView(text: message)
                     }
                 }
@@ -39,7 +59,7 @@ struct ChatView: View {
             }) {
                 print(self.tfMessage)
             }
-        }.padding(16.0)
+        }.padding()
     }
     
     func sendMessage() {
@@ -52,11 +72,11 @@ struct ChatView: View {
         ]
         
         // For some reason these crash the preview
-        messageRef.updateData(
-            [
-                "messages": FieldValue.arrayUnion([messageData])
-            ]
-        )
+//        messageRef.updateData(
+//            [
+//                "messages": FieldValue.arrayUnion([messageData])
+//            ]
+//        )
     }
 }
 

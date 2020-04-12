@@ -56,21 +56,21 @@ class L102Language {
     }
 }
 
-func MethodSwizzleGivenClassName1(cls: AnyClass, originalSelector: Selector, overrideSelector: Selector) {
-    
-    guard let origMethod: Method = class_getInstanceMethod(cls, originalSelector) else {return}
-    
-   guard let overrideMethod: Method = class_getInstanceMethod(cls, overrideSelector) else {return}
-    
-    if (class_addMethod(cls, originalSelector, method_getImplementation(overrideMethod), method_getTypeEncoding(overrideMethod))) {
-        
-        class_replaceMethod(cls, overrideSelector, method_getImplementation(origMethod), method_getTypeEncoding(origMethod))
-        
-    } else {
-        
-        method_exchangeImplementations(origMethod, overrideMethod);
-    }
-}
+//func MethodSwizzleGivenClassName1(cls: AnyClass, originalSelector: Selector, overrideSelector: Selector) {
+//
+//    guard let origMethod: Method = class_getInstanceMethod(cls, originalSelector) else {return}
+//
+//   guard let overrideMethod: Method = class_getInstanceMethod(cls, overrideSelector) else {return}
+//
+//    if (class_addMethod(cls, originalSelector, method_getImplementation(overrideMethod), method_getTypeEncoding(overrideMethod))) {
+//
+//        class_replaceMethod(cls, overrideSelector, method_getImplementation(origMethod), method_getTypeEncoding(origMethod))
+//
+//    } else {
+//
+//        method_exchangeImplementations(origMethod, overrideMethod);
+//    }
+//}
 
 
 
@@ -111,7 +111,7 @@ class L102Localizer: NSObject {
     
     class func DoTheMagic() {
         
-        MethodSwizzleGivenClassName1(cls: Bundle.self, originalSelector: #selector(Bundle.localizedString(forKey:value:table:)), overrideSelector: #selector(Bundle.specialLocalizedStringForKey(_:value:table:)))
+//        MethodSwizzleGivenClassName1(cls: Bundle.self, originalSelector: #selector(Bundle.localizedString(forKey:value:table:)), overrideSelector: #selector(Bundle.specialLocalizedStringForKey(_:value:table:)))
         
 //        MethodSwizzleGivenClassName1(cls: UIApplication.self, originalSelector: #selector(getter: UIApplication.userInterfaceLayoutDirection), overrideSelector: #selector(getter: UIApplication.cstm_userInterfaceLayoutDirection))
 //

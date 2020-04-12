@@ -15,7 +15,7 @@ struct FavPlace : Identifiable {
     
     var placename : String?
     
-    var pType : type
+    var pType : favPlacetype
     
     var selected: Bool = false
     
@@ -36,7 +36,7 @@ struct FavPlace : Identifiable {
     
 }
 
-enum type : Int {
+enum favPlacetype : Int {
     case home = 0
     case work = 1
     case other = 2

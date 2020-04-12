@@ -11,14 +11,22 @@ import SwiftUI
 struct NotificationView: View {
     
     @State var notifications : [NotificationData] = [
-        NotificationData(title: "sa", image: Image("person"), publishedDate: Date())
+        NotificationData(title: "Discount for National day 🇸🇦", image: Image("sidemenuBg"), publishedDate: Date())
     ]
     
     var body: some View {
-        List(notifications) { notifi in
-            Text(notifi.title)
+        VStack {
+            List(notifications) { notification in
+                NotificationCell(Notification: notification).shadow(radius: 1)
+            }.background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
         }
     }
+    
+    init() {
+        UITableView.appearance().separatorColor = UIColor.clear
+        UITableView.appearance().tableFooterView = UIView()
+    }
+    
 }
 
 struct NotificationData : Identifiable {
@@ -35,5 +43,38 @@ struct NotificationData : Identifiable {
 struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
         NotificationView()
+    }
+}
+
+struct NotificationCell : View {
+    @State var Notification : NotificationData
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            self.Notification.image
+                .resizable()
+                .frame(height: 130, alignment: .center)
+            
+            HStack(alignment: .center) {
+                Text(self.Notification.title)
+                    .font(.custom("Cairo-SemiBold", size: 18))
+                Spacer()
+                Text(self.Notification.publishedDate.weekday)
+                    .font(.custom("Cairo-SemiBold", size: 15))
+                    .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
+            }
+            .padding(7)
+        }
+        .background(Color.white)
+        .cornerRadius(10)
+        
+    }
+}
+
+struct NotificationCell_Previews: PreviewProvider {
+    static var previews: some View {
+        NotificationCell(Notification:
+            NotificationData(title: "خصم بمناسبة اليوم الوطني", image: Image("sidemenuBg"), publishedDate: Date())
+        ).previewLayout(.fixed(width: 350, height: 200))
     }
 }

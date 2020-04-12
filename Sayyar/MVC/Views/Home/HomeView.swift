@@ -171,7 +171,7 @@ struct HomeView : View {
                 }) {
                     
                     Image(systemName: "line.horizontal.3")
-                        .foregroundColor(purple)
+//                        .foregroundColor(purple)
                         .imageScale(.large)
                         .scaleEffect(CGSize(width: 1.3, height: 1.7))
                 }.offset(x: self.showMenu ? UIScreen.main.bounds.width/1.5 : 0))
@@ -180,8 +180,9 @@ struct HomeView : View {
                 .sheet(isPresented: self.$showSearch, content: {
                     SearchView()
                 })
-            .navigationBarHidden(self.showMenu)
-        }.sheet(isPresented: self.$newFavPlace, content: {
+//            .navigationBarHidden(self.showMenu)
+        }.accentColor(purple)
+            .sheet(isPresented: self.$newFavPlace, content: {
             NewFavPlaceView()
         })
     }

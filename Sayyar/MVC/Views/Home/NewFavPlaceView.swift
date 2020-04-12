@@ -64,9 +64,9 @@ struct NewFavPlaceView : View {
                         }
                         .overlay(
                             VStack(spacing: 20) {
-                                TypeView(placeType: type(rawValue: 0)!)
-                                TypeView(placeType: type(rawValue: 1)!)
-                                TypeView(placeType: type(rawValue: 2)!)
+                                TypeView(placeType: favPlacetype(rawValue: 0)!)
+                                TypeView(placeType: favPlacetype(rawValue: 1)!)
+                                TypeView(placeType: favPlacetype(rawValue: 2)!)
                             }
                             .padding(10)
                             .background(Color.white)
@@ -128,7 +128,7 @@ struct NewFavPlaceView_Previews: PreviewProvider {
 
 struct TypeView: View {
     
-    var placeType : type
+    var placeType : favPlacetype
     
     var image : Image {
         switch placeType {

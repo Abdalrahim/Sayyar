@@ -13,7 +13,7 @@ struct SignInView: View {
     
     @State var phoneNum : String = ""
     
-    @State var notRegister : Bool = false
+    @State var notRegister : Bool = true
     
     var body: some View {
         VStack {

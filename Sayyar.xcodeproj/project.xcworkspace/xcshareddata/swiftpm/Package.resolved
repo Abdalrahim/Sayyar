@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "Pages",
+        "repositoryURL": "https://github.com/nachonavarro/Pages.git",
+        "state": {
+          "branch": null,
+          "revision": "90e0d3fe13ee85bc98bafed7f56150f24c305526",
+          "version": "0.1.4"
+        }
+      },
+      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {

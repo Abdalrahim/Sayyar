@@ -41,86 +41,82 @@ struct OrderView: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack(alignment: .center) {
-                gmap.padding(.bottom, -20)
-                    .onAppear {
-                        self.gmap.map.padding = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        VStack(alignment: .center) {
+            gmap.padding(.bottom, -20)
+                .onAppear {
+                    self.gmap.map.padding = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+            }
+            purple
+                .overlay(
+                    Text("waiting driver")
+                        .font(.custom("Cairo-SemiBold", size: 15))
+                        .foregroundColor(.white)
+                        .padding(.bottom, 40)
+            ).frame(height: 80)
+                .cornerRadius(20)
+                .padding(.bottom, -50)
+            
+            VStack(spacing: 15) {
+                if isArriving {
+                    PartnerArriveView(isTaxi: self.$isTaxi)
                 }
-                purple
-                    .overlay(
-                        Text("waiting driver")
-                            .font(.custom("Cairo-SemiBold", size: 15))
-                            .foregroundColor(.white)
-                            .padding(.bottom, 40)
-                ).frame(height: 80)
-                    .cornerRadius(20)
-                    .padding(.bottom, -50)
                 
-                VStack(spacing: 15) {
-                    if isArriving {
-                        PartnerArriveView(isTaxi: self.$isTaxi)
-                    }
-                    
-                    HStack(spacing: 15) {
-                        Image("destination").padding(.bottom, 17)
-                        VStack(alignment: .leading, spacing: 0) {
-                            VStack(alignment : .leading, spacing: -5) {
-                                Text("from.destination")
-                                    .font(.custom("Cairo-SemiBold", size: 18))
-                                Text("Azizyah rd")
-                                    .font(.custom("Cairo-SemiBold", size: 17))
-                                    .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
-                            }
-                            
-                            VStack(alignment: .leading, spacing: -5) {
-                                Text("to.destination")
-                                    .font(.custom("Cairo-SemiBold", size: 18))
-                                Text("Azizyah rd")
-                                    .font(.custom("Cairo-SemiBold", size: 17))
-                                    .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
-                            }
+                HStack(spacing: 15) {
+                    Image("destination").padding(.bottom, 17)
+                    VStack(alignment: .leading, spacing: 0) {
+                        VStack(alignment : .leading, spacing: -5) {
+                            Text("from.destination")
+                                .font(.custom("Cairo-SemiBold", size: 18))
+                            Text("Azizyah rd")
+                                .font(.custom("Cairo-SemiBold", size: 17))
+                                .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
                         }
                         
-                        Spacer()
-                    }.padding(.vertical, -15)
+                        VStack(alignment: .leading, spacing: -5) {
+                            Text("to.destination")
+                                .font(.custom("Cairo-SemiBold", size: 18))
+                            Text("Azizyah rd")
+                                .font(.custom("Cairo-SemiBold", size: 17))
+                                .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
+                        }
+                    }
+                    
+                    Spacer()
+                }.padding(.vertical, -15)
+                
+                Divider()
+                
+                if !isArriving {
+                    PartnerOnTripView(isTaxi: self.$isTaxi)
+                    Divider()
+                }
+                
+                if !isArriving {
+                    HStack {
+                        Image("safety")
+                        Text("safety.procedures")
+                            .font(.custom("Cairo-SemiBold", size: 15))
+                    }.padding(.vertical, -10)
                     
                     Divider()
-                    
-                    if !isArriving {
-                        PartnerOnTripView(isTaxi: self.$isTaxi)
-                        Divider()
-                    }
-                    
-                    if !isArriving {
-                        HStack {
-                            Image("safety")
-                            Text("safety.procedures")
-                                .font(.custom("Cairo-SemiBold", size: 15))
-                        }.padding(.vertical, -10)
-                        
-                        Divider()
-                    }
-                    
-                    Button(action: {
-                        self.addPin()
-                    }, label: {
-                        Text("Cancel")
-                            .font(.custom("Cairo-SemiBold", size: 16))
-                            .foregroundColor(.red)
-                    }).padding(.vertical, -5)
-                    
                 }
-                .padding()
-                .background(bgColor)
-                .cornerRadius(20)
+                
+                Button(action: {
+                    self.addPin()
+                }, label: {
+                    Text("Cancel")
+                        .font(.custom("Cairo-SemiBold", size: 16))
+                        .foregroundColor(.red)
+                }).padding(.vertical, -5)
+                
             }
-            .edgesIgnoringSafeArea(.all)
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: btnBack)
-        }.onDisappear {
-            
+            .padding()
+            .background(bgColor)
+            .cornerRadius(20)
         }
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
     
     func addPin() {
@@ -218,7 +214,7 @@ struct PartnerArriveView: View {
                     .padding(.horizontal)
                 
                 ///##Chat Room Bugs Canvas
-                NavigationLink(destination: Settings()) {
+                NavigationLink(destination: ChatView(room: TextNetworkManager(room: "Terataxi Dev Room"))) {
                     Image(systemName: "text.bubble.fill")
                         .resizable()
                         .frame(width: 15, height: 15)
