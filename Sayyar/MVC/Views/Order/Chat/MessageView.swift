@@ -82,14 +82,16 @@ struct MessageView: View {
         }
     }
     
-    func getDate(format: String, date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.dateFormat = format
-        dateFormatter.locale = Locale(identifier: "en_US")
-        return dateFormatter.string(from: date)
-    }
+    
+}
+
+func getDate(format: String, date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    dateFormatter.dateFormat = format
+    dateFormatter.locale = Locale(identifier: "en_GB")
+    return dateFormatter.string(from: date)
 }
 
 

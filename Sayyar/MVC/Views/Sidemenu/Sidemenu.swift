@@ -90,7 +90,7 @@ struct Sidemenu: View {
                 }
                 
                 
-                NavigationLink(destination: ChatView(room: TextNetworkManager(room: "Terataxi Dev Room"))) {
+                NavigationLink(destination: NotificationView()) {
                     SideMenuButton(image: Image(systemName: "bell.fill"), text: "notifications")
                 }.padding()
 

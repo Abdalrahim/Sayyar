@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "pasttopin.png",
       "idiom" : "universal",
-      "filename" : "search-location.png",
       "scale" : "1x"
     },
     {
+      "filename" : "pasttopin@2x.png",
       "idiom" : "universal",
-      "filename" : "search-location@2x.png",
       "scale" : "2x"
     },
     {
+      "filename" : "pasttopin@3x.png",
       "idiom" : "universal",
-      "filename" : "search-location@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

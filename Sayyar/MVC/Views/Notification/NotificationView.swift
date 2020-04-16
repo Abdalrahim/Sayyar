@@ -18,14 +18,19 @@ struct NotificationView: View {
     var body: some View {
         VStack {
             List(notifications) { notification in
-                NotificationCell(Notification: notification).shadow(radius: 3)
+                NavigationLink(destination: NotificationDetail()) {
+                    NotificationCell(Notification: notification).shadow(radius: 3)
+                }.buttonStyle(PlainButtonStyle())
+                
             }.background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
         }
+        .navigationBarTitle("Notifications")
     }
     
     init() {
         UITableView.appearance().separatorColor = UIColor.clear
         UITableView.appearance().tableFooterView = UIView()
+        
     }
     
 }
@@ -70,7 +75,6 @@ struct NotificationCell : View {
         }
         .background(Color.white)
         .cornerRadius(10)
-        
     }
 }
 

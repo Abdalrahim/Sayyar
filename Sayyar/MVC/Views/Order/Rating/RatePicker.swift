@@ -11,7 +11,7 @@ import SwiftUI
 struct RatePicker : View {
     
     @Binding var rate:Rating
-    
+    @State var size : CGFloat?
     func starButton(index:Int) -> some View {
         let imageName = index <= rate.rawValue ? "star.fill" : "star"
         let color:Color = index <= rate.rawValue ? .yellow : .gray
@@ -21,9 +21,10 @@ struct RatePicker : View {
                 self.rate = Rating(rawValue: index)!
             }) {
                 Image(systemName:imageName)
+                .resizable()
                     .imageScale(.large)
                     .foregroundColor(color)
-                    .frame(width:24, height: 24)
+                    .frame(width: size ?? 24, height: size ?? 24)
         }
     }
     
@@ -77,5 +78,11 @@ enum Rating: Int,CaseIterable {
         case .noRate:
             return 0
         }
+    }
+}
+
+struct RatePicker_Previews: PreviewProvider {
+    static var previews: some View {
+        RatePicker(rate: .constant(Rating(rawValue: 4)!)).previewLayout(.fixed(width: 300, height: 40))
     }
 }

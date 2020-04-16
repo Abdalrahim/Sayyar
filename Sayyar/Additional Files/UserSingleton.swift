@@ -12,7 +12,7 @@ import ObjectMapper
 
 enum SingletonKeys : String {
   
-  case user = "BhiveUserAccount"
+  case user = "UserAccount"
   case isFirstLauch = "isFirstLauch"
   case isGuestLogin = "isGuestLogin"
   case notificationCount =  "notificationCount"

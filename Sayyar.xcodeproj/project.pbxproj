@@ -34,6 +34,7 @@
 		0F20723523E70BAA00D89A29 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20723423E70BAA00D89A29 /* Extensions.swift */; };
 		0F273656240B956A0092D09C /* OfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F273655240B956A0092D09C /* OfferView.swift */; };
 		0F273659240B95EF0092D09C /* OfferData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F273658240B95EF0092D09C /* OfferData.swift */; };
+		0F30B9E7244703F100FCACCE /* OrderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30B9E6244703F100FCACCE /* OrderData.swift */; };
 		0F3D8F9023F031C3001A384B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D8F8F23F031C3001A384B /* UserModel.swift */; };
 		0F3D8F9323F03829001A384B /* UserSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D8F9223F03829001A384B /* UserSingleton.swift */; };
 		0F483AD823F99213004DDC29 /* TextNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F483AD723F99213004DDC29 /* TextNetworkManager.swift */; };
@@ -69,6 +70,9 @@
 		0FBFDEA2240416D5007739A7 /* FirFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBFDEA1240416D5007739A7 /* FirFile.swift */; };
 		0FC8227724432058007B418D /* NotificationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC8227624432057007B418D /* NotificationDetail.swift */; };
 		0FD1AEA1241149640026E38B /* Pages in Frameworks */ = {isa = PBXBuildFile; productRef = 0FD1AEA0241149640026E38B /* Pages */; };
+		0FD52EDF244608D4000601BC /* PastOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD52EDE244608D4000601BC /* PastOrdersView.swift */; };
+		0FD52EE124460A77000601BC /* PartnerOnTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD52EE024460A77000601BC /* PartnerOnTripView.swift */; };
+		0FD52EE324460A90000601BC /* PartnerArriveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD52EE224460A90000601BC /* PartnerArriveView.swift */; };
 		0FF18C8924289CC40027FB52 /* VerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF18C8824289CC40027FB52 /* VerifyView.swift */; };
 		0FF555B923EC51390002727A /* L102Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF555B823EC51390002727A /* L102Language.swift */; };
 		86D4658FF9B05BDF2012CB1E /* Pods_Sayyar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E30C863A1A51C3DF888D9F5 /* Pods_Sayyar.framework */; };
@@ -98,6 +102,7 @@
 		0F20723423E70BAA00D89A29 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0F273655240B956A0092D09C /* OfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferView.swift; sourceTree = "<group>"; };
 		0F273658240B95EF0092D09C /* OfferData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferData.swift; sourceTree = "<group>"; };
+		0F30B9E6244703F100FCACCE /* OrderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderData.swift; sourceTree = "<group>"; };
 		0F3D8F8F23F031C3001A384B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		0F3D8F9223F03829001A384B /* UserSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSingleton.swift; sourceTree = "<group>"; };
 		0F483AD723F99213004DDC29 /* TextNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextNetworkManager.swift; sourceTree = "<group>"; };
@@ -136,6 +141,9 @@
 		0FBFDE9F240416B5007739A7 /* ConfigRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigRemote.swift; sourceTree = "<group>"; };
 		0FBFDEA1240416D5007739A7 /* FirFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirFile.swift; sourceTree = "<group>"; };
 		0FC8227624432057007B418D /* NotificationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetail.swift; sourceTree = "<group>"; };
+		0FD52EDE244608D4000601BC /* PastOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastOrdersView.swift; sourceTree = "<group>"; };
+		0FD52EE024460A77000601BC /* PartnerOnTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerOnTripView.swift; sourceTree = "<group>"; };
+		0FD52EE224460A90000601BC /* PartnerArriveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerArriveView.swift; sourceTree = "<group>"; };
 		0FF18C8824289CC40027FB52 /* VerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyView.swift; sourceTree = "<group>"; };
 		0FF555B823EC51390002727A /* L102Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L102Language.swift; sourceTree = "<group>"; };
 		48B787D583435F01C5690689 /* Pods-Sayyar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sayyar.release.xcconfig"; path = "Target Support Files/Pods-Sayyar/Pods-Sayyar.release.xcconfig"; sourceTree = "<group>"; };
@@ -291,6 +299,9 @@
 				0F8F2D4D23FD62BF008017A3 /* OrderView.swift */,
 				0F483AD623F98B70004DDC29 /* Rating */,
 				0F0BEF0F23E99F540008017B /* Chat */,
+				0FD52EDE244608D4000601BC /* PastOrdersView.swift */,
+				0FD52EE024460A77000601BC /* PartnerOnTripView.swift */,
+				0FD52EE224460A90000601BC /* PartnerArriveView.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -393,6 +404,7 @@
 				0F0BEF1223E99F8A0008017B /* ReverseScrollView.swift */,
 				0F0BEF1423E99FB90008017B /* TextMessage.swift */,
 				0F0F75842427510F0001DD94 /* customTextField.swift */,
+				0F30B9E6244703F100FCACCE /* OrderData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -620,6 +632,7 @@
 				0FC8227724432058007B418D /* NotificationDetail.swift in Sources */,
 				0F4FE3DB23E6B6FC003FA452 /* AppDelegate.swift in Sources */,
 				0F273659240B95EF0092D09C /* OfferData.swift in Sources */,
+				0FD52EE324460A90000601BC /* PartnerArriveView.swift in Sources */,
 				0FA2CFD023E8158200451EEE /* MapView.swift in Sources */,
 				0FA2CFC623E80A3600451EEE /* HomeView.swift in Sources */,
 				0F77D46A2435E6D000B5E59C /* Sidemenu.swift in Sources */,
@@ -631,17 +644,20 @@
 				0F273656240B956A0092D09C /* OfferView.swift in Sources */,
 				0F0F75852427510F0001DD94 /* customTextField.swift in Sources */,
 				0F075B6D24056F5A00F30C77 /* Settings.swift in Sources */,
+				0F30B9E7244703F100FCACCE /* OrderData.swift in Sources */,
 				0FF18C8924289CC40027FB52 /* VerifyView.swift in Sources */,
 				0FBFDEA2240416D5007739A7 /* FirFile.swift in Sources */,
 				0F8F2D4E23FD62BF008017A3 /* OrderView.swift in Sources */,
 				0F7F96422423872600D03C5E /* RegisterView.swift in Sources */,
 				0F0BEF1723E9A13E0008017B /* MessageView.swift in Sources */,
+				0FD52EDF244608D4000601BC /* PastOrdersView.swift in Sources */,
 				0FA2CFE023E84C3100451EEE /* Location.swift in Sources */,
 				0F3D8F9323F03829001A384B /* UserSingleton.swift in Sources */,
 				0FF555B923EC51390002727A /* L102Language.swift in Sources */,
 				0FA2CFDC23E81DC800451EEE /* LocalNotificationManager.swift in Sources */,
 				0F20723523E70BAA00D89A29 /* Extensions.swift in Sources */,
 				0FA2CFCD23E80F4900451EEE /* DestinationView.swift in Sources */,
+				0FD52EE124460A77000601BC /* PartnerOnTripView.swift in Sources */,
 				0F11ACFB23FC0977002D0552 /* NewFavPlaceView.swift in Sources */,
 				0F0BEF1123E99F610008017B /* ChatView.swift in Sources */,
 				0F0BEF1323E99F8A0008017B /* ReverseScrollView.swift in Sources */,
