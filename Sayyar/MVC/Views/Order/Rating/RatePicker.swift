@@ -29,7 +29,7 @@ struct RatePicker : View {
     }
     
     var body: some View {
-        HStack {
+        HStack(spacing: (size ?? 5)/10) {
             ForEach(Range(1...5)) { id in
                 self.starButton(index: id)
             }

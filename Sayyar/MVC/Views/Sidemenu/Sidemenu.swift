@@ -93,7 +93,7 @@ struct Sidemenu: View {
                 NavigationLink(destination: NotificationView()) {
                     SideMenuButton(image: Image(systemName: "bell.fill"), text: "notifications")
                 }.padding()
-
+                
                 NavigationLink(destination: OrderView()) {
                     SideMenuButton(image: Image("trip log"), text: "trip.log")
                 }.padding()
@@ -101,15 +101,15 @@ struct Sidemenu: View {
                 NavigationLink(destination: OrderView()) {
                     SideMenuButton(image: Image(systemName: "creditcard.fill"), text: "payment.method")
                 }.padding()
-
+                
                 NavigationLink(destination: OfferView()) {
                     SideMenuButton(image: Image(systemName: "questionmark.circle.fill"), text: "help")
                 }.padding()
-
+                
                 NavigationLink(destination: Settings()) {
                     SideMenuButton(image: Image(systemName: "bubble.left.and.bubble.right.fill"), text: "contact.us")
                 }.padding()
-
+                
                 NavigationLink(destination: Settings()) {
                     SideMenuButton(image: Image("settings"), text: "settings")
                 }.padding()
@@ -137,9 +137,9 @@ struct Sidemenu: View {
                 
             }
             
-            }.background(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)))
+        }.background(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)))
             .edgesIgnoringSafeArea(.all)
-        
+            
             .onAppear(){
                 print(UIDevice.isSmallScreen())
         }
