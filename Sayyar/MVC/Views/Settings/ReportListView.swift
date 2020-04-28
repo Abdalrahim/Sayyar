@@ -12,8 +12,8 @@ struct ReportListView: View {
     
     
     @State var reports : [ReportData] = [
-        ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: "pending"),
-        ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: "pending")
+        ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: ReportStatus(rawValue: 0)!, message: "I lost my phone in the white corolla"),
+        ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: ReportStatus(rawValue: 0)!, message: "I lost my phone in the white corolla")
     ]
     
     
@@ -51,15 +51,33 @@ struct ReportData : Identifiable {
     var reportNum : Int
     var type : String
     var reportDate : Date
-    var status : String
-    
+    var status : ReportStatus
+    var message : String
+    var sayyarMessage : String?
     
 }
+
+enum ReportStatus : Int {
+    case closed = 0
+    case step1 = 1
+    case step2 = 2
+    case step3 = 3
+    
+    func desc() -> String {
+        switch self {
+        case .closed:
+            return "Closed"
+        default:
+            return "Pending"
+        }
+    }
+}
+
 
 struct ReportCell : View {
     
     @State var report : ReportData
-    @State var pending : Bool = false
+    @State var pending : Bool = true
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -97,7 +115,7 @@ struct ReportCell : View {
                 
                 VStack(alignment: .leading, spacing: 20) {
                     Text(report.type)
-                    Text(report.status)
+                    Text(report.status.desc())
                         .foregroundColor(pending ?  Color(#colorLiteral(red: 0.1294117647, green: 0.4862745098, blue: 0.3490196078, alpha: 1)) : Color(#colorLiteral(red: 0.5137254902, green: 0.5333333333, blue: 0.5568627451, alpha: 1)))
                 }
                 .font(.custom("Cairo-SemiBold", size: 15))
@@ -111,11 +129,11 @@ struct ReportCell : View {
         .cornerRadius(16)
         .lineLimit(1)
             
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.black.opacity(0.1), lineWidth: 1)
-        )
-            .shadow(radius: pending ? 1: .zero)
+//        .overlay(
+//            RoundedRectangle(cornerRadius: 16)
+//                .stroke(Color.black.opacity(0.1), lineWidth: 1)
+//        )
+            .shadow(radius: pending ? 3 : 1)
     }
 }
 
@@ -123,7 +141,7 @@ struct ReportCell : View {
 struct ReportCell_Previews: PreviewProvider {
     static var previews: some View {
         ReportCell(report:
-            ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: "pending")
+            ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: ReportStatus(rawValue: 0)!, message: "")
         )
             .previewLayout(.fixed(width: 400, height: 200))
     }
