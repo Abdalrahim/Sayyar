@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-//TextFieldEffects
+import GoogleMaps
 
 struct NewFavPlaceView : View {
     
@@ -15,35 +15,78 @@ struct NewFavPlaceView : View {
     
     @State var placeName : String = ""
     
+    @State var placetype : favPlacetype?
+    
     @State var placeDetails : String = ""
+    
+    @State var placeTitle : String = "Loading.."
+    
+    @State var placeSubtitle : String = "Loading.."
     
     @State var showTypeList : Bool = false
     
     @State var showDetail : Bool = false
     
-//    var place : FavPlace = FavPlace(name: <#T##String#>, pType: <#T##type#>, location: <#T##String#>)
+    var coordination : CLLocationCoordinate2D
+    
+    var placeTypeName : String {
+        switch self.placetype {
+        case .home:
+            return "Home"
+        case .work:
+            return "Work"
+        case .place:
+            return "Other"
+        default:
+            return "Other"
+        }
+    }
+    
+    func googleMapsiOSSDKReverseGeocoding(completion : @escaping (_ address: GMSAddress?) -> Void ) {
+        let aGMSGeocoder: GMSGeocoder = GMSGeocoder()
+        aGMSGeocoder.reverseGeocodeCoordinate(self.coordination) { (GeocodeResponse, error) in
+            if error != nil {
+                print(error.debugDescription)
+                return
+            } else {
+                
+            }
+            guard let gmsAddress: GMSAddress = GeocodeResponse?.firstResult() else {
+                return
+            }
+            completion(gmsAddress)
+        }
+        
+    }
     
     var body: some View {
-        
-       GeometryReader { geometry in
+        self.googleMapsiOSSDKReverseGeocoding { (address) in
+            if let thoroughfare = address?.thoroughfare {
+                 self.placeTitle = thoroughfare
+            }
+            if let subLocality = address?.subLocality {
+                self.placeSubtitle = subLocality
+            }
+            
+        }
+       return GeometryReader { geometry in
             VStack(spacing: 35) {
-                Text("new.place")
-                .font(.custom("Cairo-SemiBold", size: 25))
+                Text("save.location")
+                .font(.custom("Cairo-SemiBold", size: 23))
                 
                 ZStack(alignment: .bottomLeading) {
-                    self.gmap.padding(.bottom, 60)
+                    self.gmap//.padding(.bottom, 60)
                     HStack {
-                        VStack(alignment: .leading) {
-                            Text("Office")
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(self.placeTitle)
                                 .font(.custom("Cairo-SemiBold", size: 15))
-                            Text("Office")
+                            Text(self.placeSubtitle)
                                 .font(.custom("Cairo-SemiBold", size: 14)).foregroundColor(.gray)
-                        }
-                        .frame(height: 20)
+                        }.padding(.leading, 30)
                         
                         Spacer()
                     }
-                    .padding(20)
+                .frame(height: 60)
                     .background(bgColor)
                 }
                 .frame(height: 200, alignment: .center)
@@ -56,25 +99,50 @@ struct NewFavPlaceView : View {
                         
                     }
                     ZStack(alignment: .trailing) {
-                        customTextField(placeholder: "type", placename: self.$placeName) {}
-                            .disabled(true)
-                            .frame(width: 120)
+                        HStack {
+                            Text(self.placetype == nil ? "type" : self.placeTypeName)
+                                .disabled(true)
+                                .padding(.leading)
+                            Spacer()
+                            Image(systemName: self.placetype == nil ? "arrowtriangle.down.fill" : "arrowtriangle.up.fill")
+                                .resizable()
+                                .frame(width: 10, height: 10)
+                                .padding(.trailing)
+                            
+                        }.foregroundColor(self.placetype == nil ? Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)) : purple)
+                            .frame(width: 120, height: 44)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(self.placetype == nil ? Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)) : purple, lineWidth: 1)
+                        )
                             .onTapGesture {
                                 self.showTypeList.toggle()
                         }
-                        .overlay(
+                        if self.showTypeList {
                             VStack(spacing: 20) {
                                 TypeView(placeType: favPlacetype(rawValue: 0)!)
+                                    .onTapGesture {
+                                        self.placetype = favPlacetype(rawValue: 0)!
+                                        self.showTypeList = false
+                                }
                                 TypeView(placeType: favPlacetype(rawValue: 1)!)
+                                    .onTapGesture {
+                                        self.placetype = favPlacetype(rawValue: 1)!
+                                        self.showTypeList = false
+                                }
+                                
                                 TypeView(placeType: favPlacetype(rawValue: 2)!)
+                                    .onTapGesture {
+                                        self.placetype = favPlacetype(rawValue: 2)!
+                                        self.showTypeList = false
+                                }
                             }
                             .padding(10)
                             .background(Color.white)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
                                     .stroke(purple, lineWidth: 1))
-                                .padding(.top, 78)
-                        )
+                        }
                     }
                 }
                 
@@ -91,7 +159,7 @@ struct NewFavPlaceView : View {
                             HStack {
                                 Spacer()
                                 Image(systemName: "plus")
-                                Text("add detail")
+                                Text("add.detail")
                             }.foregroundColor(purple)
                         })
                     }
@@ -103,7 +171,7 @@ struct NewFavPlaceView : View {
                     print("")
                 }, label: {
                     Spacer()
-                    Text("Save Location")
+                    Text("save.location")
                         .foregroundColor(.white)
                     .font(.custom("Cairo-SemiBold", size: 15))
                     Spacer()
@@ -113,18 +181,21 @@ struct NewFavPlaceView : View {
                 .background(purple)
                 .cornerRadius(10)
                 
-            }.padding(.horizontal, 30)
+            }.padding(30)
         }
     }
-    
 }
-
+//
 struct NewFavPlaceView_Previews: PreviewProvider {
     static var previews: some View {
-        NewFavPlaceView()
+        NewFavPlaceView(coordination:
+            CLLocationCoordinate2D(latitude: 21.550270436442297, longitude: 39.18819688260556)
+        )
     }
 }
 
+//21.550270436442297
+//39.18819688260556
 
 struct TypeView: View {
     
@@ -133,13 +204,13 @@ struct TypeView: View {
     var image : Image {
         switch placeType {
         case .home:
-            return Image("home")
+            return Image("homeSettings")
         case .work:
-            return Image("work")
+            return Image("workSettings")
         case .place:
-            return Image("fav")
+            return Image("favSettings")
         default:
-            return Image("fav")
+            return Image("favSettings")
         }
     }
     
@@ -157,10 +228,10 @@ struct TypeView: View {
     }
      
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             Text(name)
             Spacer()
             image.resizable().frame(width: 20, height: 20)
-        }
+        }.frame(width: 100)
     }
 }

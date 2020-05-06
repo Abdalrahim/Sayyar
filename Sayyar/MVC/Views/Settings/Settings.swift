@@ -51,7 +51,7 @@ struct Settings: View {
                 
                 HStack(alignment: .bottom) {
                     
-                    Text("logout")
+                    Text("Logout")
                         .font(.custom("Cairo-SemiBold", size: 16))
                         .padding(.leading)
                     
@@ -134,7 +134,7 @@ struct CustomRow: View {
             
             HStack {
                 
-                Text("email")
+                Text("Email")
                     .font(.custom("Cairo-SemiBold", size: 16))
                     .padding(.leading)
                 

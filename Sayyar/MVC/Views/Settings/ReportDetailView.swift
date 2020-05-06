@@ -25,7 +25,6 @@ struct ReportDetailView: View {
             return Image("step2")
         case .step3:
             return Image("step3")
-            
         }
     }
     var body: some View {
@@ -60,9 +59,9 @@ struct ReportDetailView: View {
             
             if showMessage {
                 Text(sayyarMessage)
-                .font(.custom("Cairo-SemiBold", size: 15))
-                .padding()
-                .background(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1))).cornerRadius(17)
+                    .font(.custom("Cairo-SemiBold", size: 15))
+                    .padding()
+                    .background(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1))).cornerRadius(17)
             }
             
             HStack {
@@ -73,15 +72,15 @@ struct ReportDetailView: View {
                         .foregroundColor(
                             (
                                 report.status == .step1 ||
-                                report.status == .step2 ||
-                                report.status == .step3) ? purple : Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1))
+                                    report.status == .step2 ||
+                                    report.status == .step3) ? purple : Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1))
                     )
                     Text("Step 2")
                         .foregroundColor(
-                                (
-                                    report.status == .step2 ||
+                            (
+                                report.status == .step2 ||
                                     report.status == .step3) ? purple : Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1))
-                        )
+                    )
                     Text("Step 3")
                         .foregroundColor((report.status == .step3) ? purple : Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)))
                 }
@@ -92,7 +91,9 @@ struct ReportDetailView: View {
             
             
             Spacer()
-        }.padding()
+        }
+        .padding()
+        .navigationBarTitle("Report")
     }
 }
 

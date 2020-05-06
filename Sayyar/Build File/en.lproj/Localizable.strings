@@ -31,6 +31,19 @@
 "timer" = "Timer";
 "add.place" = "New Place";
 
+/// MARK: Save Location
+"add.detail" = "Add Detail";
+"save.location" = "Save Location";
+"place.name" = "Place Name";
+
+
 /// MARK: Registration
 "sign.in" = "Sign In";
 "resend" = "Resend";
+
+/// Mark: Settings
+"account.info" = "Account Info";
+"fav.place" = "Favourite Places";
+"first.name" = "First Name";
+"last.name" = "Last Name";
+"phone.number" = "Phone Number";

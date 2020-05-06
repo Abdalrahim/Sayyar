@@ -1,5 +1,5 @@
 //
-//  HelpView.swift
+//  SupportView.swift
 //  Sayyar
 //
 //  Created by Abdalrahim Abdullah on 19/04/2020.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct HelpView: View {
+struct SupportView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("General Support")
@@ -23,7 +23,17 @@ struct HelpView: View {
                 .background(Color(#colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)))
                 .cornerRadius(5)
                 
-                NavigationLink(destination: Text("")) {
+                NavigationLink(destination:
+                    
+                    ZStack {
+                        Text("What separates Sayyar is how the offer comes from the partner.")
+                            .font(.custom("Cairo-Regular", size: 18))
+                            .padding()
+                            .background(Color(#colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)))
+                            .navigationBarTitle("Pricing")
+                    }
+                    
+                ) {
                     SupportCell(title: "Pricing", icon: Image("document"))
                 }
                 .padding()
@@ -46,7 +56,7 @@ struct HelpView: View {
                 .font(.custom("Cairo-Regular", size: 16))
             
             VStack {
-                NavigationLink(destination: Text("")) {
+                NavigationLink(destination: ReportListView()) {
                     SupportCell(title: "Reports", icon: Image("document"))
                 }
                 .padding()
@@ -60,9 +70,9 @@ struct HelpView: View {
     }
 }
 
-struct HelpView_Previews: PreviewProvider {
+struct SupportView_Previews: PreviewProvider {
     static var previews: some View {
-        HelpView()
+        SupportView()
     }
 }
 

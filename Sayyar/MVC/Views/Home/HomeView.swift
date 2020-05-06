@@ -183,7 +183,7 @@ struct HomeView : View {
 //            .navigationBarHidden(self.showMenu)
         }.accentColor(purple)
             .sheet(isPresented: self.$newFavPlace, content: {
-            NewFavPlaceView()
+                NewFavPlaceView(coordination: self.gmap.map.projection.coordinate(for: self.gmap.map.center))
         })
     }
     

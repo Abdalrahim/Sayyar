@@ -75,11 +75,18 @@ struct SearchCell : View {
     
     var body: some View {
         HStack {
+            Circle()
+                .foregroundColor(Color(#colorLiteral(red: 0.8941176471, green: 0.8941176471, blue: 0.8941176471, alpha: 1)))
+                .overlay(
+                    
+                    self.place.image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 20, height: 20)
+                    
+            ).frame(width: 35, height: 35)
             
-            self.place.image
-            .resizable()
-            .scaledToFill()
-            .frame(width: 35, height: 35)
+            
             
             VStack(alignment: .leading, spacing: -2) {
                 Text(place.name).font(.custom("Cairo-SemiBold", size: 16))

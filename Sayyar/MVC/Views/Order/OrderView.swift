@@ -48,7 +48,7 @@ struct OrderView: View {
             }
             purple
                 .overlay(
-                    Text("waiting driver")
+                    Text("Driver is on the way")
                         .font(.custom("Cairo-SemiBold", size: 15))
                         .foregroundColor(.white)
                         .padding(.bottom, 40)
@@ -67,7 +67,7 @@ struct OrderView: View {
                         VStack(alignment : .leading, spacing: -5) {
                             Text("from.destination")
                                 .font(.custom("Cairo-SemiBold", size: 18))
-                            Text("Azizyah rd")
+                            Text("from.rd")
                                 .font(.custom("Cairo-SemiBold", size: 17))
                                 .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
                         }
@@ -75,14 +75,16 @@ struct OrderView: View {
                         VStack(alignment: .leading, spacing: -5) {
                             Text("to.destination")
                                 .font(.custom("Cairo-SemiBold", size: 18))
-                            Text("Azizyah rd")
+                            Text("toroad.rd")
                                 .font(.custom("Cairo-SemiBold", size: 17))
                                 .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
                         }
                     }
                     
                     Spacer()
-                }.padding(.vertical, -15)
+                }
+                .lineLimit(1)
+                .padding(.vertical, -15)
                 
                 Divider()
                 

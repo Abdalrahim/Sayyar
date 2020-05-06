@@ -22,7 +22,7 @@ struct ReportListView: View {
             ForEach(reports) { report in
                 ZStack {
                     ReportCell(report: report)
-                    NavigationLink(destination: Text("Yayyy - Mei ")) {
+                    NavigationLink(destination: ReportDetailView(report: report)) {
                         EmptyView()
                     }
                     .buttonStyle(PlainButtonStyle())
@@ -41,35 +41,6 @@ struct ReportListView: View {
 struct ReportListView_Previews: PreviewProvider {
     static var previews: some View {
         ReportListView()
-    }
-}
-
-struct ReportData : Identifiable {
-    var id = UUID()
-    
-    var title : String
-    var reportNum : Int
-    var type : String
-    var reportDate : Date
-    var status : ReportStatus
-    var message : String
-    var sayyarMessage : String?
-    
-}
-
-enum ReportStatus : Int {
-    case closed = 0
-    case step1 = 1
-    case step2 = 2
-    case step3 = 3
-    
-    func desc() -> String {
-        switch self {
-        case .closed:
-            return "Closed"
-        default:
-            return "Pending"
-        }
     }
 }
 

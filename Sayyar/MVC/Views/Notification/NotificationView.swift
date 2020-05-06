@@ -16,14 +16,20 @@ struct NotificationView: View {
     ]
     
     var body: some View {
-        VStack {
-            List(notifications) { notification in
-                NavigationLink(destination: NotificationDetail()) {
-                    NotificationCell(Notification: notification).shadow(radius: 3)
-                }.buttonStyle(PlainButtonStyle())
-                
-            }.background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+        
+        
+        List {
+            ForEach(self.notifications) { notification in
+                ZStack {
+                     NotificationCell(Notification: notification).shadow(radius: 3)
+                    NavigationLink(destination: NotificationDetail()) {
+                       EmptyView()
+                    }.buttonStyle(PlainButtonStyle())
+                    
+                }
+            }
         }
+        .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
         .navigationBarTitle("Notifications")
     }
     

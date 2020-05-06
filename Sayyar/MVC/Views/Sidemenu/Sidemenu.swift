@@ -94,7 +94,7 @@ struct Sidemenu: View {
                     SideMenuButton(image: Image(systemName: "bell.fill"), text: "notifications")
                 }.padding()
                 
-                NavigationLink(destination: OrderView()) {
+                NavigationLink(destination: PastOrdersView()) {
                     SideMenuButton(image: Image("trip log"), text: "trip.log")
                 }.padding()
                 
@@ -102,7 +102,7 @@ struct Sidemenu: View {
                     SideMenuButton(image: Image(systemName: "creditcard.fill"), text: "payment.method")
                 }.padding()
                 
-                NavigationLink(destination: OfferView()) {
+                NavigationLink(destination: SupportView()) {
                     SideMenuButton(image: Image(systemName: "questionmark.circle.fill"), text: "help")
                 }.padding()
                 

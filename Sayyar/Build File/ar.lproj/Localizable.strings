@@ -31,6 +31,19 @@
 "sr" = "ر.س";
 "timer" = "وقت العرض";
 
+/// MARK: Save Location
+"add.detail" = "تفاصيل الموقع";
+"save.location" = "حفظ الموقع";
+"place.name" = "ادخل اسم الموقع";
+
 /// MARK: Registration
 "sign.in" = "تسجيل دخول";
 "resend" = "إعادة إرسال";
+
+
+/// Mark: Settings
+"account.info" = "البيانات الشخصية";
+"fav.place" = "الأماكن المفضلة";
+"first.name" = "الاسم الأول";
+"last.name" = "الاسم الأخير";
+"phone.number" = "رقم الجوال";

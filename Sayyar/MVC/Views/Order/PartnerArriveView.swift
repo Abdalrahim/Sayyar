@@ -11,7 +11,7 @@ import SwiftUI
 struct PartnerArriveView: View {
     @Binding var isTaxi : Bool
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             HStack(alignment : .center) {
                     Image(systemName: "phone.fill")
                         .resizable()
