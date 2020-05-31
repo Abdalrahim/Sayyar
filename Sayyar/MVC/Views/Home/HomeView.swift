@@ -41,6 +41,8 @@ struct HomeView : View {
     
     @State var newFavPlace = false
     
+    @State var isDestination = true
+    
     @State var userId = ""
     
     @State var polyline = GMSPolyline()
@@ -49,7 +51,13 @@ struct HomeView : View {
     @State var animationPath = GMSMutablePath()
     @State var i: UInt = 0
     
-    @State var centerImage : Image = Image("pin")
+    var centerImage : Image {
+        if locations.isEmpty {
+            return Image("pin2")
+        } else {
+            return Image("pin")
+        }
+    }
     
     @State var buttonText = "home.canvas".localized
     
@@ -60,6 +68,16 @@ struct HomeView : View {
     ]
     
     var selectedPlace : FavPlace?
+    
+    var bartTitle : String {
+        if locations.isEmpty {
+            return "select.destination".localized
+        } else if locations.count == 1 {
+            return "select.from".localized
+        } else {
+            return "order.summary".localized
+        }
+    }
     
     @State var isNewYear : Bool = {
         var myDict: NSDictionary?
@@ -118,9 +136,8 @@ struct HomeView : View {
                         .edgesIgnoringSafeArea(.all)
                         .imageScale(.large)
                         .onAppear {
-                            self.gmap.map.padding = UIEdgeInsets(top: 20, left: 10, bottom: 240, right: 10)
+                            self.gmap.map.padding = UIEdgeInsets(top: 20, left: 10, bottom: 250, right: 10)
                     }
-                    Text("%u".localizewithnumber(count: 2))
                     
                     self.centerImage
                         .foregroundColor(Color.black)
@@ -128,14 +145,20 @@ struct HomeView : View {
                     
                     if self.showRating {
                         RatingView(rate: self.rate, textRating: self.textRating)
+                    } else if self.locations.count == 2 {
+                        SummaryView()
                     } else {
                         DestinationView(places: self.places, addedPin: {
                             self.addPin()
                         }, showSearch: {
-                            self.showSearch.toggle()
+                            withAnimation {
+                                self.showSearch.toggle()
+                            }
                         }, newFav: {
-                            self.newFavPlace.toggle()
-                        })
+                            withAnimation {
+                                self.newFavPlace.toggle()
+                            }
+                        }, isDestination: self.$isDestination)
                     }
                     
                 }
@@ -157,8 +180,6 @@ struct HomeView : View {
                         .frame(width: geometry.size.width/1.3)
                         .transition(.move(edge: .leading))
                 }
-                
-                
             }
             .gesture(drag)
             .navigationBarItems(
@@ -175,7 +196,7 @@ struct HomeView : View {
                         .imageScale(.large)
                         .scaleEffect(CGSize(width: 1.3, height: 1.7))
                 }.offset(x: self.showMenu ? UIScreen.main.bounds.width/1.5 : 0))
-                .navigationBarTitle(Text(self.showMenu ? "" : "select.from"), displayMode: .inline)
+                .navigationBarTitle(Text(self.showMenu ? "" : self.bartTitle), displayMode: .inline)
                 .accentColor(purple)
                 .sheet(isPresented: self.$showSearch, content: {
                     SearchView()
@@ -195,25 +216,26 @@ struct HomeView : View {
         marker.iconView?.frame = CGRect(x: 0, y: 0, w: 25, h: 43)
         
         if locations.isEmpty {
-            marker.icon = UIImage(named: "pin")?.withTintColor(.green)
+            marker.icon = UIImage(named: "pin2")?.withTintColor(.green)
+            locations.append(coordinate)
+            gmap.addMarker(marker: marker)
+            self.isDestination = false
         } else if locations.count == 1 {
-            marker.icon = UIImage(named: "pin2")?.withTintColor(.red)
-        } else if locations.count == 2 {
+            marker.icon = UIImage(named: "pin")?.withTintColor(.red)
+            locations.append(coordinate)
+            gmap.addMarker(marker: marker)
             self.onFetch()
-            return
         }
         
-        locations.append(coordinate)
         
-        gmap.addMarker(marker: marker)
         //createLocalNotifications()
     }
     
     func onFetch() {
-        let place = [Place(lat: locations[1].latitude, lng: locations[1].longitude)]
-        let firstPlace = "\(locations.first!.latitude),\(locations.first!.longitude)"
+        let toPlace = [Place(lat: locations.first!.latitude, lng: locations.first!.longitude)]
+        let fromPlace = "\(locations[1].latitude),\(locations[1].longitude)"
 
-        FetchDirectionsRequest.getDirections(from: firstPlace, destinations: place, completion: ({ path in
+        FetchDirectionsRequest.getDirections(from: fromPlace, destinations: toPlace, completion: ({ path in
             guard let gpath = path else { return }
             self.path = gpath
 

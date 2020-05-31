@@ -18,6 +18,11 @@ struct RegisterView: View {
     @State var notRegister : Bool = false
     @State var checked : Bool = true
     
+    @State var firstnameCheck : Bool = true
+    @State var lastnameCheck : Bool = true
+    @State var phoneCheck : Bool = true
+    @State var emailCheck : Bool = true
+    
     var body: some View {
         VStack {
             Image("registerImage")
@@ -34,12 +39,12 @@ struct RegisterView: View {
                         HStack(spacing: 20) {
                             VStack(spacing: 15) {
                                 HStack(spacing: 15) {
-                                    customTextField(placeholder: "first.name", placename: self.$firstName) {
+                                    customTextField(placeholder: "first.name", placename: self.$firstName, fieldReq: self.$firstnameCheck) {
                                         
                                     }
                                     .font(.custom("Cairo-SemiBold", size: 15))
                                     
-                                    customTextField(placeholder: "last.name", placename: self.$lastName) {
+                                    customTextField(placeholder: "last.name", placename: self.$lastName, fieldReq: self.$lastnameCheck) {
                                         
                                     }
                                     .font(.custom("Cairo-SemiBold", size: 15))
@@ -64,12 +69,12 @@ struct RegisterView: View {
                                                 .stroke(purple , lineWidth: 1)
                                     )
                                     
-                                    customTextField(placeholder: "phone", placename: self.$lastName) {
+                                    customTextField(placeholder: "phone", placename: self.$lastName, fieldReq: self.$phoneCheck) {
                                         
                                     }
                                     .font(.custom("Cairo-SemiBold", size: 15))
                                 }
-                                customTextField(placeholder: "email", placename: self.$firstName) {
+                                customTextField(placeholder: "email", placename: self.$firstName, fieldReq: self.$emailCheck) {
                                     
                                 }
                             }

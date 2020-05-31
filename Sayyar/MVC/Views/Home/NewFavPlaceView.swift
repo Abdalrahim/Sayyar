@@ -27,6 +27,8 @@ struct NewFavPlaceView : View {
     
     @State var showDetail : Bool = false
     
+    @State var fieldRed : Bool = false
+    
     var coordination : CLLocationCoordinate2D
     
     var placeTypeName : String {
@@ -43,6 +45,7 @@ struct NewFavPlaceView : View {
     }
     
     func googleMapsiOSSDKReverseGeocoding(completion : @escaping (_ address: GMSAddress?) -> Void ) {
+        GMSServices.provideAPIKey(GMSApiKey)
         let aGMSGeocoder: GMSGeocoder = GMSGeocoder()
         aGMSGeocoder.reverseGeocodeCoordinate(self.coordination) { (GeocodeResponse, error) in
             if error != nil {
@@ -67,8 +70,8 @@ struct NewFavPlaceView : View {
             if let subLocality = address?.subLocality {
                 self.placeSubtitle = subLocality
             }
-            
         }
+        
        return GeometryReader { geometry in
             VStack(spacing: 35) {
                 Text("save.location")
@@ -95,7 +98,7 @@ struct NewFavPlaceView : View {
                 
                 
                 HStack {
-                    customTextField(placeholder: "place.name", placename: self.$placeName) {
+                    customTextField(placeholder: "place.name", placename: self.$placeName, fieldReq: self.$fieldRed) {
                         
                     }
                     ZStack(alignment: .trailing) {
@@ -148,7 +151,7 @@ struct NewFavPlaceView : View {
                 
                 ZStack(alignment: .trailing) {
                     if self.showDetail {
-                        customTextField(placeholder: "place.details", placename: self.$placeDetails) {
+                        customTextField(placeholder: "place.details", placename: self.$placeDetails, fieldReq: .constant(true)) {
                             
                         }
                         

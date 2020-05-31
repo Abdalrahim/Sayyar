@@ -21,7 +21,7 @@ struct TextView: UIViewRepresentable {
         let myTextView = SZTextView()
         myTextView.delegate = context.coordinator
         myTextView.placeholder = "rate.me".localized
-        myTextView.font = UIFont(name: "Cairo-SemiBold", size: 12)
+        myTextView.font = UIFont(name: "Cairo-SemiBold", size: 14)
         myTextView.isScrollEnabled = true
         myTextView.isEditable = true
         myTextView.isUserInteractionEnabled = true

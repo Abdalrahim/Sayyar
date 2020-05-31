@@ -17,10 +17,15 @@
 
 /// MARK: Home View
 "syyar" = "سيار";
-"select.from" = "حدد وجهتك";
+"select.destination" = "حدد وجهتك";
+"select.from" = "حدد نقطة الإلتقاء";
+"order.summary" = "ملخص الطلب";
 "home.canvas" = "لوحة الرسم";
 "add.pin" = "تأكيد الوجهة";
 "where.to.go?" = "أين تود الذهاب؟";
+
+"from.destination" = "نقطة التقاء";
+"to.destination" = "الوجهة";
 
 "how.was.trip?" = "كيف كانت رحلتك مع";
 "rate.me" = "...اكتب تعليق للسائق";

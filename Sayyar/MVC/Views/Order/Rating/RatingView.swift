@@ -44,10 +44,12 @@ struct RatingView: View {
         .cornerRadius(10)
         .padding()
         .modifier(DismissingKeyboard())
+    .shadow(radius: 5)
     }
 }
 struct RatingView_Previews: PreviewProvider {
     static var previews: some View {
-        RatingView(rate: Rating(rawValue: 1)!, textRating: "Pls Rate")
+        RatingView(rate: Rating(rawValue: 1)!, textRating: "Pls Rate").padding()
+            .previewLayout(.sizeThatFits)
     }
 }

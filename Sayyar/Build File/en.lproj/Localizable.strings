@@ -17,10 +17,15 @@
 
 /// MARK: Home View
 "syyar" = "Syyar";
-"select.from" = "Select Destination";
+"select.destination" = "Select Destination";
+"select.from" = "Select From";
+"order.summary" = "Order Summary";
 "home.canvas" = "Canvas";
 "add.pin" = "Add Pin";
 "where.to.go?" = "Where to go?";
+
+"from.destination" = "Pickup Point";
+"to.destination" = "Destination";
 
 "how.was.trip?" = "How was your trip";
 "rate.me" = "Write a comment...";

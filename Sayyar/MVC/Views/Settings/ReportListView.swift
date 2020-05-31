@@ -113,7 +113,7 @@ struct ReportCell_Previews: PreviewProvider {
     static var previews: some View {
         ReportCell(report:
             ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: ReportStatus(rawValue: 0)!, message: "")
-        )
-            .previewLayout(.fixed(width: 400, height: 200))
+            ).padding()
+            .previewLayout(.sizeThatFits)
     }
 }

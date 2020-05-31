@@ -42,6 +42,19 @@ struct OfferView: View {
             price: 15,
             time: 5,
             location : CLLocationCoordinate2D(latitude: 21.53753967998264, longitude: 39.19593270868063)
+        ),
+        
+        OfferData(
+            driverName: "Saleh",
+            rating: 4.2,
+            carMake: "Hyundai",
+            carModel: "Sonata",
+            carYear: 2019,
+            distance: 50.0,
+            timeDistance: 5,
+            price: 25,
+            time: 5,
+            location : CLLocationCoordinate2D(latitude: 21.53703967998265, longitude: 39.19293230868063)
         )
     ]
     
@@ -60,50 +73,50 @@ struct OfferView: View {
                 VStack(spacing: 10) {
                     scrollbar(selected: self.$index, page: self.offers.count).frame(height: 5)
                     
-                    ModelPages (self.offers, currentPage: $index, hasControl: false) { (pageIndex, offer) in
-                        GeometryReader { geometry in
-                            OfferCard(offer: offer, addOffer: {
-                                print(Double(geometry.frame(in: .global).minX))
-                            })
-                                .rotation3DEffect(Angle(degrees:
-                                    Double((geometry.frame(in: .global).minX) / -20)
-                                ), axis: (x: 10.0, y: 10.0, z: 10.0))
-                                .onAppear {
-                                    self.addPin(offer: offer)
-                                    print(Double(geometry.frame(in: .global).minX))
-                            }
-                            .onTapGesture{
-                                //self.currenOffer = offer
-                            }
-                        }.frame(width: UIScreen.main.bounds.width/1.1)
-                    }.accentColor(purple)
-                    
-//                    ScrollView(.horizontal, showsIndicators: false) {
-//
-//                        HStack{
-//                            Spacer(minLength: 20)
-//
-//                            ForEach(self.offers) { offer in
-//                                GeometryReader { geometry in
-//                                    OfferCard(offer: offer, addOffer: {
-//                                        print(Double(geometry.frame(in: .global).minX))
-//                                    })
-//                                        .rotation3DEffect(Angle(degrees:
-//                                            Double((geometry.frame(in: .global).minX) / -20)
-//                                        ), axis: (x: 10.0, y: 10.0, z: 10.0))
-//                                        .onAppear {
-//                                            self.addPin(offer: offer)
-//                                            print(Double(geometry.frame(in: .global).minX))
-//                                    }
-//                                    .onTapGesture{
-//                                        //self.currenOffer = offer
-//                                    }
-//                                }.frame(width: UIScreen.main.bounds.width/1.1)
-//
+//                    ModelPages (self.offers, currentPage: $index, hasControl: false) { (pageIndex, offer) in
+//                        GeometryReader { geometry in
+//                            OfferCard(offer: offer, addOffer: {
+//                                print(Double(geometry.frame(in: .global).minX))
+//                            })
+//                                .rotation3DEffect(Angle(degrees:
+//                                    Double((geometry.frame(in: .global).minX) / -20)
+//                                ), axis: (x: 10.0, y: 10.0, z: 10.0))
+//                                .onAppear {
+//                                    self.addPin(offer: offer)
+//                                    print(Double(geometry.frame(in: .global).minX))
 //                            }
-//                            Spacer(minLength: 20)
-//                        }
-//                    }
+//                            .onTapGesture{
+//                                self.currenOffer = pageIndex
+//                            }
+//                        }.frame(width: UIScreen.main.bounds.width/1.1)
+//                    }.accentColor(purple)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+
+                        HStack{
+                            Spacer(minLength: 20)
+
+                            ForEach(self.offers) { offer in
+                                GeometryReader { geometry in
+                                    OfferCard(offer: offer, addOffer: {
+                                        print(Double(geometry.frame(in: .global).minX))
+                                    })
+                                        .rotation3DEffect(Angle(degrees:
+                                            Double((geometry.frame(in: .global).minX) / -20)
+                                        ), axis: (x: 10.0, y: 10.0, z: 10.0))
+                                        .onAppear {
+                                            self.addPin(offer: offer)
+                                            print(Double(geometry.frame(in: .global).minX))
+                                    }
+                                    .onTapGesture{
+                                        //self.currenOffer = offer
+                                    }
+                                }.frame(width: UIScreen.main.bounds.width/1.1)
+
+                            }
+                            Spacer(minLength: 20)
+                        }
+                    }
                 }
                 .frame(height:200)
                 .padding(.bottom)

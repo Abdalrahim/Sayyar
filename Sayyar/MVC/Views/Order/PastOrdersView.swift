@@ -25,7 +25,6 @@ struct PastOrdersView: View {
         VStack {
             List(pastOrders) { order in
                 PastOrderCell(pastOrder: order)
-                    .shadow(radius: 4)
                 
             }.background(Color(#colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)))
         }
@@ -95,6 +94,7 @@ struct PastOrderCell : View {
         .padding()
         .background(Color.white)
         .cornerRadius(10)
+        .shadow(radius: 4)
     }
 }
 
@@ -109,7 +109,8 @@ struct PastOrderCell_Previews: PreviewProvider {
                 fromPlace: "Rehab school",
                 toPlace: "Saleh Road",
                 rating: 4))
-            .previewLayout(.fixed(width: 600, height: 210))
+        .padding()
+            .previewLayout(.sizeThatFits)
     }
 }
 
@@ -121,7 +122,6 @@ struct PastOrderData : Identifiable {
     var driverName : String
     
     var price : Int
-    
     
     var time : Date
     

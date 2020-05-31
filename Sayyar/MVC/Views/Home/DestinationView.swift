@@ -19,7 +19,10 @@ struct DestinationView: View {
     
     var newFav: () -> ()
     
+    @Binding var isDestination : Bool
+    
     @EnvironmentObject var settings: UserSettings
+    
     
 //    @Published var selectedPlace: Place
     
@@ -31,8 +34,8 @@ struct DestinationView: View {
             VStack(alignment: .leading, spacing: 10) {
                 
                 HStack {
-                    Image(systemName: "location.north.fill")
-                        .rotationEffect(.degrees(180))
+                    
+                    Image(isDestination ? "pasttopin" : "virtualPin")
                         .foregroundColor(purple)
                     
                     Text("where.to.go?")
@@ -147,7 +150,7 @@ struct DestinationView_Previews: PreviewProvider {
             FavPlace(name: "work", pType: .work, location: "30mins"),
             FavPlace(name: "meeting", pType: .other, location: "5mins")
         ]
-        return DestinationView(places: places, addedPin: {}, showSearch: {}, newFav: {})
+        return DestinationView(places: places, addedPin: {}, showSearch: {}, newFav: {}, isDestination: .constant(true))
             .previewLayout(.fixed(width: 500, height: 250))
     }
 }
