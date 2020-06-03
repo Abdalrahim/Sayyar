@@ -31,11 +31,11 @@ struct PastOrdersView: View {
         .navigationBarTitle("past trips")
     }
     
-    init() {
-        UITableView.appearance().separatorColor = UIColor.clear
-        UITableView.appearance().tableFooterView = UIView()
-        
-    }
+//    init() {
+//        UITableView.appearance().separatorColor = UIColor.clear
+//        UITableView.appearance().tableFooterView = UIView()
+//        
+//    }
 }
 
 struct PastOrderCell : View {
@@ -111,41 +111,6 @@ struct PastOrderCell_Previews: PreviewProvider {
                 rating: 4))
         .padding()
             .previewLayout(.sizeThatFits)
-    }
-}
-
-struct PastOrderData : Identifiable {
-    var id = UUID()
-    
-    var status : OrderStatus
-    
-    var driverName : String
-    
-    var price : Int
-    
-    var time : Date
-    
-    var fromPlace : String
-    
-    var toPlace : String
-    
-    var rating : Int
-}
-
-enum OrderStatus : Int {
-    case cash = 0
-    case credit = 1
-    case cancelled = 2
-    
-    func desc() -> String {
-        switch self {
-        case .cash:
-            return "Cash"
-        case .credit:
-            return "Credit"
-        case .cancelled:
-            return "Cancelled"
-        }
     }
 }
 

@@ -25,7 +25,8 @@ struct MapView: UIViewRepresentable, LocationManagerDelegate {
     
     @State var updated : Bool = false
     
-    func makeUIView(context: UIViewRepresentableContext<MapView>) -> MapView.UIViewType {
+    func makeUIView(context: UIViewRepresentableContext<MapView>) -> GMSMapView {
+        map.delegate = context.coordinator
         map.settings.myLocationButton = false
         map.isMyLocationEnabled = true
         do {
@@ -95,6 +96,28 @@ struct MapView: UIViewRepresentable, LocationManagerDelegate {
         if !self.updated {
             map.animate(to: camera)
             self.updated = true
+        }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    final class Coordinator: NSObject, GMSMapViewDelegate {
+        
+        var map : MapView
+        
+        init(_ map : MapView) {
+            self.map = map
+        }
+        
+        func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+            print(gesture)
+        }
+        
+        func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+            print(marker.position)
+            return true
         }
     }
     

@@ -15,7 +15,7 @@ struct SupportView: View {
                 .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
                 .font(.custom("Cairo-Regular", size: 16))
             VStack(spacing: 20) {
-                NavigationLink(destination: Text("")) {
+                NavigationLink(destination: ReportMissingView()) {
                     SupportCell(title: "I forgot Stuff in the car", icon: Image("letter"))
                 }
                 .padding()

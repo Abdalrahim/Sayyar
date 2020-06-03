@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "18052943-2EB7-4EB6-99F0-4108DCEBF20C"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "10E87EA5-005C-484F-97CB-28B779158873"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sayyar/MVC/Views/Home/HomeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "onFetch()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "10E87EA5-005C-484F-97CB-28B779158873 - 3268a32da6c69422"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.GMSPath&gt;) -&gt; () in Sayyar.HomeView.onFetch() -&gt; ()"
+                  moduleName = "Sayyar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Abdalrahim/Tera/Sayyar%20iOS/syyarios/Sayyar/MVC/Views/Home/HomeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "239"
+                  endingLineNumber = "239"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "10E87EA5-005C-484F-97CB-28B779158873 - 2a2ccbf4aaf950b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in Sayyar_PreviewReplacement_HomeView_6):Sayyar.HomeView.(__preview__onFetch in _F5FAA3062E7444FF5C02D5C01ABDA5D6)() -&gt; ()"
+                  moduleName = "HomeView.6.preview-thunk.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Abdalrahim/Tera/Sayyar%20iOS/syyarios/Sayyar/MVC/Views/Home/HomeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "240"
+                  endingLineNumber = "240"
+                  offsetFromSymbolStart = "2804">
+               </Location>
+               <Location
+                  uuid = "10E87EA5-005C-484F-97CB-28B779158873 - a141f8f7b1c85188"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.GMSPath&gt;) -&gt; () in (extension in Sayyar_PreviewReplacement_HomeView_6):Sayyar.HomeView.(__preview__onFetch in _F5FAA3062E7444FF5C02D5C01ABDA5D6)() -&gt; ()"
+                  moduleName = "HomeView.6.preview-thunk.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Abdalrahim/Library/Developer/Xcode/DerivedData/Sayyar-dpotljkoxojrntgofmujpcqmzrol/Build/Intermediates.noindex/Previews/Sayyar/Intermediates.noindex/Sayyar.build/Debug-iphonesimulator/Sayyar.build/Objects-normal/x86_64/HomeView.6.preview-thunk.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "171095D6-04DE-4CC9-A814-873624DDC8A2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sayyar/MVC/Views/Home/HomeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "onFetch()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "171095D6-04DE-4CC9-A814-873624DDC8A2 - 6bdee69f4b0ce8ff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Sayyar.HomeView.onFetch() -&gt; ()"
+                  moduleName = "Sayyar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Abdalrahim/Tera/Sayyar%20iOS/syyarios/Sayyar/MVC/Views/Home/HomeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "236"
+                  endingLineNumber = "236"
+                  offsetFromSymbolStart = "1167">
+               </Location>
+               <Location
+                  uuid = "171095D6-04DE-4CC9-A814-873624DDC8A2 - 2a2ccbf4aaf950b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in Sayyar_PreviewReplacement_HomeView_6):Sayyar.HomeView.(__preview__onFetch in _F5FAA3062E7444FF5C02D5C01ABDA5D6)() -&gt; ()"
+                  moduleName = "HomeView.6.preview-thunk.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Abdalrahim/Tera/Sayyar%20iOS/syyarios/Sayyar/MVC/Views/Home/HomeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "237"
+                  endingLineNumber = "237"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

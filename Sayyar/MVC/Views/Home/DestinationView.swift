@@ -21,9 +21,6 @@ struct DestinationView: View {
     
     @Binding var isDestination : Bool
     
-    @EnvironmentObject var settings: UserSettings
-    
-    
 //    @Published var selectedPlace: Place
     
     var body: some View {
@@ -101,10 +98,6 @@ struct DestinationView: View {
         }.padding(.horizontal, 20)
             .edgesIgnoringSafeArea(.bottom)
     }
-}
-
-class UserSettings: ObservableObject {
-    @Published var score = 0
 }
 
 struct RoundedCorners: View {
