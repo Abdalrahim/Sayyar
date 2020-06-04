@@ -212,6 +212,7 @@ struct HomeView : View {
         
         let coordinate = gmap.map.projection.coordinate(for: gmap.map.center)
         
+        
         let marker = GMSMarker(position: coordinate)
         marker.iconView?.frame = CGRect(x: 0, y: 0, w: 25, h: 43)
         

@@ -73,16 +73,16 @@ struct ReportDetailView: View {
                             (
                                 report.status == .step1 ||
                                     report.status == .step2 ||
-                                    report.status == .step3) ? purple : Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1))
+                                    report.status == .step3) ? purple : Color((#colorLiteral(red: 0.6274509804, green: 0.6352941176, blue: 0.6470588235, alpha: 1)))
                     )
                     Text("Step 2")
                         .foregroundColor(
                             (
                                 report.status == .step2 ||
-                                    report.status == .step3) ? purple : Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1))
+                                    report.status == .step3) ? purple : Color(#colorLiteral(red: 0.6274509804, green: 0.6352941176, blue: 0.6470588235, alpha: 1))
                     )
                     Text("Step 3")
-                        .foregroundColor((report.status == .step3) ? purple : Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)))
+                        .foregroundColor((report.status == .step3) ? purple : Color(#colorLiteral(red: 0.6274509804, green: 0.6352941176, blue: 0.6470588235, alpha: 1)))
                 }
                 .font(.custom("Cairo-SemiBold", size: 17))
                 
@@ -99,6 +99,6 @@ struct ReportDetailView: View {
 
 struct ReportDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ReportDetailView(report: .init(title: "I forgot my phone in the car", reportNum: 2123, type: "some", reportDate: Date(), status: ReportStatus(rawValue: 1)!, message: "Black Black Berry Bold with motion sensor and NASA grade titanium cover made from a dying star."))
+        ReportDetailView(report: .init(title: "نسيت جوالي في السيارة", reportNum: 2123, type: "some", reportDate: Date(), status: ReportStatus(rawValue: 1)!, message: "جوال آيفون XR أبيض عليه كفر شفاف صورة الخلفية بحر "))
     }
 }

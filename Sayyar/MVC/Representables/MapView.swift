@@ -13,13 +13,14 @@ import MapKit
 import Firebase
 import UIKit
 
-struct MapView: UIViewRepresentable, LocationManagerDelegate {
+struct MapView: UIViewRepresentable {
+    
+    @ObservedObject var locationManager = LocationManager()
     
     typealias UIViewType = GMSMapView
     
     let map = GMSMapView(frame: .zero)
 //    private var renderer: GMUGeometryRenderer!
-    let manager = LocationManager.shared
     
     let db = Firestore.firestore()
     
@@ -57,9 +58,15 @@ struct MapView: UIViewRepresentable, LocationManagerDelegate {
     }
     
     func updateUIView(_ uiView: MapView.UIViewType, context: UIViewRepresentableContext<MapView>) {
-        let camera = GMSCameraPosition(latitude: 21.553583299752678, longitude: 39.18819702956502, zoom: 15)
+        //MARK: - Remove when deployed to APP Store
+        if locationManager.latitude == 0 && locationManager.longitude == 0 {
+            let camera = GMSCameraPosition(latitude: 21.553583299752678, longitude: 39.18819702956502, zoom: 15)
+            uiView.animate(to: camera)
+            return
+        }
+        
+        let camera = GMSCameraPosition(latitude: locationManager.latitude, longitude: locationManager.longitude, zoom: 15)
         uiView.animate(to: camera)
-        manager.delegate = self
     }
     
     func addMarker(marker: GMSMarker){
@@ -109,10 +116,6 @@ struct MapView: UIViewRepresentable, LocationManagerDelegate {
         
         init(_ map : MapView) {
             self.map = map
-        }
-        
-        func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-            print(gesture)
         }
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {

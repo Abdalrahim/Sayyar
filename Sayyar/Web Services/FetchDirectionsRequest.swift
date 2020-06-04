@@ -55,6 +55,8 @@ class FetchDirectionsRequest  {
                         }
                     }
                 }
+            } else {
+                print(response.result)
             }
         }
     }

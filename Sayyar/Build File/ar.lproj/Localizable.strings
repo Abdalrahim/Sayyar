@@ -52,3 +52,11 @@
 "first.name" = "الاسم الأول";
 "last.name" = "الاسم الأخير";
 "phone.number" = "رقم الجوال";
+
+/// Mark: Report List
+"report.title" = "عنوان";
+"report.num" = "رقم";
+"report.date" = "تاريخ";
+"report.type" = "نوع";
+"report.stat" = "حالة";
+"Reports" = "البلاغات";

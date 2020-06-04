@@ -10,55 +10,43 @@ import UIKit
 import CoreLocation
 import EZSwiftExtensions
 import Firebase
+import Combine
 
-protocol LocationManagerDelegate {
-    func update(location : CLLocation)
-}
-
-class LocationManager: NSObject,CLLocationManagerDelegate {
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
-    var locationManager : CLLocationManager?
-    var currentLoc : CLLocation?
+    private let locationManager = CLLocationManager()
+    static let shared = LocationManager()
     
-    lazy var latitude = CLLocationDegrees()
-    lazy var longitude = CLLocationDegrees()
+    var latitude: CLLocationDegrees {
+        return location?.coordinate.latitude ?? 0
+    }
     
-    var delegate : LocationManagerDelegate?
+    var longitude: CLLocationDegrees {
+        return location?.coordinate.longitude ?? 0
+    }
     
     var currentCity : String?
     var country : String?
     
-    
     override init() {
         super.init()
         
-        locationInitializer()
-        updateLocation()
+        locationManager.delegate = self
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.requestAlwaysAuthorization()
     }
     
-    static let shared = LocationManager()
-    
-    func updateUserLocation() {
-        locationInitializer()
-        updateLocation()
-    }
+    @Published var location: CLLocation? {
+       willSet { objectWillChange.send() }
+     }
     
     func updateLocation() {
         
-        locationManager?.delegate = self
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.startMonitoringVisits()
-        
-        locationManager?.startUpdatingLocation()
-    }
-    
-    func locationInitializer() {
-        
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        
-        locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager?.requestAlwaysAuthorization()
+        locationManager.delegate = self
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.startMonitoringVisits()
+        locationManager.startUpdatingLocation()
     }
     
     
@@ -67,10 +55,10 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
         switch status {
             
         case .authorizedWhenInUse,.authorizedAlways:
-            locationManager?.startUpdatingLocation()
+            locationManager.startUpdatingLocation()
             
         case .notDetermined:
-            locationManager?.requestAlwaysAuthorization()
+            locationManager.requestAlwaysAuthorization()
             
         case .restricted,.denied:
             settingsAlert()
@@ -80,19 +68,15 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
     }
     
     func settingsAlert() {
-        
         //Alerts.shared.showAlertView(alert: Alert.alert.getLocalised(), message: "alert.TurnOnLocationPermission".localized, buttonTitles: ["buttonTitle.settings".localized ], viewController: ez.topMostVC!)
     }
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else {
           return
         }
         
-        self.delegate?.update(location: location)
-        
-        currentLoc = location
+        self.location = location
         
         AppDelegate.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
           if let place = placemarks?.first {
@@ -102,11 +86,7 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
           }
         }
         
-        if let lat = currentLoc?.coordinate.latitude , let lng = currentLoc?.coordinate.longitude {
-            
-            latitude  = lat
-            longitude = lng
-            
+        if self.latitude != 0 && self.longitude != 0 {
             getUserCurrentCity()
         }
     }
@@ -135,9 +115,7 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
     }
     
     func stopUpdatingLocation() {
-        
-        locationManager?.stopUpdatingLocation()
-        locationManager?.delegate = nil
+        locationManager.stopUpdatingLocation()
     }
     
     //MARK: - Delegate City Fire

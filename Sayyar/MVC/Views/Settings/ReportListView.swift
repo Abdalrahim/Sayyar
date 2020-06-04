@@ -12,7 +12,7 @@ struct ReportListView: View {
     
     
     @State var reports : [ReportData] = [
-        ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: ReportStatus(rawValue: 0)!, message: "I lost my phone in the white corolla"),
+        ReportData(title: "نسيت جوالي في السيارة", reportNum: 234, type: "sent", reportDate: Date(), status: ReportStatus(rawValue: 1)!, message: "جوال آيفون XR أبيض عليه كفر شفاف صورة الخلفية بحر "),
         ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: ReportStatus(rawValue: 0)!, message: "I lost my phone in the white corolla")
     ]
     
@@ -48,7 +48,6 @@ struct ReportListView_Previews: PreviewProvider {
 struct ReportCell : View {
     
     @State var report : ReportData
-    @State var pending : Bool = true
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -87,11 +86,11 @@ struct ReportCell : View {
                 VStack(alignment: .leading, spacing: 20) {
                     Text(report.type)
                     Text(report.status.desc())
-                        .foregroundColor(pending ?  Color(#colorLiteral(red: 0.1294117647, green: 0.4862745098, blue: 0.3490196078, alpha: 1)) : Color(#colorLiteral(red: 0.5137254902, green: 0.5333333333, blue: 0.5568627451, alpha: 1)))
+                        .foregroundColor((report.status.rawValue == 1) ?  Color(#colorLiteral(red: 0.1294117647, green: 0.4862745098, blue: 0.3490196078, alpha: 1)) : Color(#colorLiteral(red: 0.5137254902, green: 0.5333333333, blue: 0.5568627451, alpha: 1)))
                 }
                 .font(.custom("Cairo-SemiBold", size: 15))
                 .foregroundColor(Color(#colorLiteral(red: 0.5137254902, green: 0.5333333333, blue: 0.5568627451, alpha: 1)))
-            }
+            }.navigationBarTitle("Reports")
             
         }
             
@@ -104,7 +103,7 @@ struct ReportCell : View {
 //            RoundedRectangle(cornerRadius: 16)
 //                .stroke(Color.black.opacity(0.1), lineWidth: 1)
 //        )
-            .shadow(radius: pending ? 3 : 1)
+            .shadow(radius: (report.status.rawValue == 0) ? 3 : 1)
     }
 }
 
