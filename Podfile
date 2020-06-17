@@ -18,7 +18,7 @@ target 'Sayyar' do
   pod 'Crashlytics'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-  pod 'EZSwiftExtensions'
+  pod 'EZSwiftExtensions', :git => 'https://github.com/goktugyil/EZSwiftExtensions.git', :branch => 'ceeyang-Swift5.0'
   pod 'ObjectMapper'
   pod 'Charts'
   pod 'SZTextView'

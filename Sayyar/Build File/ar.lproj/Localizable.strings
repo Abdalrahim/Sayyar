@@ -23,18 +23,21 @@
 "home.canvas" = "لوحة الرسم";
 "add.pin" = "تأكيد الوجهة";
 "where.to.go?" = "أين تود الذهاب؟";
-
 "from.destination" = "نقطة التقاء";
 "to.destination" = "الوجهة";
-
 "how.was.trip?" = "كيف كانت رحلتك مع";
 "rate.me" = "...اكتب تعليق للسائق";
-"send" = "ارسال";
 "accept.offer" = "قبول العرض";
 "offers.page" = "عروض السائقين";
+"choose.paymentmethod" = "طريقة الدفع المختارة";
+"add.paymentmethod" = "";
+
+/// MARK: General
+"send" = "ارسال";
 "km" = "كم";
 "sr" = "ر.س";
 "timer" = "وقت العرض";
+"save" = "حفظ";
 
 /// MARK: Save Location
 "add.detail" = "تفاصيل الموقع";
@@ -60,3 +63,14 @@
 "report.type" = "نوع";
 "report.stat" = "حالة";
 "Reports" = "البلاغات";
+
+/// Mark: Support Pages
+"selet.trip" = "اختر الرحلة";
+"support" = "الدعم";
+"support.title" = "نسيت غرض في السيارة";
+"support.subtitle" = "اذا نسيت غرضًا ما في سيارة الشريك أثناء رحلتك ، شاركنا بمعلومات عن الغرض والرحلة لنتمكن من الوصول للشريك في أقرب وقت وخدمتك بشكل أفضل";
+"info.lostobject" = "معلومات وتفاصيل عن الغرض";
+"date.lostobject" = "تاريخ الرحلة التي نسيت بها الغرض";
+
+/// Mark: OrderView
+"order.ontheway" = "السائق في طريقه إليك";

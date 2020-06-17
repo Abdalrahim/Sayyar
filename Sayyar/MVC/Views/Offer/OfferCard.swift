@@ -8,16 +8,17 @@
 
 import SwiftUI
 import GoogleMaps
+import UIKit
+import SpriteKit
+
 struct OfferCard: View {
     @State var offer : OfferData
-    @State var progressBarValue : CGFloat = 1
-    
-    @State var currentDate = Date()
     
     @State var isTaxi = true
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    var addOffer: () -> ()
+    @State var time : Int = 10
+    
+    var acceptOffer: () -> ()
     
     var body: some View {
         VStack {
@@ -64,7 +65,7 @@ struct OfferCard: View {
                     Spacer()
                     Text("timer")
                         .font(.custom("Cairo-SemiBold", size: 10))
-                    ProgressCircle(value: self.$progressBarValue)
+                    ProgressCircle(time: self.offer.time)
                 }
             }.padding(.horizontal, 10)
             
@@ -98,38 +99,25 @@ struct OfferCard: View {
                         .frame(height: 20)
                     
                     
-                    Text(String.localizedStringWithFormat("min".localizewithnumber(count: UInt(offer.time))))
+                    Text(String.localizedStringWithFormat("min".localizewithnumber(count: UInt(((offer.time % 3600) / 60)))))
                         .font(.custom("Cairo-SemiBold", size: 12))
                 }
             }.padding(.horizontal)
             
-            Button(action: {
-                self.addOffer()
-            }, label: {
+            NavigationLink(destination: OrderView()) {
                 Text("accept.offer")
-                    .font(.custom("Cairo-SemiBold", size: 12))
-                    .foregroundColor(Color.white)
-            })
-                .padding(20)
-                .frame(height : 35)
-                .background(purple)
-                .cornerRadius(5)
+                .font(.custom("Cairo-SemiBold", size: 12))
+                .foregroundColor(Color.white)
+            }.padding(20)
+            .frame(height : 35)
+            .background(purple)
+            .cornerRadius(5)
             
         }
         .padding(5)
         .background(bgColor)
         .cornerRadius(10)
-            .onReceive(timer) { input in
-                self.currentDate = input
-                withAnimation {
-                    if (self.progressBarValue <= 0.9) {
-                        self.progressBarValue += 0.1
-                    }
-                }
-            }
-        .onAppear{
-            self.progressBarValue = self.offer.time/10
-        }
+        
     }
 }
 
@@ -147,7 +135,7 @@ struct OfferCard_Previews: PreviewProvider {
             distance: 40.0,
             timeDistance: 25,
             price: 12.5,
-            time: 1,
+            time: 60,
             location : CLLocationCoordinate2D(latitude: 21.542289948557013, longitude: 39.18610509485006)
         )
         let supportedLocales: [Locale] = [
@@ -158,7 +146,7 @@ struct OfferCard_Previews: PreviewProvider {
         return ForEach(supportedLocales, id: \.identifier) { locale in
             
             ForEach([ColorScheme.dark, .light], id: \.self) { scheme in
-                OfferCard(offer: offer, addOffer: {
+                OfferCard(offer: offer, acceptOffer: {
                     
                 })
                     .environment(\.locale, locale)
@@ -169,4 +157,64 @@ struct OfferCard_Previews: PreviewProvider {
         }
         
     }
+}
+
+struct ProgressCircle: View {
+    
+    @State var time : Int
+    @State var starter : Bool = false
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+//    func getProgressBarWidth(geometry:GeometryProxy) -> CGFloat {
+//        let frame = geometry.frame(in: .global)
+//        return frame.size.width * value
+//    }
+    
+    func getPercentage(_ value:CGFloat) -> String {
+        let intValue = Int(ceil(value * 100))
+        return "\(intValue) %"
+    }
+    
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(Color.gray,
+                        style: StrokeStyle(
+                        lineWidth: 3,
+                        lineCap: .butt,
+                        dash: [2,3]))
+                .frame(width: 45)
+            
+            Circle()
+                .trim(from: starter ? 0 : 1, to: 1)
+                .stroke(purple,
+                        style: StrokeStyle(
+                            lineWidth: 3,
+                            lineCap: .butt))
+                .frame(width:45)
+                .animation(Animation.easeInOut(duration: Double(time)).delay(1))
+                .rotationEffect(Angle(degrees:-90))
+            
+            Text(secsToMinsAndSecs(seconds: time))
+                .font(.custom("Cairo-Bold", size: 11))
+                .foregroundColor(purple)
+        }.onAppear {
+            self.starter = true
+        }.onReceive(timer) { input in
+            withAnimation(.linear) {
+                if (self.time != 0) {
+                    self.time -= 1
+                }
+            }
+        }
+    }
+}
+
+func secsToMinsAndSecs(seconds : Int) -> String {
+    let minutes = "\((seconds % 3600) / 60)"
+    let seconds = "\((seconds % 3600) % 60)"
+    let minStamp = minutes.count > 1 ? minutes : "0" + minutes
+    let secStamp = seconds.count > 1 ? seconds : "0" + seconds
+    return "\(minStamp) : \(secStamp)"
 }

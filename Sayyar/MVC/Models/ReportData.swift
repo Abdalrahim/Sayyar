@@ -17,7 +17,7 @@ struct ReportData : Identifiable {
     var reportDate : Date
     var status : ReportStatus
     var message : String
-    var sayyarMessage : String?
+    var sayyarMessage : String
     
 }
 

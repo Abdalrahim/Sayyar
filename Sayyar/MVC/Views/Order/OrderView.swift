@@ -30,13 +30,14 @@ struct OrderView: View {
     
     @State var room = ""
     
-    var btnBack : some View { Button(action: {
-        self.presentationMode.wrappedValue.dismiss()
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
         }) {
             Image(systemName: "line.horizontal.3")
-            .foregroundColor(purple)
-            .imageScale(.large)
-            .scaleEffect(CGSize(width: 1.3, height: 1.7))
+                .foregroundColor(purple)
+                .imageScale(.large)
+                .scaleEffect(CGSize(width: 1.3, height: 1.7))
         }
     }
     
@@ -45,10 +46,10 @@ struct OrderView: View {
             gmap.padding(.bottom, -20)
                 .onAppear {
                     self.gmap.map.padding = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-            }
+            }.edgesIgnoringSafeArea(.vertical)
             purple
                 .overlay(
-                    Text("Driver is on the way")
+                    Text("order.ontheway")
                         .font(.custom("Cairo-SemiBold", size: 15))
                         .foregroundColor(.white)
                         .padding(.bottom, 40)
@@ -116,7 +117,6 @@ struct OrderView: View {
             .background(bgColor)
             .cornerRadius(20)
         }
-        .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnBack)
     }

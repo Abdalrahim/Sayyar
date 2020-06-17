@@ -22,30 +22,37 @@ struct ReportMissingView: View {
     
     @State var showHistory = false
     
+    init() {
+        UITableView.appearance().separatorColor = UIColor.clear
+        UITableView.appearance().separatorInset = .zero
+    }
+    
     var body: some View {
-        let now = Date()
-        
-        return VStack(alignment: .leading, spacing: 10)   {
+        return Form {
+//            VStack(alignment: .leading, spacing: 10)    {
             
             
-            Text("Forgot Something in the car")
+            Text("support.title")
                 .font(.custom("Cairo-Regular", size: 23))
             
-            Text("If you forget an item in the partner’s car during your trip, share with us information about the thing you lost so that we can reach the partner soon and better serve you.")
+            Text("support.subtitle")
                 .font(.custom("Cairo-Regular", size: 15))
             
-            Text("Date when you lost the object")
+            Text("date.lostobject")
                 .font(.custom("Cairo-SemiBold", size: 18))
+                .frame(width: 200)
             
-            HStack(spacing: 25) {
-                PurpleSquare(text: .constant("Day"), title: "Day")
-                PurpleSquare(text: .constant("Month"), title: "Month")
+            DatePicker(selection: self.$selectedDate ,displayedComponents: .date) {
+                HStack(spacing: 25) {
+                    PurpleSquare(text: .constant("\(selectedDate.day)"), title: "Day")
+                    PurpleSquare(text: .constant(selectedDate.monthAsString), title: "Month")
+                }
             }
-            .frame(width: 200)
             
-            Text("Information about the lost object")
-                .font(.custom("Cairo-SemiBold", size: 18))
             
+            Text("info.lostobject")
+               .font(.custom("Cairo-SemiBold", size: 18))
+
             customTextField(placeholder: "Report Title", placename: $reportTitle, fieldReq: .constant(false)) {
             }
             
@@ -55,7 +62,7 @@ struct ReportMissingView: View {
                 .onTapGesture {
                     self.showHistory.toggle()
             }
-            
+             
             Button(action: {
                 
             }) {
@@ -75,7 +82,7 @@ struct ReportMissingView: View {
             
             Spacer()
         }
-        .padding()
+    .navigationBarTitle("support")
             
         .sheet(isPresented: self.$showHistory, content: {
             PastOrderSelect(presentPastOrders: self.$showHistory, title: self.$tripTitle).environmentObject(self.settings)

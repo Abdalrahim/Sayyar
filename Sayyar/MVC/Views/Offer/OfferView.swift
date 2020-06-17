@@ -27,7 +27,7 @@ struct OfferView: View {
             distance: 40.0,
             timeDistance: 25,
             price: 12.5,
-            time: 1,
+            time: 60,
             location : CLLocationCoordinate2D(latitude: 21.542289948557013, longitude: 39.18610509485006)
         ),
         
@@ -40,7 +40,7 @@ struct OfferView: View {
             distance: 20.0,
             timeDistance: 5,
             price: 15,
-            time: 5,
+            time: 120,
             location : CLLocationCoordinate2D(latitude: 21.53753967998264, longitude: 39.19593270868063)
         ),
         
@@ -53,10 +53,12 @@ struct OfferView: View {
             distance: 50.0,
             timeDistance: 5,
             price: 25,
-            time: 5,
+            time: 200,
             location : CLLocationCoordinate2D(latitude: 21.53703967998265, longitude: 39.19293230868063)
         )
     ]
+    
+    
     
     let gmap = MapView()
     
@@ -96,20 +98,22 @@ struct OfferView: View {
                         HStack{
                             Spacer(minLength: 20)
 
-                            ForEach(self.offers) { offer in
+                            ForEach(0..<self.offers.count) { index in
                                 GeometryReader { geometry in
-                                    OfferCard(offer: offer, addOffer: {
-                                        print(Double(geometry.frame(in: .global).minX))
+                                    OfferCard(offer: self.offers[index], acceptOffer: {
+                                        self.index = index
+                                        print(Double(geometry.frame(in: .global).minX), index)
                                     })
                                         .rotation3DEffect(Angle(degrees:
                                             Double((geometry.frame(in: .global).minX) / -20)
                                         ), axis: (x: 10.0, y: 10.0, z: 10.0))
                                         .onAppear {
-                                            self.addPin(offer: offer)
+                                            self.addPin(offer: self.offers[index])
                                             print(Double(geometry.frame(in: .global).minX))
+                                            self.index = index
                                     }
                                     .onTapGesture{
-                                        //self.currenOffer = offer
+                                        self.index = index
                                     }
                                 }.frame(width: UIScreen.main.bounds.width/1.1)
 
@@ -178,57 +182,6 @@ struct scrollbar: View {
             ForEach(Range(1...page)) {i in
                 Circle().frame(width: 5).foregroundColor((i == self.selected) ? purple : lightPurple)
             }
-        }
-    }
-}
-
-struct ProgressCircle: View {
-    
-    @Binding var value:CGFloat
-    
-    @State var minute : Int = 0
-    @State var second : Int = 60
-    
-    func getProgressBarWidth(geometry:GeometryProxy) -> CGFloat {
-        let frame = geometry.frame(in: .global)
-        return frame.size.width * value
-    }
-    
-    func getPercentage(_ value:CGFloat) -> String {
-        let intValue = Int(ceil(value * 100))
-        return "\(intValue) %"
-    }
-    
-    func getime(_ value:CGFloat) -> String {
-        let intValue = (second - Int(value * 10))
-//        print(value)
-        
-        return "\(minute) : \(intValue)"
-    }
-    
-    var body: some View {
-        ZStack {
-            Circle()
-                .stroke(
-                    Color.gray, style:
-                    StrokeStyle(
-                        lineWidth: 3,
-                        lineCap: .butt,
-                        dash: [2,3]))
-                .frame(width: 45)
-            
-            Circle()
-                .trim(from: value, to: 1)
-                .stroke(purple,
-                        style: StrokeStyle(
-                            lineWidth: 3,
-                            lineCap: .butt))
-                .frame(width:45)
-                .rotationEffect(Angle(degrees:-90))
-            
-            Text(getime(value))
-                .font(.custom("Cairo-Bold", size: 11))
-                .foregroundColor(purple)
         }
     }
 }

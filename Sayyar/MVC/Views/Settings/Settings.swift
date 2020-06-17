@@ -172,6 +172,8 @@ struct FavPlaceSettingRow : View {
             return Image("favSettings")
         case .other:
             return Image("favSettings")
+        case .add:
+            return Image(systemName: "plus.circle.fill")
         }
     }
     var body: some View {

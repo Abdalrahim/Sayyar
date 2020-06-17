@@ -91,7 +91,7 @@ struct PlaceView_Previews: PreviewProvider {
 
 struct NewPlaceView_Previews: PreviewProvider {
     static var previews: some View {
-        NewPlaceView(place: FavPlace(name: "home", pType: .other, location: "10mins"))
+        NewPlaceView(place: FavPlace(name: "home", pType: .home, location: "10mins"))
             .previewLayout(.fixed(width: 75, height: 75))
     }
 }

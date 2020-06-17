@@ -27,11 +27,12 @@ struct FavPlace : Identifiable {
             return Image("work")
         case .place:
             return Image("fav")
-        default:
+        case .add:
+            return Image(systemName: "plus.circle.fill").personCircle(diameter: 30)
+        case .other:
             return Image("fav")
         }
     }
-    
     var location : String
     
 }
@@ -41,4 +42,5 @@ enum favPlacetype : Int {
     case work = 1
     case other = 2
     case place = 3
+    case add = 4
 }

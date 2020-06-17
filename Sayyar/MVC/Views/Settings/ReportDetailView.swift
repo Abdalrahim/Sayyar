@@ -12,7 +12,6 @@ struct ReportDetailView: View {
     
     @State var report : ReportData
     
-    @State var sayyarMessage : String = " نأمل منك الحضور لإستلام الغرض من مكتب سيار في حي الصفا٩  خلال ٢٤ ساعة من لحظة إشعارك بحالة البلاغ"
     @State var showMessage : Bool = false
     
     var imageStatus : Image {
@@ -58,7 +57,7 @@ struct ReportDetailView: View {
             .background(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1))).cornerRadius(17)
             
             if showMessage {
-                Text(sayyarMessage)
+                Text(report.sayyarMessage)
                     .font(.custom("Cairo-SemiBold", size: 15))
                     .padding()
                     .background(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1))).cornerRadius(17)
@@ -99,6 +98,15 @@ struct ReportDetailView: View {
 
 struct ReportDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ReportDetailView(report: .init(title: "نسيت جوالي في السيارة", reportNum: 2123, type: "some", reportDate: Date(), status: ReportStatus(rawValue: 1)!, message: "جوال آيفون XR أبيض عليه كفر شفاف صورة الخلفية بحر "))
+        ReportDetailView(
+            report:
+            .init(
+                title: "نسيت جوالي في السيارة",
+                reportNum: 2123,
+                type: "some",
+                reportDate: Date(),
+                status: ReportStatus(rawValue: 1)!,
+                message: "جوال آيفون XR أبيض عليه كفر شفاف صورة الخلفية بحر ",
+                sayyarMessage: "نأمل منك الحضور لإستلام الغرض من مكتب سيار في حي الصفا٩  خلال ٢٤ ساعة من لحظة إشعارك بحالة البلاغ"))
     }
 }

@@ -12,9 +12,18 @@ struct SummaryView: View {
     
     @State var isSearching : Bool = false
     
+    @Binding var paymentMethod : Method
+    
+    @Binding var showPaymentType : Bool
+    
+    
     var body: some View {
         VStack(spacing: 0) {
-            Spacer()
+            if isSearching {
+                Color(#colorLiteral(red: 0.737254902, green: 0.737254902, blue: 0.737254902, alpha: 0.45))
+            } else {
+                Spacer()
+            }
             
             HStack(alignment: .top) {
                 Spacer()
@@ -57,10 +66,27 @@ struct SummaryView: View {
                 Divider()
                 if !isSearching {
                     HStack {
-                        Image("cash-pay").resizable().frame(width: 21, height: 12)
-                        Text("Cash").font(.custom("Cairo-Regular", size: 13))
-                        Image(systemName: "chevron.down").resizable().frame(width: 9, height: 5)
-                            .foregroundColor(Color.black)
+                        HStack {
+                            if paymentMethod.type == .cash {
+                                Image("cash-pay")
+                                    .resizable()
+                                    .frame(width: 21, height: 12)
+                                Text("Cash")
+                                    .font(.custom("Cairo-Regular", size: 13))
+                            } else {
+                                Image("visa")
+                                    .resizable()
+                                    .frame(width: 21, height: 12)
+                                Text("Credit Card")
+                                    .font(.custom("Cairo-Regular", size: 13))
+                            }
+                            
+                            Image(systemName: "chevron.down").resizable().frame(width: 9, height: 5)
+                                .foregroundColor(Color.black)
+                        }.onTapGesture {
+                            self.showPaymentType.toggle()
+                        }
+                        
                         Spacer()
                     }
                 }
@@ -71,7 +97,7 @@ struct SummaryView: View {
                     // MARK: Add Pin
                     Button(action: {
                         withAnimation {
-                            self.isSearching.toggle()
+                            self.isSearching = true
                         }
                         
                     }) {
@@ -101,13 +127,13 @@ struct SummaryView: View {
             
         }
         .padding(.horizontal, isSearching ? 0 : 15)
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
 struct SummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryView().previewLayout(.sizeThatFits)
+        SummaryView(paymentMethod: .constant(.init(type: .visa)), showPaymentType: .constant(true))
+            .previewLayout(.sizeThatFits)
             .background(Color.gray)
     }
 }

@@ -20,7 +20,7 @@ struct OfferData : Identifiable {
     var distance : Double
     var timeDistance : Double
     var price : Double
-    var time : CGFloat
+    var time : Int
     var location : CLLocationCoordinate2D
     var isTaxi : Bool?
 }

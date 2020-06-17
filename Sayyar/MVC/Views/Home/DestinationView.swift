@@ -96,7 +96,6 @@ struct DestinationView: View {
             .frame(height: 200)
             .padding(.bottom, 20)
         }.padding(.horizontal, 20)
-            .edgesIgnoringSafeArea(.bottom)
     }
 }
 

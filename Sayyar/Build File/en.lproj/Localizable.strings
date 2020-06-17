@@ -23,18 +23,21 @@
 "home.canvas" = "Canvas";
 "add.pin" = "Add Pin";
 "where.to.go?" = "Where to go?";
-
 "from.destination" = "Pickup Point";
 "to.destination" = "Destination";
-
 "how.was.trip?" = "How was your trip";
 "rate.me" = "Write a comment...";
-"send" = "Send";
 "accept.offer" = "Accept Offer";
 "offers.page" = "Partner Offers";
+"choose.paymentmethod" = "Choose payment method";
+"add.paymentmethod" = "Add payment method";
+
+/// MARK: General
+"send" = "Send";
 "sr" = "SR";
 "timer" = "Timer";
 "add.place" = "New Place";
+"save" = "Save";
 
 /// MARK: Save Location
 "add.detail" = "Add Detail";
@@ -59,4 +62,15 @@
 "report.date" = "Date";
 "report.type" = "Type";
 "report.stat" = "Status";
-"Reports" = "Repors";
+"Reports" = "Reports";
+
+/// Mark: Support Pages
+"selet.trip" = "Select Trip";
+"support" = "Support";
+"support.title" = "Forgot Something in the car";
+"support.subtitle" = "If you forget an item in the partner’s car during your trip, share with us information about the thing you lost so that we can reach the partner soon and better serve you.";
+"info.lostobject" = "Information about the lost object";
+"date.lostobject" = "Date when you lost the object";
+
+/// Mark: OrderView
+"order.ontheway" = "Driver is on the way";

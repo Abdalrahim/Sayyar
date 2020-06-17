@@ -138,7 +138,6 @@ struct Sidemenu: View {
             }
             
         }.background(Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)))
-            .edgesIgnoringSafeArea(.all)
             
             .onAppear(){
                 print(UIDevice.isSmallScreen())

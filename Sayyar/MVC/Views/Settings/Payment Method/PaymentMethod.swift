@@ -16,6 +16,7 @@ struct PaymentMethod: View {
     ]
     
     @State var showNewCupon : Bool = false
+    @State var selectedPaymentMethod : Method = Method(type: .cash)
     
     init() {
         UITableView.appearance().separatorInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 20)
@@ -47,7 +48,10 @@ struct PaymentMethod: View {
                     ).padding(.bottom)
                     
                     List(self.methods) { method in
-                        MethodView(method: method)
+                        MethodView(method: method, selectedMethod: self.$selectedPaymentMethod)
+                        .onTapGesture {
+                                self.selectedPaymentMethod = method
+                        }
                     }
                     
                     Text("Offers to use")
@@ -74,14 +78,13 @@ struct PaymentMethod: View {
                 Alert(title: Text("sa"))
             }
             .navigationBarTitle("payment.method")
-            .edgesIgnoringSafeArea(.all)
         }
     }
 }
 
 struct MethodView : View {
-    @State var isSelected : Bool = false
     @State var method :Method
+    @Binding var selectedMethod : Method
     
     var image: Image {
         switch method.type {
@@ -114,7 +117,12 @@ struct MethodView : View {
                 .foregroundColor(purple)
                 .frame(width: 18, height: 18)
                 .overlay(
-                    Circle().foregroundColor(isSelected ? purple : .clear).frame(width: 10, height: 10)
+                    withAnimation {
+                        Circle()
+                            .foregroundColor((selectedMethod.type == method.type) ? purple : .clear)
+                            .frame(width: 10, height: 10)
+                            .animation(.spring())
+                    }
             )
             
             image
@@ -124,14 +132,12 @@ struct MethodView : View {
             
             Text(name)
                 .font(.custom("Cairo-Regular", size: 18))
-        }.onTapGesture {
-            self.isSelected.toggle()
         }
     }
 }
 struct MethodView_Previews: PreviewProvider {
     static var previews: some View {
-        MethodView(method: Method(type: .cash)).previewLayout(.fixed(width: 200, height: 50))
+        MethodView(method: Method(type: .cash), selectedMethod: .constant(Method(type : .cash))).previewLayout(.fixed(width: 200, height: 50))
     }
 }
 

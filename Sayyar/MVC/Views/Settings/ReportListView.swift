@@ -12,8 +12,22 @@ struct ReportListView: View {
     
     
     @State var reports : [ReportData] = [
-        ReportData(title: "نسيت جوالي في السيارة", reportNum: 234, type: "sent", reportDate: Date(), status: ReportStatus(rawValue: 1)!, message: "جوال آيفون XR أبيض عليه كفر شفاف صورة الخلفية بحر "),
-        ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: ReportStatus(rawValue: 0)!, message: "I lost my phone in the white corolla")
+        ReportData(
+            title: "نسيت جوالي في السيارة",
+            reportNum: 234,
+            type: "sent",
+            reportDate: Date(),
+            status: ReportStatus(rawValue: 1)!,
+            message: "جوال آيفون XR أبيض عليه كفر شفاف صورة الخلفية بحر ",
+            sayyarMessage: "نأمل منك الحضور لإستلام الغرض من مكتب سيار في حي الصفا٩  خلال ٢٤ ساعة من لحظة إشعارك بحالة البلاغ"),
+        ReportData(
+            title: "Lost My Phone",
+            reportNum: 234,
+            type: "sent",
+            reportDate: Date(),
+            status: ReportStatus(rawValue: 0)!,
+            message: "I lost my phone in the white corolla",
+            sayyarMessage: "نأمل منك الحضور لإستلام الغرض من مكتب سيار في حي الصفا٩  خلال ٢٤ ساعة من لحظة إشعارك بحالة البلاغ")
     ]
     
     
@@ -110,8 +124,16 @@ struct ReportCell : View {
 
 struct ReportCell_Previews: PreviewProvider {
     static var previews: some View {
-        ReportCell(report:
-            ReportData(title: "Lost My Phone", reportNum: 234, type: "sent", reportDate: Date(), status: ReportStatus(rawValue: 0)!, message: "")
+        ReportCell(
+            report:
+            ReportData(
+                title: "Lost My Phone",
+                reportNum: 234,
+                type: "sent",
+                reportDate: Date(),
+                status: ReportStatus(rawValue: 0)!,
+                message: "",
+                sayyarMessage: "")
             ).padding()
             .previewLayout(.sizeThatFits)
     }

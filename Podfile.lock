@@ -336,7 +336,7 @@ PODS:
 DEPENDENCIES:
   - Charts
   - Crashlytics
-  - EZSwiftExtensions
+  - EZSwiftExtensions (from `https://github.com/goktugyil/EZSwiftExtensions.git`, branch `ceeyang-Swift5.0`)
   - Fabric
   - Firebase/Analytics
   - Firebase/Auth
@@ -357,7 +357,6 @@ SPEC REPOS:
     - BoringSSL-GRPC
     - Charts
     - Crashlytics
-    - EZSwiftExtensions
     - Fabric
     - Firebase
     - FirebaseABTesting
@@ -388,6 +387,16 @@ SPEC REPOS:
     - ObjectMapper
     - Protobuf
     - SZTextView
+
+EXTERNAL SOURCES:
+  EZSwiftExtensions:
+    :branch: ceeyang-Swift5.0
+    :git: https://github.com/goktugyil/EZSwiftExtensions.git
+
+CHECKOUT OPTIONS:
+  EZSwiftExtensions:
+    :commit: c1f2720c6164ed47e081fa38bbf6b489fc0f9266
+    :git: https://github.com/goktugyil/EZSwiftExtensions.git
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
@@ -426,6 +435,6 @@ SPEC CHECKSUMS:
   Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
 
-PODFILE CHECKSUM: 0af9594e19da91943a85108c0f366475ab2ce6e5
+PODFILE CHECKSUM: ebfa57bf04b1f29697eaff08ebceb946577db9d3
 
 COCOAPODS: 1.8.4

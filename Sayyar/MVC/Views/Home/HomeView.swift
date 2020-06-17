@@ -45,11 +45,20 @@ struct HomeView : View {
     
     @State var userId = ""
     
+    @State var showPayment = false
+    
+    @State var selectedPaymentMethod : Method = Method(type: .cash)
+    
     @State var polyline = GMSPolyline()
     @State var animationPolyline = GMSPolyline()
     @State var path = GMSPath()
     @State var animationPath = GMSMutablePath()
     @State var i: UInt = 0
+    
+    @State var methods : [Method] = [
+        Method(type: .cash),
+        Method(type: .visa)
+    ]
     
     var centerImage : Image {
         if locations.isEmpty {
@@ -109,6 +118,7 @@ struct HomeView : View {
             .foregroundColor: UIColor(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)),
             .font : UIFont(name:"Cairo-Bold", size: 20)!]
         
+        UITableView.appearance().separatorColor = UIColor.clear
         //Config.shared.set(defaults: ["buttonText": "Add Pin" as NSObject])
     }
     
@@ -133,7 +143,6 @@ struct HomeView : View {
                 ZStack {
                     
                     self.gmap
-                        .edgesIgnoringSafeArea(.all)
                         .imageScale(.large)
                         .onAppear {
                             self.gmap.map.padding = UIEdgeInsets(top: 20, left: 10, bottom: 250, right: 10)
@@ -146,7 +155,7 @@ struct HomeView : View {
                     if self.showRating {
                         RatingView(rate: self.rate, textRating: self.textRating)
                     } else if self.locations.count == 2 {
-                        SummaryView()
+                        SummaryView(paymentMethod: self.$selectedPaymentMethod, showPaymentType: self.$showPayment)
                     } else {
                         DestinationView(places: self.places, addedPin: {
                             self.addPin()
@@ -160,6 +169,40 @@ struct HomeView : View {
                             }
                         }, isDestination: self.$isDestination)
                     }
+                    if self.showPayment {
+                        withAnimation{
+                            Color(#colorLiteral(red: 0.737254902, green: 0.737254902, blue: 0.737254902, alpha: 0.45))
+                                .overlay(
+                                    VStack(alignment: .leading) {
+                                        Text("choose.paymentmethod")
+                                            .font(.custom("Cairo-SemiBold", size: 18))
+                                            .foregroundColor(dark)
+                                        .padding()
+                                        List(self.methods) { method in
+                                            MethodView(method: method, selectedMethod: self.$selectedPaymentMethod)
+                                                .onTapGesture {
+                                                    self.selectedPaymentMethod = method
+                                            }
+                                        }
+                                        .frame(height: CGFloat(60 * self.methods.count))
+                                        HStack(spacing: 30) {
+                                            Spacer()
+                                            Text("save")
+                                                .onTapGesture {
+                                                    self.showPayment.toggle()
+                                            }
+                                            Text("add.paymentmethod")
+                                        }
+                                        .font(.custom("Cairo-SemiBold", size: 18))
+                                        .foregroundColor(purple)
+                                    }
+                                    .padding()
+                                    .background(Color.white)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal)
+                            )
+                        }
+                    }
                     
                 }
                     //.offset(x: self.showMenu ? geometry.size.width/1.5 : 0)
@@ -168,7 +211,6 @@ struct HomeView : View {
                 
                 if self.showMenu {
                     Color(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 0.5))
-                        .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
                             withAnimation {
                                 self.showMenu.toggle()
@@ -176,7 +218,6 @@ struct HomeView : View {
                     }
                     
                     Sidemenu()
-                        .edgesIgnoringSafeArea(.all)
                         .frame(width: geometry.size.width/1.3)
                         .transition(.move(edge: .leading))
                 }
@@ -201,6 +242,7 @@ struct HomeView : View {
                 .sheet(isPresented: self.$showSearch, content: {
                     SearchView()
                 })
+            .edgesIgnoringSafeArea(.all)
 //            .navigationBarHidden(self.showMenu)
         }.accentColor(purple)
             .sheet(isPresented: self.$newFavPlace, content: {
