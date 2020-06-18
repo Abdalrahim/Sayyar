@@ -55,6 +55,7 @@
 "first.name" = "الاسم الأول";
 "last.name" = "الاسم الأخير";
 "phone.number" = "رقم الجوال";
+"nofav" = "لا توجد لديك أماكن مفضلة";
 
 /// Mark: Report List
 "report.title" = "عنوان";

@@ -47,12 +47,15 @@ struct PaymentMethod: View {
                             Circle().foregroundColor(Color(#colorLiteral(red: 0.9293273091, green: 0.9294641614, blue: 0.9293100238, alpha: 1)))
                     ).padding(.bottom)
                     
-                    List(self.methods) { method in
-                        MethodView(method: method, selectedMethod: self.$selectedPaymentMethod)
-                        .onTapGesture {
-                                self.selectedPaymentMethod = method
-                        }
-                    }
+                    List {
+                        ForEach(self.methods) {method in
+                            MethodView(method: method, selectedMethod: self.$selectedPaymentMethod)
+                            .onTapGesture {
+                                    self.selectedPaymentMethod = method
+                            }
+                        }.onDelete(perform: self.delete)
+                    }.frame(height: 20 + CGFloat(60 * self.methods.count))
+                    
                     
                     Text("Offers to use")
                         .font(.custom("Cairo-SemiBold", size: 18))
@@ -79,6 +82,10 @@ struct PaymentMethod: View {
             }
             .navigationBarTitle("payment.method")
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+         methods.remove(atOffsets: offsets)
     }
 }
 

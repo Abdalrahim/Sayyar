@@ -37,16 +37,27 @@ struct Settings: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("account.info")
-                    .font(.custom("Cairo-SemiBold", size: 16))
+                        .font(.custom("Cairo-SemiBold", size: 16))
                     CustomRow(model: self.data, firstName: $firstName, lastName: $lastName)
                 }
                 VStack(alignment: .leading, spacing: 10) {
                     Text("fav.place")
                         .font(.custom("Cairo-SemiBold", size: 16))
-                    
-                    ForEach(self.places) {place in
-                        FavPlaceSettingRow(favPlace: place)
+                    if !self.places.isEmpty {
+                        HStack {
+                            Text("nofav")
+                                .font(.custom("Cairo-SemiBold", size: 16))
+                                .foregroundColor(Color.gray)
+                            Spacer()
+                        }.padding(.leading)
+                    } else {
+                        List {
+                            ForEach(self.places) {place in
+                                FavPlaceSettingRow(favPlace: place)
+                            }.onDelete(perform: delete)
+                        }.frame(height: 20 + CGFloat(60 * self.places.count))
                     }
+                    
                 }
                 
                 HStack(alignment: .bottom) {
@@ -70,6 +81,12 @@ struct Settings: View {
             self.lastName = self.data.lastName
             
         }
+        
+        
+    }
+    
+    func delete(at offsets: IndexSet) {
+         places.remove(atOffsets: offsets)
     }
 }
 

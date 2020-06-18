@@ -55,6 +55,7 @@
 "first.name" = "First Name";
 "last.name" = "Last Name";
 "phone.number" = "Phone Number";
+"nofav" = "You have no favourite places";
 
 /// Mark: Report List
 "report.title" = "Title";
