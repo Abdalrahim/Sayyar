@@ -31,13 +31,15 @@ struct customTextField: View {
                 }
             }, onCommit: {
                 self.commit()
-            }).frame(height: 44).padding(.horizontal)
+            })
+                .foregroundColor(.black)
+                .frame(height: 44).padding(.horizontal)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .stroke(textFieldActive || !placename.isEmpty ? purple : Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)), lineWidth: 1)
             )
-            
-            if fieldReq {
+             
+            if fieldReq && placename.isEmpty && !textFieldActive {
                 Text("Field required")
                 .font(.custom("Cairo-Bold", size: 12))
                 .foregroundColor(red)

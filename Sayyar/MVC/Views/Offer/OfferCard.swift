@@ -114,6 +114,7 @@ struct OfferCard: View {
             .cornerRadius(5)
             
         }
+        .foregroundColor(dark)
         .padding(5)
         .background(bgColor)
         .cornerRadius(10)
@@ -199,7 +200,10 @@ struct ProgressCircle: View {
             Text(secsToMinsAndSecs(seconds: time))
                 .font(.custom("Cairo-Bold", size: 11))
                 .foregroundColor(purple)
-        }.onAppear {
+        }
+//        .padding(.horizontal, 2)
+//        .drawingGroup()
+        .onAppear {
             self.starter = true
         }.onReceive(timer) { input in
             withAnimation(.linear) {

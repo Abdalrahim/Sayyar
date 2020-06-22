@@ -55,9 +55,42 @@ struct OfferView: View {
             price: 25,
             time: 200,
             location : CLLocationCoordinate2D(latitude: 21.53703967998265, longitude: 39.19293230868063)
+        ),
+        
+        OfferData(
+            driverName: "Constantine",
+            rating: 4.2,
+            carMake: "Hyundai",
+            carModel: "Sonata",
+            carYear: 2019,
+            distance: 50.0,
+            timeDistance: 5,
+            price: 25,
+            time: 200,
+            location : CLLocationCoordinate2D(latitude: 21.53703967998265, longitude: 39.19293230868063)
+        ),
+        
+        OfferData(
+            driverName: "Noman",
+            rating: 4.2,
+            carMake: "Hyundai",
+            carModel: "Sonata",
+            carYear: 2019,
+            distance: 50.0,
+            timeDistance: 5,
+            price: 25,
+            time: 200,
+            location : CLLocationCoordinate2D(latitude: 21.53703967998265, longitude: 39.19293230868063)
         )
     ]
     
+    
+    init() {
+        UIScrollView.appearance().isPagingEnabled = true
+        UIScrollView.appearance().clipsToBounds = false
+        UIScrollView.appearance().contentSize = CGSize(width: UIScreen.main.bounds.width/1.2, height: 300)
+        UIStackView.appearance().clipsToBounds = false
+    }
     
     
     let gmap = MapView()
@@ -95,18 +128,21 @@ struct OfferView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
 
-                        HStack{
-                            Spacer(minLength: 20)
+                        HStack(spacing: 0){
+//                            Spacer(minLength: 20)
 
                             ForEach(0..<self.offers.count) { index in
                                 GeometryReader { geometry in
                                     OfferCard(offer: self.offers[index], acceptOffer: {
-                                        self.index = index
+//                                        self.index = index
                                         print(Double(geometry.frame(in: .global).minX), index)
-                                    })
-                                        .rotation3DEffect(Angle(degrees:
-                                            Double((geometry.frame(in: .global).minX) / -20)
-                                        ), axis: (x: 10.0, y: 10.0, z: 10.0))
+                                        })
+                                        .scaleEffect(geometry.frame(in: .global).minX <= 0 ? 0.9 : 1.1 , anchor: .center)
+//                                        .rotation3DEffect(Angle(degrees:
+//                                            Double((geometry.frame(in: .global).minX) / -20)
+//                                        ), axis: (x: 10.0, y: 10.0, z: 10.0))
+                                    
+                                    .cornerRadius(1)
                                         .onAppear {
                                             self.addPin(offer: self.offers[index])
                                             print(Double(geometry.frame(in: .global).minX))
@@ -115,12 +151,14 @@ struct OfferView: View {
                                     .onTapGesture{
                                         self.index = index
                                     }
-                                }.frame(width: UIScreen.main.bounds.width/1.1)
-
+                                }
+                                .frame(width: UIScreen.main.bounds.width)
+                                
                             }
-                            Spacer(minLength: 20)
+//                            Spacer(minLength: 20)
                         }
                     }
+//                        .padding(.horizontal, 20)
                 }
                 .frame(height:200)
                 .padding(.bottom)
@@ -180,7 +218,7 @@ struct scrollbar: View {
     var body: some View {
         HStack {
             ForEach(Range(1...page)) {i in
-                Circle().frame(width: 5).foregroundColor((i == self.selected) ? purple : lightPurple)
+                Circle().frame(width: 5).foregroundColor((i - 1 == self.selected) ? purple : lightPurple)
             }
         }
     }

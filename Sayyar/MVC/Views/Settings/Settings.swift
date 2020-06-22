@@ -40,10 +40,10 @@ struct Settings: View {
                         .font(.custom("Cairo-SemiBold", size: 16))
                     CustomRow(model: self.data, firstName: $firstName, lastName: $lastName)
                 }
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 5) {
                     Text("fav.place")
                         .font(.custom("Cairo-SemiBold", size: 16))
-                    if !self.places.isEmpty {
+                    if self.places.isEmpty {
                         HStack {
                             Text("nofav")
                                 .font(.custom("Cairo-SemiBold", size: 16))
@@ -52,17 +52,17 @@ struct Settings: View {
                         }.padding(.leading)
                     } else {
                         List {
-                            ForEach(self.places) {place in
+                            ForEach(self.places) { place in
                                 FavPlaceSettingRow(favPlace: place)
                             }.onDelete(perform: delete)
-                        }.frame(height: 20 + CGFloat(60 * self.places.count))
+                        }.padding(.horizontal, -20).frame(height: CGFloat(56 * self.places.count))
                     }
                     
                 }
                 
                 HStack(alignment: .bottom) {
                     
-                    Text("Logout")
+                    Text("logout")
                         .font(.custom("Cairo-SemiBold", size: 16))
                         .padding(.leading)
                     
@@ -72,8 +72,12 @@ struct Settings: View {
                 .frame(height: 44)
                 .background(Color.init(white: 0.95))
                 .cornerRadius(5)
-            }.padding()
+            }
+        
+            .foregroundColor(blktxt)
+            .padding()
         }
+            .background(bgColor)
         .navigationBarTitle("settings")
         .onAppear {
             self.firstName = self.data.firstName
@@ -151,7 +155,7 @@ struct CustomRow: View {
             
             HStack {
                 
-                Text("Email")
+                Text("email")
                     .font(.custom("Cairo-SemiBold", size: 16))
                     .padding(.leading)
                 

@@ -75,14 +75,15 @@ struct NewFavPlaceView : View {
        return GeometryReader { geometry in
             VStack(spacing: 35) {
                 Text("save.location")
-                .font(.custom("Cairo-SemiBold", size: 23))
+                    .font(.custom("Cairo-SemiBold", size: 23))
+                    .foregroundColor(gray)
                 
                 ZStack(alignment: .bottomLeading) {
                     self.gmap//.padding(.bottom, 60)
                     HStack {
                         VStack(alignment: .leading, spacing: 0) {
                             Text(self.placeTitle)
-                                .font(.custom("Cairo-SemiBold", size: 15))
+                                .font(.custom("Cairo-SemiBold", size: 15)).foregroundColor(.black)
                             Text(self.placeSubtitle)
                                 .font(.custom("Cairo-SemiBold", size: 14)).foregroundColor(.gray)
                         }.padding(.leading, 30)
@@ -98,12 +99,12 @@ struct NewFavPlaceView : View {
                 
                 
                 HStack {
-                    customTextField(placeholder: "place.name", placename: self.$placeName, fieldReq: self.$fieldRed) {
+                    customTextField(placeholder: "place.name".localized, placename: self.$placeName, fieldReq: self.$fieldRed) {
                         
                     }
                     ZStack(alignment: .trailing) {
                         HStack {
-                            Text(self.placetype == nil ? "type" : self.placeTypeName)
+                            Text(self.placetype == nil ? "type".localized : self.placeTypeName)
                                 .disabled(true)
                                 .padding(.leading)
                             Spacer()
@@ -191,9 +192,23 @@ struct NewFavPlaceView : View {
 //
 struct NewFavPlaceView_Previews: PreviewProvider {
     static var previews: some View {
-        NewFavPlaceView(coordination:
-            CLLocationCoordinate2D(latitude: 21.550270436442297, longitude: 39.18819688260556)
-        )
+        let supportedLocales: [Locale] = [
+            "en",
+            "ar",
+            ].map(Locale.init(identifier:))
+        
+        return ForEach(supportedLocales, id: \.identifier) { locale in
+            
+            ForEach([ColorScheme.light, .dark], id: \.self) { scheme in
+                NewFavPlaceView(coordination:
+                    CLLocationCoordinate2D(latitude: 21.550270436442297, longitude: 39.18819688260556)
+                )
+                    .environment(\.locale, locale)
+                    .previewDisplayName(Locale.current.localizedString(forIdentifier: locale.identifier)! + " \(scheme)")
+                    .colorScheme(scheme)
+            }
+        }
+        
     }
 }
 

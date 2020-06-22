@@ -42,12 +42,12 @@
 /// MARK: Save Location
 "add.detail" = "تفاصيل الموقع";
 "save.location" = "حفظ الموقع";
-"place.name" = "ادخل اسم الموقع";
+"place.name" = "اسم الموقع";
+"type" = "تصنيف";
 
 /// MARK: Registration
 "sign.in" = "تسجيل دخول";
 "resend" = "إعادة إرسال";
-
 
 /// Mark: Settings
 "account.info" = "البيانات الشخصية";
@@ -56,6 +56,8 @@
 "last.name" = "الاسم الأخير";
 "phone.number" = "رقم الجوال";
 "nofav" = "لا توجد لديك أماكن مفضلة";
+"email" = "البريد الإلكتروني";
+"logout" = "تسجيل الخروج";
 
 /// Mark: Report List
 "report.title" = "عنوان";

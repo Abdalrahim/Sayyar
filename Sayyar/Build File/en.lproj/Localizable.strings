@@ -43,7 +43,7 @@
 "add.detail" = "Add Detail";
 "save.location" = "Save Location";
 "place.name" = "Place Name";
-
+"type" = "Type";
 
 /// MARK: Registration
 "sign.in" = "Sign In";
@@ -56,6 +56,8 @@
 "last.name" = "Last Name";
 "phone.number" = "Phone Number";
 "nofav" = "You have no favourite places";
+"email" = "Email";
+"logout" = "Logout";
 
 /// Mark: Report List
 "report.title" = "Title";

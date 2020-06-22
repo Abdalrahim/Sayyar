@@ -22,5 +22,6 @@ target 'Sayyar' do
   pod 'ObjectMapper'
   pod 'Charts'
   pod 'SZTextView'
+  pod 'SwiftMessages'
 
 end

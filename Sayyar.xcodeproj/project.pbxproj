@@ -79,6 +79,7 @@
 		0FD52EDF244608D4000601BC /* PastOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD52EDE244608D4000601BC /* PastOrdersView.swift */; };
 		0FD52EE124460A77000601BC /* PartnerOnTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD52EE024460A77000601BC /* PartnerOnTripView.swift */; };
 		0FD52EE324460A90000601BC /* PartnerArriveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD52EE224460A90000601BC /* PartnerArriveView.swift */; };
+		0FD6A02824A08E8F0073E570 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6A02724A08E8F0073E570 /* RoundedCorners.swift */; };
 		0FF18C8924289CC40027FB52 /* VerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF18C8824289CC40027FB52 /* VerifyView.swift */; };
 		0FF555B923EC51390002727A /* L102Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF555B823EC51390002727A /* L102Language.swift */; };
 		86D4658FF9B05BDF2012CB1E /* Pods_Sayyar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E30C863A1A51C3DF888D9F5 /* Pods_Sayyar.framework */; };
@@ -156,6 +157,7 @@
 		0FD52EDE244608D4000601BC /* PastOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastOrdersView.swift; sourceTree = "<group>"; };
 		0FD52EE024460A77000601BC /* PartnerOnTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerOnTripView.swift; sourceTree = "<group>"; };
 		0FD52EE224460A90000601BC /* PartnerArriveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerArriveView.swift; sourceTree = "<group>"; };
+		0FD6A02724A08E8F0073E570 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 		0FF18C8824289CC40027FB52 /* VerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyView.swift; sourceTree = "<group>"; };
 		0FF555B823EC51390002727A /* L102Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L102Language.swift; sourceTree = "<group>"; };
 		48B787D583435F01C5690689 /* Pods-Sayyar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sayyar.release.xcconfig"; path = "Target Support Files/Pods-Sayyar/Pods-Sayyar.release.xcconfig"; sourceTree = "<group>"; };
@@ -193,12 +195,12 @@
 		0F075B6B2405624600F30C77 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				0F77D4682434B2D800B5E59C /* Payment Method */,
 				0F075B6C24056F5A00F30C77 /* Settings.swift */,
 				0FCDACF8244C966B003ACF21 /* SupportView.swift */,
 				0FCDACFA24507B7E003ACF21 /* ReportListView.swift */,
 				0F2AD35C2456DB50004423E6 /* ReportDetailView.swift */,
 				0F2D3A322463F11500F41C4F /* ReportMissingView.swift */,
+				0F77D4682434B2D800B5E59C /* Payment Method */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -431,6 +433,7 @@
 				0F0F75842427510F0001DD94 /* customTextField.swift */,
 				0F283C7E2459946600EAA463 /* ReportData.swift */,
 				0F7CB0F924925FA200AA5B19 /* PageViewController.swift */,
+				0FD6A02724A08E8F0073E570 /* RoundedCorners.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FD6A02824A08E8F0073E570 /* RoundedCorners.swift in Sources */,
 				0FA2CFD523E817A500451EEE /* Utility.swift in Sources */,
 				0FC8227724432058007B418D /* NotificationDetail.swift in Sources */,
 				0F4FE3DB23E6B6FC003FA452 /* AppDelegate.swift in Sources */,

@@ -88,7 +88,7 @@ struct ReportMissingView: View {
             PastOrderSelect(presentPastOrders: self.$showHistory, title: self.$tripTitle).environmentObject(self.settings)
         })
             .onAppear {
-                self.tripTitle = self.settings.orderId ?? "Select Trip"
+                self.tripTitle = self.settings.orderId
         }
     }
 }
