@@ -11,12 +11,12 @@ import SwiftUI
 struct SupportView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("General Support")
+            Text("general.support")
                 .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
                 .font(.custom("Cairo-Regular", size: 16))
             VStack(spacing: 20) {
                 NavigationLink(destination: ReportMissingView()) {
-                    SupportCell(title: "I forgot Stuff in the car", icon: Image("letter"))
+                    SupportCell(title: "forgot".localized, icon: Image("letter"))
                 }
                 .padding()
                 .frame(height: 50)
@@ -34,7 +34,7 @@ struct SupportView: View {
                     }
                     
                 ) {
-                    SupportCell(title: "Pricing", icon: Image("document"))
+                    SupportCell(title: "pricing".localized, icon: Image("document"))
                 }
                 .padding()
                 .frame(height: 50)
@@ -42,7 +42,7 @@ struct SupportView: View {
                 .cornerRadius(5)
                 
                 NavigationLink(destination: Text("")) {
-                    SupportCell(title: "Cancel Fees", icon: Image("document"))
+                    SupportCell(title: "cancel.fees".localized, icon: Image("document"))
                 }
                 .padding()
                 .frame(height: 50)
@@ -51,13 +51,13 @@ struct SupportView: View {
                 
             }
             
-            Text("Follow")
+            Text("follow")
                 .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
                 .font(.custom("Cairo-Regular", size: 16))
             
             VStack {
                 NavigationLink(destination: ReportListView()) {
-                    SupportCell(title: "Reports", icon: Image("document"))
+                    SupportCell(title: "reports".localized, icon: Image("document"))
                 }
                 .padding()
                 .frame(height: 50)
@@ -89,7 +89,7 @@ struct SupportCell: View {
                 .font(.custom("Cairo-SemiBold", size: 17))
                 .padding(.horizontal)
             Spacer()
-            Image(systemName: "chevron.right").foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
+            Image(systemName: L102Language.isRTL ? "Chevron.left" : "chevron.right").foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
         }
     }
 }

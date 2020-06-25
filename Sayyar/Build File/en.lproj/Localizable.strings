@@ -31,6 +31,7 @@
 "offers.page" = "Partner Offers";
 "choose.paymentmethod" = "Choose payment method";
 "add.paymentmethod" = "Add payment method";
+"add.location" = "Add Location";
 
 /// MARK: General
 "send" = "Send";
@@ -66,6 +67,14 @@
 "report.type" = "Type";
 "report.stat" = "Status";
 "Reports" = "Reports";
+
+/// Mark: Support View
+"general.support" = "Genereal Support";
+"forgot" = "I forgot Stuff in the car";
+"pricing" = "Pricing";
+"cancel.fees" = "Cancel Fees";
+"follow" = "Follow";
+"reports" = "Reports";
 
 /// Mark: Support Pages
 "selet.trip" = "Select Trip";

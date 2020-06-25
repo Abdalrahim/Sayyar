@@ -16,6 +16,8 @@ struct SummaryView: View {
     
     @Binding var showPaymentType : Bool
     
+    @State var pickupText : String
+    @State var destinationText : String
     
     var body: some View {
         VStack(spacing: 0) {
@@ -46,7 +48,7 @@ struct SummaryView: View {
                         VStack(alignment : .leading, spacing: -5) {
                             Text("from.destination".localized)
                                 .font(.custom("Cairo-SemiBold", size: 18))
-                            Text("Azizyah rd")
+                            Text(pickupText)
                                 .font(.custom("Cairo-SemiBold", size: 17))
                                 .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
                         }
@@ -54,11 +56,12 @@ struct SummaryView: View {
                         VStack(alignment: .leading, spacing: -5) {
                             Text("to.destination".localized)
                                 .font(.custom("Cairo-SemiBold", size: 18))
-                            Text("Azizyah rd")
+                            Text(destinationText)
                                 .font(.custom("Cairo-SemiBold", size: 17))
                                 .foregroundColor(Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1)))
                         }
                     }
+                    .foregroundColor(blktxt)
                     
                     
                     Spacer()
@@ -79,6 +82,7 @@ struct SummaryView: View {
                                     .frame(width: 21, height: 12)
                                 Text("Credit Card")
                                     .font(.custom("Cairo-Regular", size: 13))
+                                    .foregroundColor(blktxt)
                             }
                             
                             Image(systemName: "chevron.down").resizable().frame(width: 9, height: 5)
@@ -132,8 +136,26 @@ struct SummaryView: View {
 
 struct SummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryView(paymentMethod: .constant(.init(type: .visa)), showPaymentType: .constant(true))
-            .previewLayout(.sizeThatFits)
-            .background(Color.gray)
+        
+        let supportedLocales: [Locale] = [
+            "en",
+            "ar",
+            ].map(Locale.init(identifier:))
+        
+        return ForEach(supportedLocales, id: \.identifier) { locale in
+            
+            ForEach([ColorScheme.dark, .light], id: \.self) { scheme in
+                SummaryView(paymentMethod: .constant(.init(type: .visa)), showPaymentType: .constant(true), pickupText: "Azizyah rd", destinationText: "King Faisal Rd")
+                .previewLayout(.sizeThatFits)
+                .background(Color.gray)
+                .padding()
+                .background(gray.edgesIgnoringSafeArea(.all))
+                .environment(\.locale, locale)
+                .previewDisplayName(Locale.current.localizedString(forIdentifier: locale.identifier)! + " \(scheme)")
+                .colorScheme(scheme)
+                
+            }
+        }
+        
     }
 }

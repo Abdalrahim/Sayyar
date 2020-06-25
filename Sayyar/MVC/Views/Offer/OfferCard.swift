@@ -13,27 +13,23 @@ import SpriteKit
 
 struct OfferCard: View {
     @State var offer : OfferData
-    
-    @State var isTaxi = true
-    
-    @State var time : Int = 10
-    
-    var acceptOffer: () -> ()
+    @Binding var page : Int
+    var width : CGFloat
     
     var body: some View {
         VStack {
             HStack {
                 Image("person")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 60, height: 60)
-                .cornerRadius(30)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 60)
+                    .cornerRadius(30)
                     .overlay(
                         RoundedRectangle(cornerRadius: 60)
                             .strokeBorder(style: StrokeStyle(lineWidth: 1))
                             .foregroundColor(.gray)
                 )
-        
+                
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
                         Text(offer.driverName)
@@ -46,13 +42,13 @@ struct OfferCard: View {
                         
                         Text("\(NSNumber(value: offer.rating))")
                             .font(.custom("Cairo-SemiBold", size: 10))
-                        .padding(.horizontal, -6)
+                            .padding(.horizontal, -6)
                     }
                     
                     HStack {
                         Text("\(offer.carMake) • \(offer.carModel)"+" • \(offer.carYear)")
                             .font(.custom("Cairo-SemiBold", size: 12))
-                        if isTaxi {
+                        if offer.isTaxi ?? false {
                             Image("taxi-sign")
                         }
                     }
@@ -102,23 +98,29 @@ struct OfferCard: View {
                     Text(String.localizedStringWithFormat("min".localizewithnumber(count: UInt(((offer.time % 3600) / 60)))))
                         .font(.custom("Cairo-SemiBold", size: 12))
                 }
-            }.padding(.horizontal)
+            }
+            .padding(.horizontal)
             
             NavigationLink(destination: OrderView()) {
                 Text("accept.offer")
-                .font(.custom("Cairo-SemiBold", size: 12))
-                .foregroundColor(Color.white)
-            }.padding(20)
+                    .font(.custom("Cairo-SemiBold", size: 12))
+                    .foregroundColor(Color.white)
+            }
+            .padding(20)
             .frame(height : 35)
             .background(purple)
             .cornerRadius(5)
             
         }
+        .padding()
+        .frame(width: self.page == self.offer.id ? self.width - 30 : self.width + 20, height: (self.page == self.offer.id ? 220 : 240))
         .foregroundColor(dark)
-        .padding(5)
         .background(bgColor)
         .cornerRadius(10)
-        
+        .padding(.vertical, self.page == offer.id ? 0 : 20)
+        .padding(.horizontal, self.page == offer.id ? 10 : 40)
+        .frame(width: self.width)
+//        .animation(.default)
     }
 }
 
@@ -127,17 +129,19 @@ struct OfferCard_Previews: PreviewProvider {
     static var previews: some View {
         
         let offer : OfferData =
-        OfferData(
-            driverName: "Mohammed",
-            rating: 4.5,
-            carMake: "Toyota",
-            carModel: "Camry",
-            carYear: 2019,
-            distance: 40.0,
-            timeDistance: 25,
-            price: 12.5,
-            time: 60,
-            location : CLLocationCoordinate2D(latitude: 21.542289948557013, longitude: 39.18610509485006)
+            OfferData(
+                id: 1,
+                driverName: "Mohammed",
+                rating: 4.5,
+                carMake: "Toyota",
+                carModel: "Camry",
+                carYear: 2019,
+                distance: 40.0,
+                timeDistance: 25,
+                price: 12.5,
+                time: 60,
+                location : CLLocationCoordinate2D(latitude: 21.542289948557013, longitude: 39.18610509485006),
+                show: false
         )
         let supportedLocales: [Locale] = [
             "en",
@@ -147,13 +151,18 @@ struct OfferCard_Previews: PreviewProvider {
         return ForEach(supportedLocales, id: \.identifier) { locale in
             
             ForEach([ColorScheme.dark, .light], id: \.self) { scheme in
-                OfferCard(offer: offer, acceptOffer: {
+                
+                VStack {
                     
-                })
-                    .environment(\.locale, locale)
-                    .previewDisplayName(Locale.current.localizedString(forIdentifier: locale.identifier))
-                    .colorScheme(scheme)
-                    .previewLayout(.fixed(width: 350, height: 200))
+                    Spacer()
+                    OfferCard(offer: offer, page: .constant(0), width: 300)
+                }
+                .padding()
+                .background(gray.edgesIgnoringSafeArea(.all))
+                .environment(\.locale, locale)
+                .previewDisplayName(Locale.current.localizedString(forIdentifier: locale.identifier))
+                .colorScheme(scheme)
+                
             }
         }
         
@@ -194,15 +203,15 @@ struct ProgressCircle: View {
                             lineWidth: 3,
                             lineCap: .butt))
                 .frame(width:45)
-                .animation(Animation.easeInOut(duration: Double(time)).delay(1))
+                .animation(Animation.linear(duration: Double(time)).delay(1))
                 .rotationEffect(Angle(degrees:-90))
             
             Text(secsToMinsAndSecs(seconds: time))
                 .font(.custom("Cairo-Bold", size: 11))
                 .foregroundColor(purple)
         }
-//        .padding(.horizontal, 2)
-//        .drawingGroup()
+        .padding(.horizontal, 2)
+        .drawingGroup()
         .onAppear {
             self.starter = true
         }.onReceive(timer) { input in

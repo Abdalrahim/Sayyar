@@ -10,8 +10,7 @@ import SwiftUI
 import GoogleMaps
 
 struct OfferData : Identifiable {
-    var id = UUID()
-    
+    var id : Int
     var driverName : String
     var rating : Double
     var carMake : String
@@ -23,5 +22,6 @@ struct OfferData : Identifiable {
     var time : Int
     var location : CLLocationCoordinate2D
     var isTaxi : Bool?
+    var show : Bool
 }
 

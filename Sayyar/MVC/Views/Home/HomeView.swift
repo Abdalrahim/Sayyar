@@ -157,7 +157,8 @@ struct HomeView : View {
                     if self.showRating {
                         RatingView(rate: self.rate, textRating: self.textRating)
                     } else if self.locations.count == 2 {
-                        SummaryView(paymentMethod: self.$selectedPaymentMethod, showPaymentType: self.$showPayment)
+                        SummaryView(paymentMethod: self.$selectedPaymentMethod,
+                                    showPaymentType: self.$showPayment, pickupText: "King Fahad Road", destinationText: "Orobah Road")
                     } else {
                         DestinationView(places: self.places, addedPin: {
                             self.addPin()

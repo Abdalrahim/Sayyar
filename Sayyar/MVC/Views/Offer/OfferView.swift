@@ -11,87 +11,78 @@ import SwiftUI
 import GoogleMaps
 import Pages
 
+var offers : [OfferData] = [
+    OfferData(
+        id: 0,
+        driverName: "Mohammed",
+        rating: 4.5,
+        carMake: "Toyota",
+        carModel: "Camry",
+        carYear: 2019,
+        distance: 40.0,
+        timeDistance: 25,
+        price: 12.5,
+        time: 60,
+        location : CLLocationCoordinate2D(latitude: 21.542289948557013, longitude: 39.18610509485006),
+        show : false
+    ),
+    
+    OfferData(
+        id: 1,
+        driverName: "Khalid",
+        rating: 4.5,
+        carMake: "Hyundai",
+        carModel: "Elantra",
+        carYear: 2020,
+        distance: 20.0,
+        timeDistance: 5,
+        price: 15,
+        time: 120,
+        location : CLLocationCoordinate2D(latitude: 21.53753967998264, longitude: 39.19593270868063),
+        show : false
+    ),
+    
+    OfferData(
+        id: 2,
+        driverName: "Saleh",
+        rating: 4.2,
+        carMake: "Hyundai",
+        carModel: "Sonata",
+        carYear: 2019,
+        distance: 50.0,
+        timeDistance: 5,
+        price: 25,
+        time: 200,
+        location : CLLocationCoordinate2D(latitude: 21.53703967998265, longitude: 39.19293230868063),
+        show : false
+    ),
+    
+    OfferData(
+        id: 3,
+        driverName: "Saleh",
+        rating: 4.2,
+        carMake: "Hyundai",
+        carModel: "Sonata",
+        carYear: 2019,
+        distance: 50.0,
+        timeDistance: 5,
+        price: 25,
+        time: 200,
+        location : CLLocationCoordinate2D(latitude: 21.53703967998265, longitude: 39.19293230868063),
+        show : false
+    )
+]
+
 struct OfferView: View {
     
     @State var currenOffer : Int = 1
-    @State var index: Int = 1
+    @State var index: Int = 0
+    
+    @State var x : CGFloat = 0
+    @State var count : CGFloat = 0
+    @State var screen = UIScreen.main.bounds.width - 30
+    @State var op : CGFloat = 0
 //    var clusterManager     : GMUClusterManager?
-    
-    @State var offers : [OfferData] = [
-        OfferData(
-            driverName: "Mohammed",
-            rating: 4.5,
-            carMake: "Toyota",
-            carModel: "Camry",
-            carYear: 2019,
-            distance: 40.0,
-            timeDistance: 25,
-            price: 12.5,
-            time: 60,
-            location : CLLocationCoordinate2D(latitude: 21.542289948557013, longitude: 39.18610509485006)
-        ),
-        
-        OfferData(
-            driverName: "Khalid",
-            rating: 4.5,
-            carMake: "Hyundai",
-            carModel: "Elantra",
-            carYear: 2020,
-            distance: 20.0,
-            timeDistance: 5,
-            price: 15,
-            time: 120,
-            location : CLLocationCoordinate2D(latitude: 21.53753967998264, longitude: 39.19593270868063)
-        ),
-        
-        OfferData(
-            driverName: "Saleh",
-            rating: 4.2,
-            carMake: "Hyundai",
-            carModel: "Sonata",
-            carYear: 2019,
-            distance: 50.0,
-            timeDistance: 5,
-            price: 25,
-            time: 200,
-            location : CLLocationCoordinate2D(latitude: 21.53703967998265, longitude: 39.19293230868063)
-        ),
-        
-        OfferData(
-            driverName: "Constantine",
-            rating: 4.2,
-            carMake: "Hyundai",
-            carModel: "Sonata",
-            carYear: 2019,
-            distance: 50.0,
-            timeDistance: 5,
-            price: 25,
-            time: 200,
-            location : CLLocationCoordinate2D(latitude: 21.53703967998265, longitude: 39.19293230868063)
-        ),
-        
-        OfferData(
-            driverName: "Noman",
-            rating: 4.2,
-            carMake: "Hyundai",
-            carModel: "Sonata",
-            carYear: 2019,
-            distance: 50.0,
-            timeDistance: 5,
-            price: 25,
-            time: 200,
-            location : CLLocationCoordinate2D(latitude: 21.53703967998265, longitude: 39.19293230868063)
-        )
-    ]
-    
-    
-    init() {
-        UIScrollView.appearance().isPagingEnabled = true
-        UIScrollView.appearance().clipsToBounds = false
-        UIScrollView.appearance().contentSize = CGSize(width: UIScreen.main.bounds.width/1.2, height: 300)
-        UIStackView.appearance().clipsToBounds = false
-    }
-    
     
     let gmap = MapView()
     
@@ -100,73 +91,22 @@ struct OfferView: View {
             self.gmap
                 .edgesIgnoringSafeArea(.all)
                 .onAppear {
-                    self.gmap.map.padding = UIEdgeInsets(top: 20, left: 5, bottom: 200, right: 5)
+                    self.gmap.map.padding = UIEdgeInsets(top: 20, left: 5, bottom: 250, right: 5)
             }
-            VStack {
+            VStack(spacing: 10) {
                 Spacer()
                 
                 VStack(spacing: 10) {
-                    scrollbar(selected: self.$index, page: self.offers.count).frame(height: 5)
+                scrollbar(selected: self.$index, page: offers.count).frame(height: 5)
                     
-//                    ModelPages (self.offers, currentPage: $index, hasControl: false) { (pageIndex, offer) in
-//                        GeometryReader { geometry in
-//                            OfferCard(offer: offer, addOffer: {
-//                                print(Double(geometry.frame(in: .global).minX))
-//                            })
-//                                .rotation3DEffect(Angle(degrees:
-//                                    Double((geometry.frame(in: .global).minX) / -20)
-//                                ), axis: (x: 10.0, y: 10.0, z: 10.0))
-//                                .onAppear {
-//                                    self.addPin(offer: offer)
-//                                    print(Double(geometry.frame(in: .global).minX))
-//                            }
-//                            .onTapGesture{
-//                                self.currenOffer = pageIndex
-//                            }
-//                        }.frame(width: UIScreen.main.bounds.width/1.1)
-//                    }.accentColor(purple)
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-
-                        HStack(spacing: 0){
-//                            Spacer(minLength: 20)
-
-                            ForEach(0..<self.offers.count) { index in
-                                GeometryReader { geometry in
-                                    OfferCard(offer: self.offers[index], acceptOffer: {
-//                                        self.index = index
-                                        print(Double(geometry.frame(in: .global).minX), index)
-                                        })
-                                        .scaleEffect(geometry.frame(in: .global).minX <= 0 ? 0.9 : 1.1 , anchor: .center)
-//                                        .rotation3DEffect(Angle(degrees:
-//                                            Double((geometry.frame(in: .global).minX) / -20)
-//                                        ), axis: (x: 10.0, y: 10.0, z: 10.0))
-                                    
-                                    .cornerRadius(1)
-                                        .onAppear {
-                                            self.addPin(offer: self.offers[index])
-                                            print(Double(geometry.frame(in: .global).minX))
-                                            self.index = index
-                                    }
-                                    .onTapGesture{
-                                        self.index = index
-                                    }
-                                }
-                                .frame(width: UIScreen.main.bounds.width)
-                                
-                            }
-//                            Spacer(minLength: 20)
-                        }
-                    }
-//                        .padding(.horizontal, 20)
+                Carousel(width: UIScreen.main.bounds.width, page: self.$index, height: 250, count: offers.count)
+                
                 }
-                .frame(height:200)
-                .padding(.bottom)
+                .frame(height: 250)
             }
-            
+            .animation(.spring()).padding(.bottom)
         }
         .navigationBarTitle(Text("offers.page").foregroundColor(Color.gray), displayMode: .inline)
-        
     }
     
     func addPin(offer : OfferData) {
@@ -219,6 +159,21 @@ struct scrollbar: View {
         HStack {
             ForEach(Range(1...page)) {i in
                 Circle().frame(width: 5).foregroundColor((i - 1 == self.selected) ? purple : lightPurple)
+            }
+        }
+    }
+}
+
+struct Listing : View {
+    
+    @Binding var page : Int
+    
+    var body: some View{
+        
+        HStack(spacing: 0){
+            
+            ForEach(offers){i in
+                OfferCard(offer: i, page: self.$page, width: UIScreen.main.bounds.width)
             }
         }
     }

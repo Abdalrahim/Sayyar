@@ -30,7 +30,8 @@
 "accept.offer" = "قبول العرض";
 "offers.page" = "عروض السائقين";
 "choose.paymentmethod" = "طريقة الدفع المختارة";
-"add.paymentmethod" = "";
+"add.paymentmethod" = "اضف طريقة دفع أخرى";
+"add.location" = "موقع جديد";
 
 /// MARK: General
 "send" = "ارسال";
@@ -66,6 +67,14 @@
 "report.type" = "نوع";
 "report.stat" = "حالة";
 "Reports" = "البلاغات";
+
+/// Mark: Support View
+"general.support" = "موضوعات عامة";
+"forgot" = "نسيت غرض في السيارة";
+"pricing" = "كيفية حساب أسعار سيار";
+"cancel.fees" = "رسوم الإلغاء";
+"follow" = "متابعة";
+"reports" = "البلاغات";
 
 /// Mark: Support Pages
 "selet.trip" = "اختر الرحلة";
