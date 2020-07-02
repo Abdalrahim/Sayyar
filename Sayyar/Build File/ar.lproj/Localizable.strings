@@ -39,6 +39,7 @@
 "sr" = "ر.س";
 "timer" = "وقت العرض";
 "save" = "حفظ";
+"field.req" = "هذا الحقل مطلوب";
 
 /// MARK: Save Location
 "add.detail" = "تفاصيل الموقع";
@@ -49,6 +50,16 @@
 /// MARK: Registration
 "sign.in" = "تسجيل دخول";
 "resend" = "إعادة إرسال";
+"create.account" = "إنشاء حساب ";
+"goto.signin" = "الإنتقال إلى صفحة تسجيل الدخول";
+"i.accept" = "أوافق على ";
+"and" = " و ";
+"privacy.policy" = "سياسة الخصوصية";
+"tos" = "جميع الشروط والأحكام";
+"used.phone" = "رقم الجوال المدخل تم استخدامه سابقًا";
+"phone.format" = "الرجاء إدخال رقم جوال صحيح";
+"email.format" = "الرجاء إدخال بريد إلكتروني صحيح";
+"insert.code" = "قم بإدخال الرمز الذي تم ارساله إلى الرقم";
 
 /// Mark: Settings
 "account.info" = "البيانات الشخصية";
@@ -61,7 +72,7 @@
 "logout" = "تسجيل الخروج";
 
 /// Mark: Report List
-"report.title" = "عنوان";
+"report.title" = "عنوان البلاغ";
 "report.num" = "رقم";
 "report.date" = "تاريخ";
 "report.type" = "نوع";
@@ -75,6 +86,7 @@
 "cancel.fees" = "رسوم الإلغاء";
 "follow" = "متابعة";
 "reports" = "البلاغات";
+"trip" = "الرحلة";
 
 /// Mark: Support Pages
 "selet.trip" = "اختر الرحلة";
@@ -86,3 +98,13 @@
 
 /// Mark: OrderView
 "order.ontheway" = "السائق في طريقه إليك";
+
+/// Mark: Contact Us
+"send.order" = "ارسال طلب أو استفسار";
+"contact.title" = "الموضوع";
+"contact.reason" = "ما سبب كتابتك للرسالة؟";
+"tech.issue" = "مشكلة فنية";
+"money.issue" = "مشكلة مالية";
+"driver" = "السائق";
+"faq.q" = "اسئلة عامة";
+"provide.info" = "رجاءًا قدم وصفًا مفصلًا قدر الإمكان حول سبب كتابتك إلينا.";

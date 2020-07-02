@@ -18,6 +18,22 @@
 			<string>%u mins</string>
 		</dict>
 	</dict>
+	<key>sec</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@v1_sec_count@</string>
+		<key>v1_sec_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>one</key>
+			<string>1 sec</string>
+			<key>other</key>
+			<string>%u secs</string>
+		</dict>
+	</dict>
 	<key>StringKey</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

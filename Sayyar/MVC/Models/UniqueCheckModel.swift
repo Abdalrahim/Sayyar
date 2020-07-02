@@ -17,7 +17,6 @@ class UniqueCheckModel: NSObject , Mappable{
     
     
     required init(msg : String) {
-        
         message = msg
     }
     

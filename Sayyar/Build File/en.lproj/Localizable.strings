@@ -39,6 +39,7 @@
 "timer" = "Timer";
 "add.place" = "New Place";
 "save" = "Save";
+"field.req" = "Field required";
 
 /// MARK: Save Location
 "add.detail" = "Add Detail";
@@ -49,6 +50,16 @@
 /// MARK: Registration
 "sign.in" = "Sign In";
 "resend" = "Resend";
+"create.account" = "Create an Account";
+"goto.signin" = "Go to Sign In Page";
+"i.accept" = "I Accept ";
+"and" = " & ";
+"privacy.policy" = "Privacy Policy";
+"tos" = "Terms Of Service";
+"used.phone" = "Phone number already used";
+"phone.format" = "Wrong phone number format";
+"email.format" = "Wrong email format";
+"insert.code" = "Insert the code that is sent to";
 
 /// Mark: Settings
 "account.info" = "Account Info";
@@ -75,6 +86,7 @@
 "cancel.fees" = "Cancel Fees";
 "follow" = "Follow";
 "reports" = "Reports";
+"report" = "Report";
 
 /// Mark: Support Pages
 "selet.trip" = "Select Trip";
@@ -86,3 +98,13 @@
 
 /// Mark: OrderView
 "order.ontheway" = "Driver is on the way";
+
+/// Mark: Contact Us
+"send.order" = "Send an order or inquiry";
+"contact.title" = "Subject";
+"contact.reason" = "Reason for contacting?";
+"tech.issue" = "Technical Issue";
+"money.issue" = "Monetary Issue";
+"driver" = "A Driver";
+"faq.q" = "FAQ and General";
+"provide.info" = "Please provide a detailed description.";

@@ -106,7 +106,7 @@ struct Sidemenu: View {
                     SideMenuButton(image: Image(systemName: "questionmark.circle.fill"), text: "help")
                 }.padding()
                 
-                NavigationLink(destination: Settings()) {
+                NavigationLink(destination: ContactUsView()) {
                     SideMenuButton(image: Image(systemName: "bubble.left.and.bubble.right.fill"), text: "contact.us")
                 }.padding()
                 

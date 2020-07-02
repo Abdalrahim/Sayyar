@@ -7,21 +7,29 @@
 //
 
 import SwiftUI
+import SafariServices
 
 struct RegisterView: View {
     
-    @State var firstName : String = "Majid"
-    @State var lastName : String = "AlSaqer"
-    @State var phoneNumber : String = "0539128374"
-    @State var email : String = "majed@gmail.com"
+    @State var firstName : String = ""
+    @State var lastName : String = ""
+    @State var phoneNumber : String = ""
+    @State var email : String = ""
     
-    @State var notRegister : Bool = false
+    @State var usedPhone : Bool = true
+    @State var checkphone : Bool = true
     @State var checked : Bool = true
     
     @State var firstnameCheck : Bool = true
     @State var lastnameCheck : Bool = true
     @State var phoneCheck : Bool = true
     @State var emailCheck : Bool = true
+    
+    @State var showTOS = false
+    @State var showPrivacyPolicy = false
+    
+    @State var tosURL = "https://duckduckgo.com"
+    @State var privacyPolicyURL = "https://duckduckgo.com"
     
     var body: some View {
         VStack {
@@ -31,7 +39,7 @@ struct RegisterView: View {
                 .padding(.bottom, -80)
             VStack {
                 VStack {
-                    Text("Create an Account")
+                    Text("create.account")
                         .foregroundColor(gray)
                         .font(.custom("Cairo-Black", size: 15))
                     
@@ -39,12 +47,12 @@ struct RegisterView: View {
                         HStack(spacing: 20) {
                             VStack(spacing: 15) {
                                 HStack(spacing: 15) {
-                                    customTextField(placeholder: "first.name", placename: self.$firstName, fieldReq: self.$firstnameCheck) {
+                                    customTextField(placeholder: "first.name".localized, placename: self.$firstName, fieldReq: self.$firstnameCheck) {
                                         
                                     }
                                     .font(.custom("Cairo-SemiBold", size: 15))
                                     
-                                    customTextField(placeholder: "last.name", placename: self.$lastName, fieldReq: self.$lastnameCheck) {
+                                    customTextField(placeholder: "last.name".localized, placename: self.$lastName, fieldReq: self.$lastnameCheck) {
                                         
                                     }
                                     .font(.custom("Cairo-SemiBold", size: 15))
@@ -69,73 +77,72 @@ struct RegisterView: View {
                                                 .stroke(purple , lineWidth: 1)
                                     )
                                     
-                                    customTextField(placeholder: "phone", placename: self.$lastName, fieldReq: self.$phoneCheck) {
+                                    customTextField(placeholder: "phone.number".localized, placename: self.$lastName, fieldReq: self.$phoneCheck) {
                                         
                                     }
                                     .font(.custom("Cairo-SemiBold", size: 15))
                                 }
-                                customTextField(placeholder: "email", placename: self.$firstName, fieldReq: self.$emailCheck) {
+                                customTextField(placeholder: "email".localized, placename: self.$email, fieldReq: self.$emailCheck) {
                                     
-                                }
+                                }.font(.custom("Cairo-SemiBold", size: 15))
                             }
                             
                         }
-                        VStack(spacing: 0){
-                            if self.notRegister {
+                        VStack(alignment: .leading, spacing: 0){
+
+                            if self.usedPhone {
                                 HStack {
                                     Image(systemName : "exclamationmark.circle.fill")
-                                        .foregroundColor(red)
-                                    
-                                    
-                                    Text("phone number not registered")
-                                        .font(.custom("Cairo-Regular", size: 15))
-                                        .foregroundColor(red)
+                                    Text("used.phone")
                                 }
                             }
-                            if self.notRegister {
+                            if self.checkphone {
                                 HStack {
                                     Image(systemName : "exclamationmark.circle.fill")
-                                        .foregroundColor(red)
-                                    
-                                    
-                                    Text("phone number not registered")
-                                        .font(.custom("Cairo-Regular", size: 15))
-                                        .foregroundColor(red)
+                                    Text("email.format")
                                 }
                             }
-                            if self.notRegister {
+                            if self.checkphone {
                                 HStack {
                                     Image(systemName : "exclamationmark.circle.fill")
-                                        .foregroundColor(red)
-                                    
-                                    
-                                    Text("phone number not registered")
-                                        .font(.custom("Cairo-Regular", size: 15))
-                                        .foregroundColor(red)
+                                    Text("phone.format")
                                 }
                             }
                         }
+                        .font(.custom("Cairo-Regular", size: 15))
+                        .foregroundColor(red)
+                        
                         HStack {
-                            if self.checked {
-                                Image(systemName : "checkmark.square.fill")
-                                    .foregroundColor(purple)
-                            } else {
-                                Image(systemName : "square")
-                                    .foregroundColor(purple)
+                            HStack {
+                                if self.checked {
+                                    Image(systemName : "checkmark.square.fill")
+                                } else {
+                                    Image(systemName : "square")
+                                }
                             }
+                            .foregroundColor(purple)
                             
                             
                             
-                            Text("I accept ")
-                                .font(.custom("Cairo-Regular", size: 15))
-                                + Text("Terms of use")
-                                    .font(.custom("Cairo-Regular", size: 15))
-                                    .foregroundColor(purple).underline()
-                                + Text(" & ")
-                                    .font(.custom("Cairo-Regular", size: 15))
-                                + Text("Privacy Policy")
-                                    .font(.custom("Cairo-Regular", size: 15))
-                                    .foregroundColor(purple).underline()
+                            HStack(spacing: 0) {
+                                Text("i.accept")
+                                    .foregroundColor(blktxt)
+                                Text("tos")
+                                    .underline()
+                                    .onTapGesture {
+                                        self.showTOS.toggle()
+                                }
+                                Text("and")
+                                Text("privacy.policy")
+                                    .underline()
+                                    .onTapGesture {
+                                        self.showPrivacyPolicy.toggle()
+                                }
+                            }
+                            .font(.custom("Cairo-Regular", size: 15))
+                            .foregroundColor(purple)
+                            
+                            
                         }.onTapGesture {
                             withAnimation {
                                 self.checked.toggle()
@@ -173,22 +180,24 @@ struct RegisterView: View {
                             .cornerRadius(10)
                     }.padding()
                     
-                    Text("Go to Sign In Page")
+                    Text("goto.signin")
                         .foregroundColor(purple)
                         .font(.custom("Cairo-SemiBold", size: 13))
                         .underline()
-                    
-                    
-                    
                 }
                 .padding()
                 
             }.background(RoundedCorners(color: bgColor, tl: 60, tr: 60, bl: 0, br: 0))
         }
+        .sheet(isPresented: $showTOS) {
+            SafariView(url:URL(string: self.tosURL)!)
+        }
+            
+        .sheet(isPresented: $showPrivacyPolicy) {
+            SafariView(url:URL(string: self.privacyPolicyURL)!)
+        }
         .edgesIgnoringSafeArea(.all)
-        
     }
-    
     
 }
 

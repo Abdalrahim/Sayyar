@@ -18,6 +18,7 @@ struct VerifyView: View {
     
     @State var seconds : Int = 60
     
+    @State var resendShow : Bool = false
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -28,9 +29,14 @@ struct VerifyView: View {
             }.foregroundColor(dark)
             Spacer()
             
-            Text("Insert the code that is sent to \(self.phone)")
-                .font(.custom("Cairo-Regular", size: 18))
-                .lineLimit(2)
+            HStack {
+                Text("insert.code")
+                    + Text(" \(self.phone)")
+            }
+        
+//            .aspectRatio(contentMode: .fit)
+            .font(.custom("Cairo-Regular", size: 18))
+            .lineLimit(2)
             
             HStack(spacing : 15) {
                 verifytf(placename: self.$num1.animation(.default)) {
@@ -68,10 +74,15 @@ struct VerifyView: View {
                 }
                 Spacer()
                 
+                
                 HStack {
-                    Text("\(seconds) sec")
+                    Text(String.localizedStringWithFormat("sec".localizewithnumber(count: UInt(seconds))))
+                    .scaledToFill()
+                        .font(.custom("Cairo-Regular", size: 18))
+                        .padding()
                     Image(systemName: "clock.fill")
-                }.foregroundColor(purple)
+                }
+                    .foregroundColor(purple)
             }
             Spacer()
             
@@ -108,6 +119,9 @@ struct VerifyView: View {
             withAnimation {
                 if (self.seconds > 0) {
                     self.seconds -= 1
+                }
+                if self.seconds == 0 {
+                    self.resendShow = true
                 }
             }
         }

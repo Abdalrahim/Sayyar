@@ -40,8 +40,8 @@ struct customTextField: View {
             )
              
             if fieldReq && placename.isEmpty && !textFieldActive {
-                Text("Field required")
-                .font(.custom("Cairo-Bold", size: 12))
+                Text("field.req")
+                .font(.custom("Cairo-SemiBold", size: 12))
                 .foregroundColor(red)
                 .padding(2)
                 .background(Color.white)
@@ -71,7 +71,7 @@ struct customTextField_Previews: PreviewProvider {
     
     static var previews: some View {
         ZStack {
-            customTextField(placeholder: "last.name", placename: .constant(""), fieldReq: .constant(true)) {
+            customTextField(placeholder: "Text Field", placename: .constant(""), fieldReq: .constant(true)) {
                 
             }.padding()
         }.previewLayout(.fixed(width: 300, height: 70))

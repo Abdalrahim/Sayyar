@@ -40,28 +40,30 @@ struct ReportMissingView: View {
             
             Text("date.lostobject")
                 .font(.custom("Cairo-SemiBold", size: 18))
-                .frame(width: 200)
             
             DatePicker(selection: self.$selectedDate ,displayedComponents: .date) {
                 HStack(spacing: 25) {
                     PurpleSquare(text: .constant("\(selectedDate.day)"), title: "Day")
+                    .font(.custom("Cairo-SemiBold", size: 16))
                     PurpleSquare(text: .constant(selectedDate.monthAsString), title: "Month")
-                }
-            }
+                    .font(.custom("Cairo-SemiBold", size: 16))
+                }.foregroundColor(blktxt)
+            }.foregroundColor(.clear)
             
             
             Text("info.lostobject")
                .font(.custom("Cairo-SemiBold", size: 18))
 
-            customTextField(placeholder: "Report Title", placename: $reportTitle, fieldReq: .constant(false)) {
+            customTextField(placeholder: "report.title".localized, placename: $reportTitle, fieldReq: .constant(false)) {
             }
+            .font(.custom("Cairo-SemiBold", size: 16))
             
             TextView(text: $reportDetail).frame(height: 100)
             
-            PurpleSquare(text: $tripTitle, title: "trip")
+            PurpleSquare(text: $tripTitle, title: "trip".localized)
                 .onTapGesture {
                     self.showHistory.toggle()
-            }
+            }.font(.custom("Cairo-Regular", size: 16))
              
             Button(action: {
                 
@@ -75,7 +77,7 @@ struct ReportMissingView: View {
                     Spacer()
                 }
             }
-            .frame(height: 11, alignment: .center)
+            .frame(height: 20, alignment: .center)
             .padding()
             .background(Color(#colorLiteral(red: 0.3450980392, green: 0.2039215686, blue: 0.4470588235, alpha: 1)))
             .cornerRadius(10)
