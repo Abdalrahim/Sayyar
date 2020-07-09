@@ -23,5 +23,6 @@ target 'Sayyar' do
   pod 'Charts'
   pod 'SZTextView'
   pod 'SwiftMessages'
-
+  pod 'SwiftyJSON'
+  
 end

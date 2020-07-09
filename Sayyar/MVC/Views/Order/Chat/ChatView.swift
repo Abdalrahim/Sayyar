@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 
 // Chat View
 struct ChatView: View {

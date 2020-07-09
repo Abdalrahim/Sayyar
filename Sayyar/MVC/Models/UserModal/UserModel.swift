@@ -55,9 +55,10 @@ class UserDetail : NSObject , Mappable {
 class UserData : Mappable{
     
     var userId : String?
-//    var userDeviceDetail : UserDevice?
+    var userDeviceDetail : UserDevice?
 
     var email : String?
+    var emailVerified : String?
     var password : String?
 
     
@@ -65,11 +66,13 @@ class UserData : Mappable{
     var lastName : String?
     var userName : String?
 
-    var phoneNumber : String?
-    var phoneCode : String?
+    var mobile : String?
     
     var profilePic : String?
-    var profilePicThumb : String?
+    var clientType : String?
+    var status : String?
+    var proposals : NSArray?
+    var city : String?
     
 //    var settings: UserSettings?
 
@@ -83,27 +86,69 @@ class UserData : Mappable{
         self.email = email
         
         self.profilePic = imageUrl
-        self.profilePicThumb = imageUrl
     }
     
     
     func mapping(map: Map) {
         
-        userId <- map["userId"]
+        userId <- map["id"]
         
-        firstName <- map["firstName"]
-        lastName <- map["lastName"]
-        
+        firstName <- map["first_name"]
+        lastName <- map["last_name"]
         email <- map["email"]
 
         
-        phoneNumber <- map["phoneNumber"]
-        phoneCode <- map["phoneCode"]
-        
+        mobile <- map["mobile"]
+        proposals <- map["proposals"]
     
     }
     
 }
+
+class UserDevice : NSObject , Mappable {
+    
+    var updatedAt : String?
+    var userDevicesId : Int?
+    var accessToken : String?
+    
+    var socketId : String?
+    var fcmId : String?
+    
+    var longitude : Int?
+    var deviceId : String?
+    var deviceType : String?
+    
+    var latitude : Int?
+    var userId : Int?
+    
+    var language : String?
+    var timezone : String?
+    var createdAt : String?
+    
+    required init?(map: Map){}
+    
+    func mapping(map: Map) {
+        
+        updatedAt <- map["updatedAt"]
+        userDevicesId <- map["userDevicesId"]
+        accessToken <- map["accessToken"]
+        
+        socketId <- map["socketId"]
+        fcmId <- map["fcmId"]
+        
+        longitude <- map["longitude"]
+        deviceId <- map["deviceId"]
+        deviceType <- map["deviceType"]
+        
+        latitude <- map["latitude"]
+        userId <- map["userId"]
+        
+        language <- map["language"]
+        timezone <- map["timezone"]
+        createdAt <- map["createdAt"]
+    }
+}
+
 
 class DeviceTypeVersion: NSObject , Mappable {
     

@@ -11,7 +11,13 @@ import UIKit
 
 struct ContactUsView: View {
     
-    @State var reason : String = ""
+    
+    @State var selectedContact : ContactOption? {
+        didSet {
+            self.reason = selectedContact?.title.localized ?? ""
+        }
+    }
+    @State var reason : String = "contact.reason".localized
     @State var description : String = ""
     @State var title : String = ""
     
@@ -22,11 +28,12 @@ struct ContactUsView: View {
     @State var showOptions = false
     
     @State var options : [ContactOption] = [
-        ContactOption(title: "tech.issue"),
-        ContactOption(title: "money.issue"),
-        ContactOption(title: "driver"),
-        ContactOption(title: "faq.q"),
+        ContactOption(title: "tech.issue", type: .tech),
+        ContactOption(title: "money.issue", type: .money),
+        ContactOption(title: "driver", type: .driver),
+        ContactOption(title: "faq.q", type: .faq),
     ]
+    
     var settings = DataToTransfer()
     
     var body: some View {
@@ -37,8 +44,9 @@ struct ContactUsView: View {
                 .foregroundColor(gray)
             
             VStack(alignment: .leading, spacing: -11) {
-                PurpleSquare(text: $reason, title: "contact.reason".localized)
+                PurpleSquare(text: self.$reason , title: "contact.reason".localized)
                     .font(.custom("Cairo-Regular", size: 16))
+                    .foregroundColor(selectedContact == nil ? gray : purple)
                     .onTapGesture {
                         withAnimation {
                             self.showOptions.toggle()
@@ -51,7 +59,7 @@ struct ContactUsView: View {
                                 ForEach(self.options) { option in
                                     Text(option.title.localized)
                                         .onTapGesture {
-                                            self.reason = option.title.localized
+                                            self.selectedContact = option
                                             withAnimation {
                                                 self.showOptions.toggle()
                                             }
@@ -88,11 +96,13 @@ struct ContactUsView: View {
                     .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
             }
             
-            
-            PurpleSquare(text: $tripTitle, title: "trip".localized)
-                .onTapGesture {
-                    self.showHistory.toggle()
-            }.font(.custom("Cairo-Regular", size: 16))
+            if self.selectedContact?.type == .driver {
+                PurpleSquare(text: $tripTitle, title: "trip".localized)
+                    .onTapGesture {
+                        self.showHistory.toggle()
+                }.font(.custom("Cairo-Regular", size: 16))
+                
+            }
             
             Spacer()
             
@@ -138,4 +148,24 @@ struct ContactUsView_Previews: PreviewProvider {
 struct ContactOption : Identifiable {
     var id = UUID()
     var title : String
+    var type : contactType
+    
+    enum contactType : Int {
+        case tech = 0
+        case money = 1
+        case driver = 2
+        case faq = 3
+        func desc() -> String {
+            switch self {
+            case .tech:
+                return "tech.issue"
+            case .money:
+                return "money.issue"
+            case .driver:
+                return "driver"
+            case .faq:
+                return "faq.q"
+            }
+        }
+    }
 }

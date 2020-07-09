@@ -35,7 +35,7 @@ class FetchDirectionsRequest  {
         let origin = "origin=\(from)"
         
         let url = "\(GOOGLE_MAP_DIRCTIONS)\(origin)&\(destination)\(waypoints)&mode=driving&key=\(GMSApiKey)"
-        
+        print(url)
         Alamofire.SessionManager.default.request(url, method: .get, encoding: JSONEncoding.default, headers: [:]).responseJSON { (response) in
             if let value = response.value {
                 DispatchQueue.main.async {

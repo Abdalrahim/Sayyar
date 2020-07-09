@@ -101,12 +101,13 @@ struct SignInView: View {
                                 .cornerRadius(10)
                         }
                         Spacer()
-                        Text("Dont have an account? ")
-                            .font(.custom("Cairo-SemiBold", size: 15))
-                            +
-                            Text("Create an account!")
-                                .foregroundColor(purple)
-                                .font(.custom("Cairo-SemiBold", size: 15))
+                        HStack {
+                            Text("Dont have an account? ")
+                                +
+                                Text("Create an account!")
+                                    .foregroundColor(purple)
+                            
+                        }.font(.custom("Cairo-SemiBold", size: 15))
                         
                         Spacer()
                         

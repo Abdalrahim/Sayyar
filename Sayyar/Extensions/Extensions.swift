@@ -111,4 +111,13 @@ extension UIDevice {
     }
 }
 
-
+extension NSObject {
+    func tokenExpired() {
+        if let appdelegate =  UIApplication.shared.delegate as? AppDelegate {
+            /// Insert Global Element to change the app
+            
+            
+        }
+        UserDefaults.standard.removeObject(forKey: SingletonKeys.user.rawValue)
+    }
+}

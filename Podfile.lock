@@ -331,6 +331,10 @@ PODS:
   - nanopb/encode (0.3.9011)
   - ObjectMapper (3.5.1)
   - Protobuf (3.11.2)
+  - SwiftMessages (7.0.1):
+    - SwiftMessages/App (= 7.0.1)
+  - SwiftMessages/App (7.0.1)
+  - SwiftyJSON (5.0.0)
   - SZTextView (1.3.0)
 
 DEPENDENCIES:
@@ -349,6 +353,8 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - ObjectMapper
+  - SwiftMessages
+  - SwiftyJSON
   - SZTextView
 
 SPEC REPOS:
@@ -386,6 +392,8 @@ SPEC REPOS:
     - nanopb
     - ObjectMapper
     - Protobuf
+    - SwiftMessages
+    - SwiftyJSON
     - SZTextView
 
 EXTERNAL SOURCES:
@@ -433,8 +441,10 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
+  SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
 
-PODFILE CHECKSUM: ebfa57bf04b1f29697eaff08ebceb946577db9d3
+PODFILE CHECKSUM: b79c56b010cd0c52bec667124a5a3b287b048103
 
 COCOAPODS: 1.8.4

@@ -11,19 +11,21 @@ import SafariServices
 
 struct RegisterView: View {
     
+    @ObservedObject var apimanager: APIManager = APIManager()
+    
     @State var firstName : String = ""
     @State var lastName : String = ""
     @State var phoneNumber : String = ""
     @State var email : String = ""
     
-    @State var usedPhone : Bool = true
-    @State var checkphone : Bool = true
+    @State var usedPhone : Bool = false
+    @State var checkphone : Bool = false
     @State var checked : Bool = true
     
-    @State var firstnameCheck : Bool = true
-    @State var lastnameCheck : Bool = true
-    @State var phoneCheck : Bool = true
-    @State var emailCheck : Bool = true
+    @State var firstnameCheck : Bool = false
+    @State var lastnameCheck : Bool = false
+    @State var phoneCheck : Bool = false
+    @State var emailCheck : Bool = false
     
     @State var showTOS = false
     @State var showPrivacyPolicy = false
@@ -77,7 +79,7 @@ struct RegisterView: View {
                                                 .stroke(purple , lineWidth: 1)
                                     )
                                     
-                                    customTextField(placeholder: "phone.number".localized, placename: self.$lastName, fieldReq: self.$phoneCheck) {
+                                    customTextField(placeholder: "phone.number".localized, placename: self.$phoneNumber, fieldReq: self.$phoneCheck) {
                                         
                                     }
                                     .font(.custom("Cairo-SemiBold", size: 15))
@@ -157,6 +159,18 @@ struct RegisterView: View {
                         // MARK: Add Pin
                         Button(action: {
                             
+                            self.apimanager.request(with:
+                                RegisterEndPoint.register(email: self.email, firstName: self.firstName, lastName: self.lastName, phone: self.phoneNumber, clientType: "passenger")
+                            ) { (response) in
+                                switch response {
+                                case .success(let success):
+                                    if let usermdl = success as? UserModel {
+                                        print("Success", usermdl.toJSON())
+                                    }
+                                case .failure(let fail):
+                                    print("Fail", fail)
+                                }
+                            }
                         }) {
                             HStack(alignment: .center) {
                                 Spacer()
