@@ -65,7 +65,7 @@ struct ChatView: View {
     
     func sendMessage() {
         let messageRef = self.db.collection("messages").document("Terataxi Dev Room")
-        guard let user = UserSingleton.shared.loggedInUser?.userData?.userId else { return }
+        guard let user = UserSingleton.shared.loggedInUser?.userId else { return }
         let messageData : [String : Any] = [
             "text" : self.tfMessage,
             "time": Timestamp(date: Date()),

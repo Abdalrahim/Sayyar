@@ -168,7 +168,7 @@ struct Sidemenu: View {
                         ]
                 ]
                 
-                UserSingleton.shared.loggedInUser = UserModel(JSON: userjson)
+                UserSingleton.shared.loggedInUser = UserData(JSON: userjson)
                 
                 self.addUserwith(id : uid)
                 

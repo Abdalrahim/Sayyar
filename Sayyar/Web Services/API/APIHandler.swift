@@ -15,7 +15,7 @@ extension RegisterEndPoint {
     
     switch self {
     case .register(_) :
-        let object  = Mapper<UserModel>().map(JSONObject: data)
+        let object  = Mapper<UserData>().map(JSONObject: data)
         UserSingleton.shared.loggedInUser = object
         return object
     default:

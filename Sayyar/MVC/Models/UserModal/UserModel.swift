@@ -9,83 +9,42 @@
 import Foundation
 import ObjectMapper
 
-class UserModel :  Mappable{
-    
-    var userDetail : UserDetail?
-    var message : String?
-    
-    var statusCode: Int?
-    var userData :  UserData?
-    var currency : [String]?
-    var appVersion:DeviceTypeVersion?
-    
-    required init?(map: Map){}
-    
-    func mapping(map: Map) {
-        
-        userDetail <- map["result"]
-        message <- map["msg"]
-
-        statusCode <- map["statusCode"]
-        appVersion <- map["result.versioning"]
-        userData <- map["result.user"]
-        currency <- map["result.currencies"]
-    }
-}
-
-class UserDetail : NSObject , Mappable {
-    
-    var Versioning : AppVersion?
-    var step : String?
-    var otp : Int?
-    var userData : UserData?
-   
-
-    required init?(map: Map){}
-    
-    func mapping(map: Map) {
-        
-        Versioning <- map["Versioning"]
-        step <- map["step"]
-        otp <- map["otp"]
-        userData <- map["user"]
-    }
-}
 
 class UserData : Mappable{
-    
+    var accessToken : String?
     var userId : String?
-    var userDeviceDetail : UserDevice?
 
     var email : String?
-    var emailVerified : String?
-    var password : String?
-
+    var emailVerifiedAt : String?
     
     var firstName : String?
     var lastName : String?
     var userName : String?
-
     var mobile : String?
+    var age : Int?
+    var nationalId : String?
     
     var profilePic : String?
     var clientType : String?
     var status : String?
-    var proposals : NSArray?
+    var proposals : [Proposals]?
     var city : String?
+    var car : Car?
     
-//    var settings: UserSettings?
-
+    var media : [String]?
+    
+    var tokenResponse : TokenResponse?
     
     required init?(map: Map){}
     
-    init(uid: String?, firstName : String , lastName : String , email: String? , key : String? , imageUrl: String?) {
+    init(uid: String?, firstName : String , lastName : String , email: String? , imageUrl: String?, token: TokenResponse?) {
         self.userId = uid
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
         
         self.profilePic = imageUrl
+        self.tokenResponse = token
     }
     
     
@@ -103,6 +62,31 @@ class UserData : Mappable{
     
     }
     
+}
+
+class TokenResponse: NSObject , Mappable {
+    var accessToken : String?
+    var token_type : String?
+    var expires_in : String?
+    
+    required init?(map: Map){}
+    
+    func mapping(map: Map) {
+        accessToken <- map["access_token"]
+        token_type <- map["token_type"]
+        expires_in <- map["expires_in"]
+    }
+}
+
+class Car: NSObject , Mappable {
+    
+    var id : Int?
+    
+    required init?(map: Map){}
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+    }
 }
 
 class UserDevice : NSObject , Mappable {
@@ -181,5 +165,33 @@ class AppVersion: NSObject , Mappable {
         andriod <- map["ANDROID"]
         ios <- map["IOS"]
         
+    }
+}
+
+class Proposals : NSObject , Mappable {
+    
+    var id : Int?
+    var orderId : Int?
+    var driverId : Int?
+    var estimatedPickup : String?
+    var estimatedArrival : String?
+    var cost : String?
+    var status : String?
+    var createdAt : String?
+    var updatedAt : String?
+    
+    required init?(map: Map){}
+    
+    func mapping(map: Map) {
+        
+        id <- map["id"]
+        orderId <- map["order_id"]
+        driverId <- map["driver_id"]
+        estimatedPickup <- map["estimated_pickup"]
+        estimatedArrival <- map["estimated_arrival"]
+        cost <- map["cost"]
+        status <- map["status"]
+        createdAt <- map["created_at"]
+        updatedAt <- map["updated_at"]
     }
 }

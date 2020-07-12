@@ -40,6 +40,7 @@
 "add.place" = "New Place";
 "save" = "Save";
 "field.req" = "Field required";
+"NoInternetConnection" = "No Internet Connection";
 
 /// MARK: Save Location
 "add.detail" = "Add Detail";

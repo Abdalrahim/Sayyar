@@ -164,7 +164,7 @@ struct RegisterView: View {
                             ) { (response) in
                                 switch response {
                                 case .success(let success):
-                                    if let usermdl = success as? UserModel {
+                                    if let usermdl = success as? UserData {
                                         print("Success", usermdl.toJSON())
                                     }
                                 case .failure(let fail):

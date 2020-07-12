@@ -25,17 +25,17 @@ class UserSingleton:NSObject{
     
     static let shared = UserSingleton()
     
-    var loggedInUser : UserModel? {
+    var loggedInUser : UserData? {
         
         get{
             
             guard let data = UserDefaults.standard.value(forKey: SingletonKeys.user.rawValue) else{
                 
-                let mappedModel = Mapper<UserModel>().map(JSON: [:] )
+                let mappedModel = Mapper<UserData>().map(JSON: [:] )
                 return mappedModel
             }
             
-            let mappedModel = Mapper<UserModel>().map(JSON: data as! [String : Any])
+            let mappedModel = Mapper<UserData>().map(JSON: data as! [String : Any])
             return mappedModel
             
         }set{

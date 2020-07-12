@@ -41,6 +41,8 @@ internal struct APITypes {
     static let register = "/register"
     
     static let refresh = "/refresh"
+    
+    static let login = "/login"
 }
 
 enum Response {
@@ -113,6 +115,8 @@ struct Parameters {
     static let register : [Keys] = [.email, .firstName, .lastName, .mobile, .clientType]
     
     static let refresh : [Keys] = [.accessToken]
+    
+    static let login : [Keys] = [.email, .password]
 }
 
 internal struct Routes {
