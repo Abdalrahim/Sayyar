@@ -23,3 +23,12 @@ extension RegisterEndPoint {
     }
   }
 }
+
+extension SMSEndPoint {
+    func handle(data: Any) -> AnyObject? {
+        switch self {
+        default:
+            return data as AnyObject
+        }
+    }
+}

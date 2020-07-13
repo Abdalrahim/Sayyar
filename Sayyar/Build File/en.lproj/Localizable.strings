@@ -61,6 +61,10 @@
 "phone.format" = "Wrong phone number format";
 "email.format" = "Wrong email format";
 "insert.code" = "Insert the code that is sent to";
+"no.account" = "Dont have an account?";
+"create.account" = "Create an account!";
+"ready.for.trip" = "Ready To Start Your Trip with us?";
+"insert.phone" = "Insert Phone Number";
 
 /// Mark: Settings
 "account.info" = "Account Info";

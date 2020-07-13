@@ -60,6 +60,7 @@
 		0F77D46F2435F0FF00B5E59C /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F77D46E2435F0FF00B5E59C /* PaymentMethod.swift */; };
 		0F7CB0FA24925FA200AA5B19 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7CB0F924925FA200AA5B19 /* PageViewController.swift */; };
 		0F7F96422423872600D03C5E /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F96412423872600D03C5E /* RegisterView.swift */; };
+		0F87093524BC95320047416D /* SMSEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F87093424BC95320047416D /* SMSEndPoint.swift */; };
 		0F8F2D4E23FD62BF008017A3 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8F2D4D23FD62BF008017A3 /* OrderView.swift */; };
 		0FA2CFC623E80A3600451EEE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2CFC523E80A3600451EEE /* HomeView.swift */; };
 		0FA2CFC823E80EE500451EEE /* PlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2CFC723E80EE500451EEE /* PlaceView.swift */; };
@@ -149,6 +150,7 @@
 		0F77D46E2435F0FF00B5E59C /* PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethod.swift; sourceTree = "<group>"; };
 		0F7CB0F924925FA200AA5B19 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		0F7F96412423872600D03C5E /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		0F87093424BC95320047416D /* SMSEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSEndPoint.swift; sourceTree = "<group>"; };
 		0F8F2D4D23FD62BF008017A3 /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		0FA2CFC523E80A3600451EEE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0FA2CFC723E80EE500451EEE /* PlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceView.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				0F51FBA224B3756A004C328C /* RegisterEndPoint.swift */,
+				0F87093424BC95320047416D /* SMSEndPoint.swift */,
 			);
 			path = EndPoints;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 				0F697E6B24A4A53B00695C4A /* Carousel.swift in Sources */,
 				0F1F0526242A264F00ACEC10 /* SummaryView.swift in Sources */,
 				0F483AD823F99213004DDC29 /* TextNetworkManager.swift in Sources */,
+				0F87093524BC95320047416D /* SMSEndPoint.swift in Sources */,
 				0F51FBA324B3756A004C328C /* RegisterEndPoint.swift in Sources */,
 				0FBFDEA0240416B5007739A7 /* ConfigRemote.swift in Sources */,
 				0F14DDC8240BEA270075E22B /* OfferCard.swift in Sources */,

@@ -25,11 +25,11 @@ internal struct APIBasePath {
             
             if application_phase == .dev {
                 
-                 return  "https://api-dev.syyar.net/api/"
+                 return  "https://api-dev.syyar.net/api"
                 
             } else {
                 
-                return "https://api-dev.syyar.net/api/"
+                return "https://api-dev.syyar.net/api"
                 
             }
         }
@@ -42,7 +42,12 @@ internal struct APITypes {
     
     static let refresh = "/refresh"
     
-    static let login = "/login"
+    static let login = "/smslogin"
+    
+    static let sms = "/sms"
+    
+    static let smsCheck = "/smsChek"
+    
 }
 
 enum Response {
@@ -80,6 +85,8 @@ enum Keys : String {
     case code = "code"
     
     case accessToken = "access_token"
+    
+    case phone_no = "phone_no"
 }
 
 enum Validate : String {
@@ -116,13 +123,15 @@ struct Parameters {
     
     static let refresh : [Keys] = [.accessToken]
     
-    static let login : [Keys] = [.email, .password]
+    static let login : [Keys] = [.phone_no, .code]
+    
+    static let phone : [Keys] = [.phone_no]
 }
 
 internal struct Routes {
     
-    static let auth = "auth"
-    static let drivers = "drivers"
+    static let auth = "/auth"
+    static let drivers = "/drivers"
     
 }
 

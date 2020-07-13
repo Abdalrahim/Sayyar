@@ -45,6 +45,8 @@ struct HomeView : View {
     
     @State var isDestination = true
     
+    @State var showSignIn = false
+    
     @State var userId = ""
     
     @State var showPayment = false
@@ -127,16 +129,19 @@ struct HomeView : View {
     var body: some View {
         
         let drag = DragGesture()
-        .onEnded {
-            if L102Language.isRTL && $0.translation.width < 100 {
-                withAnimation {
-                    self.showMenu = false
+            .onEnded {
+                if L102Language.isRTL && $0.translation.width < 100 {
+                    withAnimation {
+                        self.showMenu = false
+                    }
+                } else if $0.translation.width < -100 {
+                    withAnimation {
+                        self.showMenu = false
+                    }
                 }
-            } else if $0.translation.width < -100 {
-                withAnimation {
-                    self.showMenu = false
-                }
-            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.showSignIn.toggle()
         }
         
         return NavigationView {
@@ -158,7 +163,9 @@ struct HomeView : View {
                         RatingView(rate: self.rate, textRating: self.textRating)
                     } else if self.locations.count == 2 {
                         SummaryView(paymentMethod: self.$selectedPaymentMethod,
-                                    showPaymentType: self.$showPayment, pickupText: "King Fahad Road", destinationText: "Orobah Road")
+                                    showPaymentType: self.$showPayment,
+                                    pickupText: "King Fahad Road",
+                                    destinationText: "Orobah Road")
                     } else {
                         DestinationView(places: self.places, addedPin: {
                             self.addPin()
@@ -180,7 +187,7 @@ struct HomeView : View {
                                         Text("choose.paymentmethod")
                                             .font(.custom("Cairo-SemiBold", size: 18))
                                             .foregroundColor(dark)
-                                        .padding()
+                                            .padding()
                                         List(self.methods) { method in
                                             MethodView(method: method, selectedMethod: self.$selectedPaymentMethod)
                                                 .onTapGesture {
@@ -245,12 +252,22 @@ struct HomeView : View {
                 .sheet(isPresented: self.$showSearch, content: {
                     SearchView()
                 })
-            .edgesIgnoringSafeArea(.all)
-//            .navigationBarHidden(self.showMenu)
-        }.accentColor(purple)
+                .edgesIgnoringSafeArea(.all)
+        }
+        .accentColor(purple)
+        .sheet(isPresented: self.$showSignIn, content: {
+            SignInView(showSignIn: self.$showSignIn)
+        })
             .sheet(isPresented: self.$newFavPlace, content: {
                 NewFavPlaceView(coordination: self.gmap.map.projection.coordinate(for: self.gmap.map.center))
-        })
+            })
+            .onAppear(){
+                if self.userId.isEmpty {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self.showSignIn.toggle()
+                    }
+                }
+        }
     }
     
     func addPin() {

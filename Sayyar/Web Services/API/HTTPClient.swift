@@ -89,8 +89,6 @@ class HTTPClient : NSObject {
         
         switch api.route {
             
-        case APITypes.register:
-            return false
         default:
             return false
         }

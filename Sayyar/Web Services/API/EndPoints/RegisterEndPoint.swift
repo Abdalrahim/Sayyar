@@ -13,7 +13,7 @@ enum RegisterEndPoint {
     
     case register(email : String?, firstName: String?, lastName: String?, phone: String?, clientType : String?)
     case refresh(accessToken : String?)
-    case login(email : String?, password: String?)
+    case login(phone : String?, code: String?)
 }
 
 extension RegisterEndPoint: Router {
@@ -60,8 +60,8 @@ extension RegisterEndPoint: Router {
             return Parameters.register.map(values: [email, firstName, lastname, phone, clientType])
         case .refresh(let accessToken):
             return Parameters.refresh.map(values: [accessToken])
-        case .login(email: let email, password: let password):
-            return Parameters.refresh.map(values: [email, password])
+        case .login(phone: let phone, code: let code):
+            return Parameters.login.map(values: [phone, code])
         }
     }
     

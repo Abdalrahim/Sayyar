@@ -24,5 +24,6 @@ target 'Sayyar' do
   pod 'SZTextView'
   pod 'SwiftMessages'
   pod 'SwiftyJSON'
+  pod "Introspect"
   
 end
