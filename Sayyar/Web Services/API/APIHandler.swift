@@ -8,7 +8,6 @@
 
 import ObjectMapper
 
-
 extension RegisterEndPoint {
   
   func handle(data : Any) -> AnyObject? {
@@ -25,6 +24,15 @@ extension RegisterEndPoint {
 }
 
 extension SMSEndPoint {
+    func handle(data: Any) -> AnyObject? {
+        switch self {
+        default:
+            return data as AnyObject
+        }
+    }
+}
+
+extension BookingEndPoint {
     func handle(data: Any) -> AnyObject? {
         switch self {
         default:

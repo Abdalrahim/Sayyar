@@ -23,6 +23,8 @@ struct VerifyView: View {
     
     @State var showResend : Bool = false
     
+    @Binding var showSignIn : Bool
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -129,7 +131,7 @@ struct VerifyView: View {
 
 struct VerifyView_Previews: PreviewProvider {
     static var previews: some View {
-        VerifyView(phone: "050 000 000", showSmsVerify: .constant(true))
+        VerifyView(phone: "050 000 000", showSmsVerify: .constant(true), showSignIn: .constant(true))
     }
 }
 

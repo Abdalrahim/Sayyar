@@ -17,9 +17,13 @@ struct SignInView: View {
     
     @State var notRegister : Bool = false
     
+    @State var phoneCheck : Bool = false
+    
     @Binding var showSignIn : Bool
     
     @State var showSmsCheck : Bool = false
+    
+    @State var showRegister : Bool = false
     
     var body: some View {
         NavigationView {
@@ -59,16 +63,17 @@ struct SignInView: View {
                                         Divider()
                                             .background(self.notRegister ? red : Color.clear)
                                         
+                                        
                                     }
                                     
                                 }
-                                if self.notRegister {
+                                if self.notRegister || self.phoneCheck {
                                     HStack {
                                         Image(systemName : "exclamationmark.circle.fill")
                                             .foregroundColor(red)
                                         
                                         
-                                        Text("phone number not registered")
+                                        Text(self.notRegister ? "not.registered" : "field.req")
                                             .font(.custom("Cairo-Regular", size: 15))
                                             .foregroundColor(red)
                                     }
@@ -80,16 +85,8 @@ struct SignInView: View {
                             HStack(alignment: .center, spacing: 10) {
                                 // MARK: Add Pin
                                 Button(action: {
-                                    self.apimanager.request(with:
-                                        SMSEndPoint.sendSmsto(phone: self.phoneNum)
-                                    ) { (response) in
-                                        switch response {
-                                        case .success(_):
-                                            self.showSmsCheck = true
-                                            break
-                                        case .failure(let fail):
-                                            debugPrint("SMSEndPoint", fail as Any)
-                                        }
+                                    if self.checkfield() {
+                                        self.sendSms()
                                     }
                                 }) {
                                     HStack(alignment: .center) {
@@ -118,16 +115,19 @@ struct SignInView: View {
                                     .cornerRadius(10)
                             }
                             Spacer()
-                            HStack {
-                                Text("no.account")
-                                    +
-                                    Text(" ")
-                                    +
-                                    Text("create.account")
-                                        .foregroundColor(purple)
+                            NavigationLink(destination:
+                            RegisterView(showSignIn: self.$showSignIn, showRegister: self.$showRegister),isActive: self.$showRegister) {
                                 
-                            }.font(.custom("Cairo-SemiBold", size: 15))
-                            
+                                HStack {
+                                    Text("no.account")
+                                        +
+                                        Text(" ")
+                                        +
+                                        Text("create.account")
+                                            .foregroundColor(purple)
+                                    
+                                }.font(.custom("Cairo-SemiBold", size: 15))
+                            }.foregroundColor(purple)
                             Spacer()
                             
                         }
@@ -137,12 +137,33 @@ struct SignInView: View {
                     }
                 }
                 .background(RoundedCorners(color: bgColor, tl: 60, tr: 60, bl: 0, br: 0))
+                
                 NavigationLink("", destination:
-                    VerifyView(phone: self.phoneNum, showSmsVerify: self.$showSmsCheck),
+                    VerifyView(phone: self.phoneNum, showSmsVerify: self.$showSmsCheck, showSignIn: self.$showSignIn),
                                isActive: self.$showSmsCheck)
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarHidden(true)
+        }
+    }
+    
+    private func checkfield() -> Bool {
+        // TODO: Add more
+        self.phoneCheck = self.phoneNum.isEmpty
+        return !self.phoneCheck
+    }
+    
+    private func sendSms() {
+        self.apimanager.request(with:
+            SMSEndPoint.sendSmsto(phone: self.phoneNum)
+        ) { (response) in
+            switch response {
+            case .success(_):
+                self.showSmsCheck = true
+                break
+            case .failure(let fail):
+                debugPrint("SMSEndPoint", fail as Any)
+            }
         }
     }
 }

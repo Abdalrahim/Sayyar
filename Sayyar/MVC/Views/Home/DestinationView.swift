@@ -89,7 +89,7 @@ struct DestinationView: View {
                         .cornerRadius(10)
                 }
                 .padding(.bottom, 30)
-                .padding(.horizontal)
+                .padding(.horizontal, 30)
                 
             }
             .background(RoundedCorners(color: bgColor, tl: 20, tr: 20, bl: 0, br: 0))

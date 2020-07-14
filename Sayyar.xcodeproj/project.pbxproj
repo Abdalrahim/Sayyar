@@ -58,6 +58,7 @@
 		0F697E6B24A4A53B00695C4A /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F697E6A24A4A53B00695C4A /* Carousel.swift */; };
 		0F77D46A2435E6D000B5E59C /* Sidemenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F77D4692435E6CF00B5E59C /* Sidemenu.swift */; };
 		0F77D46F2435F0FF00B5E59C /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F77D46E2435F0FF00B5E59C /* PaymentMethod.swift */; };
+		0F7A640824BDF3CF0001429B /* BookingEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7A640724BDF3CF0001429B /* BookingEndPoint.swift */; };
 		0F7CB0FA24925FA200AA5B19 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7CB0F924925FA200AA5B19 /* PageViewController.swift */; };
 		0F7F96422423872600D03C5E /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F96412423872600D03C5E /* RegisterView.swift */; };
 		0F87093524BC95320047416D /* SMSEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F87093424BC95320047416D /* SMSEndPoint.swift */; };
@@ -148,6 +149,7 @@
 		0F697E6A24A4A53B00695C4A /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		0F77D4692435E6CF00B5E59C /* Sidemenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sidemenu.swift; sourceTree = "<group>"; };
 		0F77D46E2435F0FF00B5E59C /* PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethod.swift; sourceTree = "<group>"; };
+		0F7A640724BDF3CF0001429B /* BookingEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingEndPoint.swift; sourceTree = "<group>"; };
 		0F7CB0F924925FA200AA5B19 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		0F7F96412423872600D03C5E /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		0F87093424BC95320047416D /* SMSEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSEndPoint.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 			children = (
 				0F51FBA224B3756A004C328C /* RegisterEndPoint.swift */,
 				0F87093424BC95320047416D /* SMSEndPoint.swift */,
+				0F7A640724BDF3CF0001429B /* BookingEndPoint.swift */,
 			);
 			path = EndPoints;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				0F77D46A2435E6D000B5E59C /* Sidemenu.swift in Sources */,
 				0F0BEF1523E99FB90008017B /* TextMessage.swift in Sources */,
 				0FA2CFD723E817C800451EEE /* UniqueCheckModel.swift in Sources */,
+				0F7A640824BDF3CF0001429B /* BookingEndPoint.swift in Sources */,
 				0F57463424AA41CF002CEA11 /* ContactUsView.swift in Sources */,
 				0FA2CFC823E80EE500451EEE /* PlaceView.swift in Sources */,
 				0FA2CFE823E868B900451EEE /* RatePicker.swift in Sources */,

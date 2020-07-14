@@ -30,8 +30,11 @@ struct RegisterView: View {
     @State var showTOS = false
     @State var showPrivacyPolicy = false
     
+    @Binding var showSignIn : Bool
+    @Binding var showRegister : Bool
+    
     @State var tosURL = "https://duckduckgo.com"
-    @State var privacyPolicyURL = "https://duckduckgo.com"
+    @State var privacyPolicyURL = "https://google.com"
     
     var body: some View {
         VStack {
@@ -133,12 +136,16 @@ struct RegisterView: View {
                                     .underline()
                                     .onTapGesture {
                                         self.showTOS.toggle()
+                                }.sheet(isPresented: $showTOS) {
+                                    SafariView(url:URL(string: self.tosURL)!)
                                 }
                                 Text("and")
                                 Text("privacy.policy")
                                     .underline()
                                     .onTapGesture {
                                         self.showPrivacyPolicy.toggle()
+                                }.sheet(isPresented: $showPrivacyPolicy) {
+                                    SafariView(url:URL(string: self.privacyPolicyURL)!)
                                 }
                             }
                             .font(.custom("Cairo-Regular", size: 15))
@@ -158,18 +165,8 @@ struct RegisterView: View {
                     HStack(alignment: .center, spacing: 10) {
                         // MARK: Add Pin
                         Button(action: {
-                            
-                            self.apimanager.request(with:
-                                RegisterEndPoint.register(email: self.email, firstName: self.firstName, lastName: self.lastName, phone: self.phoneNumber, clientType: "passenger")
-                            ) { (response) in
-                                switch response {
-                                case .success(let success):
-                                    if let usermdl = success as? UserData {
-                                        print("Success", usermdl.toJSON())
-                                    }
-                                case .failure(let fail):
-                                    print("Fail", fail)
-                                }
+                            if self.checkFields() {
+                                self.registerUser()
                             }
                         }) {
                             HStack(alignment: .center) {
@@ -198,25 +195,52 @@ struct RegisterView: View {
                         .foregroundColor(purple)
                         .font(.custom("Cairo-SemiBold", size: 13))
                         .underline()
+                        .onTapGesture {
+                            self.showRegister.toggle()
+                    }
                 }
                 .padding()
                 
             }.background(RoundedCorners(color: bgColor, tl: 60, tr: 60, bl: 0, br: 0))
         }
-        .sheet(isPresented: $showTOS) {
-            SafariView(url:URL(string: self.tosURL)!)
-        }
+        .navigationBarHidden(true)
+        
             
-        .sheet(isPresented: $showPrivacyPolicy) {
-            SafariView(url:URL(string: self.privacyPolicyURL)!)
-        }
+        
         .edgesIgnoringSafeArea(.all)
     }
     
+    private func checkFields() -> Bool {
+        self.emailCheck = self.email.isEmpty
+        self.firstnameCheck = self.firstName.isEmpty
+        self.lastnameCheck = self.lastName.isEmpty
+        self.phoneCheck = self.phoneNumber.isEmpty
+        if !self.emailCheck || !self.firstnameCheck || !self.lastnameCheck || !self.phoneCheck {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    private func registerUser() {
+
+        self.apimanager.request(with:
+            RegisterEndPoint.register(email: self.email, firstName: self.firstName, lastName: self.lastName, phone: self.phoneNumber, clientType: "passenger")
+        ) { (response) in
+            switch response {
+            case .success(let success):
+                if let usermdl = success as? UserData {
+                    print("Success", usermdl.toJSON())
+                }
+            case .failure(let fail):
+                print("Fail", fail)
+            }
+        }
+    }
 }
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView()
+        RegisterView(showSignIn: .constant(true), showRegister: .constant(true))
     }
 }

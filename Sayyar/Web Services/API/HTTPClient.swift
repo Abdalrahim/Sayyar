@@ -53,7 +53,7 @@ class HTTPClient : NSObject {
 //            debugPrint(json)
 
             if let status = response.response?.statusCode {
-
+                debugPrint(status)
                 let responseStatus  = ResponseStatus.init(value: status)
 
                 switch(responseStatus) {

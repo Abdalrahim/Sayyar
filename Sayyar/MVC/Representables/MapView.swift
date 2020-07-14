@@ -58,7 +58,8 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MapView.UIViewType, context: UIViewRepresentableContext<MapView>) {
-        //MARK: - Remove when deployed to APP Store
+        #warning("TODO: Remove when deployed to APP Store.")
+        // MARK: Remove when deployed to APP Store
         if locationManager.latitude == 0 && locationManager.longitude == 0 {
             let camera = GMSCameraPosition(latitude: 21.553583299752678, longitude: 39.18819702956502, zoom: 15)
             uiView.animate(to: camera)

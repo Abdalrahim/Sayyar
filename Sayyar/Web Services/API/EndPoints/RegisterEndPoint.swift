@@ -6,7 +6,6 @@
 //  Copyright © 2020 Teracit. All rights reserved.
 //
 
-import UIKit
 import Alamofire
 
 enum RegisterEndPoint {

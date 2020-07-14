@@ -11,7 +11,7 @@ import SwiftUI
 
 struct Settings: View {
     
-    @State var data = CustomRowModel(firstName: "Sam", lastName: "Black", phoneNumber: 533691336, email: "samblack@gamil.com", image: Image("person"), isExpanded: false)
+    @State var data = CustomRowModel(firstName: "Sam", lastName: "Black", phoneNumber: 0534567892, email: "samblack@gamil.com", image: Image("person"), isExpanded: false)
     
     @State var places : [FavPlace] = [
         FavPlace(name: "home", pType: .home, location: "10mins"),

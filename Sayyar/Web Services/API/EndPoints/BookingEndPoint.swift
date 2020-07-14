@@ -1,25 +1,25 @@
 //
-//  SMSEndPoint.swift
+//  BookingEndPoint.swift
 //  Sayyar
 //
-//  Created by Abdalrahim Abdullah on 13/07/2020.
+//  Created by Abdalrahim Abdullah on 14/07/2020.
 //  Copyright © 2020 Teracit. All rights reserved.
 //
 
 import Alamofire
 
-enum SMSEndPoint {
+enum BookingEndPoint {
     
-    case sendSmsto(phone : String?)
+    case createOrder(destination_lat : String?, destination_lng : String?, pickup_lat : String?, pickup_lng : String?)
     
 }
 
-extension SMSEndPoint: Router {
+extension BookingEndPoint: Router {
     
     var baseURL: String {
         switch self{
         default:
-            return APIBasePath.basePath
+            return APIBasePath.basePath + Routes.passengers
         }
         
     }
@@ -40,15 +40,15 @@ extension SMSEndPoint: Router {
         
         switch self {
             
-        case .sendSmsto(_):
-            return APITypes.sms
+        case .createOrder(_):
+            return APITypes.orderCreate
         }
     }
     
     func format() -> OptionalDictionary {
         switch self {
-        case .sendSmsto(phone: let phone):
-            return Parameters.phone.map(values: [phone])
+        case .createOrder(destination_lat: let destination_lat, destination_lng: let destination_lng, pickup_lat: let pickup_lat, pickup_lng: let pickup_lng):
+            return Parameters.order.map(values: [destination_lat,destination_lng,pickup_lat,pickup_lng])
         }
     }
     

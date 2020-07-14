@@ -140,9 +140,6 @@ struct HomeView : View {
                     }
                 }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.showSignIn.toggle()
-        }
         
         return NavigationView {
             GeometryReader { geometry in
@@ -178,6 +175,9 @@ struct HomeView : View {
                                 self.newFavPlace.toggle()
                             }
                         }, isDestination: self.$isDestination)
+                        .sheet(isPresented: self.$showSearch, content: {
+                            SearchView()
+                        })
                     }
                     if self.showPayment {
                         withAnimation{
@@ -231,7 +231,12 @@ struct HomeView : View {
                         .frame(width: geometry.size.width/1.3)
                         .transition(.move(edge: .leading))
                 }
-            }
+            }.sheet(isPresented: self.$showSignIn, content: {
+                SignInView(showSignIn: self.$showSignIn)
+                    .onDisappear {
+//                        self.showSignIn.toggle()
+                }
+            })
             .gesture(drag)
             .navigationBarItems(
                 leading:
@@ -243,34 +248,38 @@ struct HomeView : View {
                 }) {
                     
                     Image(systemName: "line.horizontal.3")
-//                        .foregroundColor(purple)
                         .imageScale(.large)
                         .scaleEffect(CGSize(width: 1.3, height: 1.7))
                 }.offset(x: self.showMenu ? UIScreen.main.bounds.width/1.5 : 0))
                 .navigationBarTitle(Text(self.showMenu ? "" : self.bartTitle), displayMode: .inline)
                 .accentColor(purple)
-                .sheet(isPresented: self.$showSearch, content: {
-                    SearchView()
-                })
                 .edgesIgnoringSafeArea(.all)
         }
         .accentColor(purple)
-        .sheet(isPresented: self.$showSignIn, content: {
-            SignInView(showSignIn: self.$showSignIn)
-        })
-            .sheet(isPresented: self.$newFavPlace, content: {
+        .sheet(isPresented: self.$newFavPlace, content: {
                 NewFavPlaceView(coordination: self.gmap.map.projection.coordinate(for: self.gmap.map.center))
             })
-            .onAppear(){
-                if self.userId.isEmpty {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        self.showSignIn.toggle()
-                    }
+        .onAppear(perform: refreshToken)
+        
+    }
+    
+    private func refreshToken() {
+        if UserSingleton.shared.loggedInUser != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.showSignIn.toggle()
+            }
+        } else {
+            RegisterEndPoint.refresh(accessToken: "").request { (response) in
+                switch response {
+                case .success(_): break
+                case .failure(let failtxt):
+                    print("Fail",failtxt ?? "")
                 }
+            }
         }
     }
     
-    func addPin() {
+    private func addPin() {
         
         let coordinate = gmap.map.projection.coordinate(for: gmap.map.center)
         
@@ -294,7 +303,22 @@ struct HomeView : View {
         //createLocalNotifications()
     }
     
-    func onFetch() {
+    private func createOrder() {
+        BookingEndPoint.createOrder(
+            destination_lat: locations.first!.latitude.toString,
+            destination_lng: locations.first!.longitude.toString,
+            pickup_lat: locations[1].latitude.toString,
+            pickup_lng: locations[1].longitude.toString).request { (response) in
+                switch response {
+                case .success(_):
+                    break
+                case .failure(let failtxt):
+                    print(failtxt)
+                }
+        }
+    }
+    
+    private func onFetch() {
         let toPlace = [Place(lat: locations.first!.latitude, lng: locations.first!.longitude)]
         let fromPlace = "\(locations[1].latitude),\(locations[1].longitude)"
 
@@ -358,3 +382,30 @@ struct HomeView_Previews: PreviewProvider {
         //HomeView()//.previewDevice(PreviewDevice(stringLiteral: "iPhone 8"))
     }
 }
+import Combine
+
+//class ReposStore: BindableObject {
+//    var repos: [Repo] = [] {
+//        didSet {
+//            didChange.send(self)
+//        }
+//    }
+//
+//    var didChange = PassthroughSubject<ReposStore, Never>()
+//
+//    let service: GithubService
+//    init(service: GithubService) {
+//        self.service = service
+//    }
+//
+//    func fetch(matching query: String) {
+//        service.search(matching: query) { [weak self] result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let repos): self?.repos = repos
+//                case .failure: self?.repos = []
+//                }
+//            }
+//        }
+//    }
+//}

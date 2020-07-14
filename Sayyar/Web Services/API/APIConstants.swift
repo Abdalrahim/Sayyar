@@ -48,6 +48,7 @@ internal struct APITypes {
     
     static let smsCheck = "/smsChek"
     
+    static let orderCreate = "/order/create"
 }
 
 enum Response {
@@ -87,6 +88,14 @@ enum Keys : String {
     case accessToken = "access_token"
     
     case phone_no = "phone_no"
+    
+    case destination_lat = "destination_lat"
+    
+    case destination_lng = "destination_lng"
+    
+    case pickup_lat = "pickup_lat"
+    
+    case pickup_lng = "pickup_lng"
 }
 
 enum Validate : String {
@@ -126,13 +135,17 @@ struct Parameters {
     static let login : [Keys] = [.phone_no, .code]
     
     static let phone : [Keys] = [.phone_no]
+    
+    static let order : [Keys] = [.destination_lat, .destination_lng, .pickup_lat, .pickup_lng]
 }
 
 internal struct Routes {
     
     static let auth = "/auth"
+    
     static let drivers = "/drivers"
     
+    static let passengers = "/passengers"
 }
 
 enum APIConstants:String {
