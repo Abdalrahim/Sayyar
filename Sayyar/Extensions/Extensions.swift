@@ -25,6 +25,51 @@ extension String {
         return resultString
     }
     
+    public var replacedArabicDigitsWithEnglish: String {
+        var str = self
+        let map = ["٠": "0",
+                   "١": "1",
+                   "٢": "2",
+                   "٣": "3",
+                   "٤": "4",
+                   "٥": "5",
+                   "٦": "6",
+                   "٧": "7",
+                   "٨": "8",
+                   "٩": "9"]
+        map.forEach { str = str.replacingOccurrences(of: $0, with: $1) }
+        return str
+    }
+    
+    func isValidEmail(email:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: email)
+    }
+    
+    var digits: [Int] {
+        var result = [Int]()
+        
+        for char in self {
+            if let number = Int(String(char)) {
+                result.append(number)
+            }
+        }
+        
+        return result
+    }
+    
+}
+
+extension Int {
+    
+    var numberString: String {
+        
+        guard self < 10 else { return "0" }
+        
+        return String(self)
+    }
 }
 
 extension UIImage {
@@ -38,30 +83,30 @@ extension UIImage {
     }
 }
 
-extension UIFont {
+extension Font {
     
-    func bold(size: CGFloat) -> UIFont {
-        return UIFont(name:"Cairo-Bold", size: size)!
+    func bold(size: CGFloat) -> Font {
+        return Font.custom("Cairo-Bold", size: size)
     }
     
-    func black(size: CGFloat) -> UIFont {
-        return UIFont(name:"Cairo-Black", size: size)!
+    func black(size: CGFloat) -> Font {
+        return Font.custom("Cairo-Black", size: size)
     }
     
-    func extralight(size: CGFloat) -> UIFont {
-        return UIFont(name:"Cairo-ExtraLight", size: size)!
+    func extralight(size: CGFloat) -> Font {
+        return Font.custom("Cairo-ExtraLight", size: size)
     }
     
-    func light(size: CGFloat) -> UIFont {
-        return UIFont(name:"Cairo-Light", size: size)!
+    func light(size: CGFloat) -> Font {
+        return Font.custom("Cairo-Light", size: size)
     }
     
-    func regular(size: CGFloat) -> UIFont {
-        return UIFont(name:"Cairo-Regular", size: size)!
+    func regular(size: CGFloat) -> Font {
+        return Font.custom("Cairo-Regular", size: size)
     }
     
-    func semibold(size: CGFloat) -> UIFont {
-        return UIFont(name:"Cairo-SemiBold", size: size)!
+    func semibold(size: CGFloat) -> Font {
+        return Font.custom("Cairo-SemiBold", size: size)
     }
 }
 

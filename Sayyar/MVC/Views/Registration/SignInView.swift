@@ -13,7 +13,7 @@ struct SignInView: View {
     
     @ObservedObject var apimanager: APIManager = APIManager()
     
-    @State var phoneNum : String = ""
+    @State var phoneNum : String = "".replacedArabicDigitsWithEnglish
     
     @State var notRegister : Bool = false
     
@@ -37,7 +37,7 @@ struct SignInView: View {
                         VStack {
                             Text("ready.for.trip")
                                 .foregroundColor(purple)
-                                .font(.custom("Cairo-Black", size: 15))
+                                .font(Font.custom("Cairo-Black", size: 15))
                                 .padding(.top)
                             
                             VStack(alignment: .leading) {
@@ -59,6 +59,7 @@ struct SignInView: View {
                                     
                                     VStack(spacing: 5) {
                                         TextField("insert.phone".localized, text: self.$phoneNum)
+                                            .keyboardType(.numberPad)
                                             .font(.custom("Cairo-SemiBold", size: 15))
                                         Divider()
                                             .background(self.notRegister ? red : Color.clear)

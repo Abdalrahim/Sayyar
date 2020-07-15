@@ -49,7 +49,7 @@ class UserData : Mappable{
     
     
     func mapping(map: Map) {
-        
+        print("User Data Mapping",map.JSON)
         userId <- map["id"]
         
         firstName <- map["first_name"]
@@ -59,6 +59,8 @@ class UserData : Mappable{
         
         mobile <- map["mobile"]
         proposals <- map["proposals"]
+        accessToken <- map["access_token"]
+        tokenResponse = TokenResponse(JSON: map.JSON)
     
     }
     
@@ -72,6 +74,7 @@ class TokenResponse: NSObject , Mappable {
     required init?(map: Map){}
     
     func mapping(map: Map) {
+        print("TokenResponse Mapping",map.JSON)
         accessToken <- map["access_token"]
         token_type <- map["token_type"]
         expires_in <- map["expires_in"]

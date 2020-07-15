@@ -59,7 +59,7 @@ extension BookingEndPoint: Router {
     
     
     var header: [String : String] {
-        let accessToken = UserSingleton.shared.loggedInUser?.accessToken ?? ""
+        let accessToken = UserSingleton.shared.loggedInUser?.tokenResponse?.accessToken ?? ""
         
         return ["Authorization" : "Bearer \(accessToken)"]
     }

@@ -140,7 +140,6 @@ struct HomeView : View {
                     }
                 }
         }
-        
         return NavigationView {
             GeometryReader { geometry in
                 
@@ -234,7 +233,7 @@ struct HomeView : View {
             }.sheet(isPresented: self.$showSignIn, content: {
                 SignInView(showSignIn: self.$showSignIn)
                     .onDisappear {
-//                        self.showSignIn.toggle()
+                        self.refreshToken()
                 }
             })
             .gesture(drag)
@@ -264,18 +263,20 @@ struct HomeView : View {
     }
     
     private func refreshToken() {
-        if UserSingleton.shared.loggedInUser != nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.showSignIn.toggle()
-            }
-        } else {
-            RegisterEndPoint.refresh(accessToken: "").request { (response) in
+        if let accessToken = UserSingleton.shared.loggedInUser?.tokenResponse {
+            print("expire in", accessToken.expires_in, accessToken.token_type)
+            RegisterEndPoint.refresh(accessToken: accessToken.token_type).request { (response) in
                 switch response {
                 case .success(_): break
                 case .failure(let failtxt):
                     print("Fail",failtxt ?? "")
                 }
             }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.showSignIn.toggle()
+            }
+            
         }
     }
     
@@ -382,30 +383,3 @@ struct HomeView_Previews: PreviewProvider {
         //HomeView()//.previewDevice(PreviewDevice(stringLiteral: "iPhone 8"))
     }
 }
-import Combine
-
-//class ReposStore: BindableObject {
-//    var repos: [Repo] = [] {
-//        didSet {
-//            didChange.send(self)
-//        }
-//    }
-//
-//    var didChange = PassthroughSubject<ReposStore, Never>()
-//
-//    let service: GithubService
-//    init(service: GithubService) {
-//        self.service = service
-//    }
-//
-//    func fetch(matching query: String) {
-//        service.search(matching: query) { [weak self] result in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let repos): self?.repos = repos
-//                case .failure: self?.repos = []
-//                }
-//            }
-//        }
-//    }
-//}

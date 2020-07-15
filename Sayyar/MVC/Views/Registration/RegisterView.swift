@@ -85,6 +85,7 @@ struct RegisterView: View {
                                     customTextField(placeholder: "phone.number".localized, placename: self.$phoneNumber, fieldReq: self.$phoneCheck) {
                                         
                                     }
+                                    .keyboardType(.numberPad)
                                     .font(.custom("Cairo-SemiBold", size: 15))
                                 }
                                 customTextField(placeholder: "email".localized, placename: self.$email, fieldReq: self.$emailCheck) {

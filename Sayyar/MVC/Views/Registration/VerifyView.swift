@@ -13,7 +13,7 @@ struct VerifyView: View {
     @ObservedObject var apimanager: APIManager = APIManager()
     
     @State var phone : String
-    @State var pin: String = ""
+    @State var pin: String = "".replacedArabicDigitsWithEnglish
     
     @State var seconds : Int = 60
     
@@ -47,50 +47,43 @@ struct VerifyView: View {
             .lineLimit(2)
             
             PasscodeField { (text, boolean ) in
-                print(text)
+                self.pin = text
+                print(text )
             }
             
             Spacer()
+            
             HStack {
-                Button(action: {
-                    self.apimanager.request(with:
-                        SMSEndPoint.sendSmsto(phone: self.phone)
-                    ) { (response) in
-                        switch response {
-                        case .success(_):
+                if self.resendShow {
+                    Button(action: {
+                        self.resendSms()
+                    }) {
+                        HStack(alignment: .center) {
+                            Text("resend")
+                                .font(.custom("Cairo-SemiBold", size: 15))
+                                .foregroundColor(Color.gray)
                             
-                            break
-                        case .failure(let fail):
-                            debugPrint("SMSEndPoint", fail as Any)
                         }
-                    }
-                }) {
-                    HStack(alignment: .center) {
-                        Text("resend")
-                            .font(.custom("Cairo-SemiBold", size: 15))
-                            .foregroundColor(Color.gray)
-                            
-                    }
-                }.disabled(self.showResend)
+                    }.disabled(self.showResend)
+                }
                 Spacer()
                 
                 
                 HStack {
                     Text(String.localizedStringWithFormat("sec".localizewithnumber(count: UInt(seconds))))
-                    .scaledToFill()
-                    .layoutPriority(0)
+                        .scaledToFill()
+                        .layoutPriority(0)
                         .font(.custom("Cairo-Regular", size: 18))
                         .padding()
                     Image(systemName: "clock.fill")
                 }
-                    .foregroundColor(purple)
+                .foregroundColor(purple)
             }
             Spacer()
             
             HStack(alignment: .center, spacing: 10) {
-                // MARK: Add Pin
                 Button(action: {
-                    
+                    self.smslogin()
                 }) {
                     HStack(alignment: .center) {
                         Spacer()
@@ -116,14 +109,44 @@ struct VerifyView: View {
             
             Spacer()
         }.padding(.horizontal)
-        .onReceive(timer) { input in
-            withAnimation {
-                if (self.seconds > 0) {
-                    self.seconds -= 1
+            .onReceive(timer) { input in
+                withAnimation {
+                    if (self.seconds > 0) {
+                        self.seconds -= 1
+                    }
+                    if self.seconds == 0 {
+                        self.resendShow = true
+                    } else {
+                        self.resendShow = false
+                    }
                 }
-                if self.seconds == 0 {
-                    self.resendShow = true
-                }
+        }
+        .navigationBarHidden(true)
+    }
+    
+    private func smslogin() {
+        self.apimanager.request(with: RegisterEndPoint.login(phone: self.phone, code: self.pin)) { (response) in
+            switch response {
+            case .success(let data):
+                print("data",data)
+                self.showSignIn.toggle()
+                break
+            case .failure(let fail):
+                debugPrint("SMSEndPoint", fail as Any)
+            }
+        }
+    }
+    
+    private func resendSms() {
+        self.apimanager.request(with:
+            SMSEndPoint.sendSmsto(phone: self.phone)
+        ) { (response) in
+            switch response {
+            case .success(_):
+                self.seconds = 60
+                break
+            case .failure(let fail):
+                debugPrint("SMSEndPoint", fail as Any)
             }
         }
     }
@@ -132,14 +155,6 @@ struct VerifyView: View {
 struct VerifyView_Previews: PreviewProvider {
     static var previews: some View {
         VerifyView(phone: "050 000 000", showSmsVerify: .constant(true), showSignIn: .constant(true))
-    }
-}
-
-struct PasscodeField_Previews: PreviewProvider {
-    static var previews: some View {
-        PasscodeField { (text, boolean ) in
-            print(text)
-        }
     }
 }
 
@@ -240,55 +255,4 @@ public struct PasscodeField: View {
     }
 }
 
-struct verifytf: View {
-    
-    @State var textFieldActive : Bool = false
-    @Binding var placename : String
-    
-    var commit: () -> ()
-    
-    var body: some View {
-        
-        ZStack(alignment: .leading) {
-            
-            
-            TextField("", text: $placename, onEditingChanged: {edited in
-                withAnimation {
-                    self.textFieldActive = edited
-                }
-            }, onCommit: {
-                self.commit()
-            }).frame(height: 44).padding(.horizontal)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(textFieldActive || !placename.isEmpty ? purple : Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)), lineWidth: 1)
-            )
-        }
-    }
-}
 
-extension String {
-    
-    var digits: [Int] {
-        var result = [Int]()
-        
-        for char in self {
-            if let number = Int(String(char)) {
-                result.append(number)
-            }
-        }
-        
-        return result
-    }
-    
-}
-
-extension Int {
-    
-    var numberString: String {
-        
-        guard self < 10 else { return "0" }
-        
-        return String(self)
-    }
-}

@@ -7,97 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "30F0B5D8-AF5E-494E-9172-B6A73D16EDC0"
+            uuid = "B23FFFBA-8DFF-4AA0-B3AC-028745368340"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sayyar/MVC/Views/Registration/RegisterView.swift"
+            filePath = "Sayyar/Web Services/API/APIHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
-            landmarkName = "checkFields()"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "handle(data:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "30F0B5D8-AF5E-494E-9172-B6A73D16EDC0 - 74a6f46a8a3d432a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Sayyar.RegisterView.(checkFields in _7C38930BFF8781F8116C695D637191B0)() -&gt; Swift.Bool"
-                  moduleName = "Sayyar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Abdalrahim/Tera/Sayyar%20iOS/syyarios/Sayyar/MVC/Views/Registration/RegisterView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "219"
-                  endingLineNumber = "219"
-                  offsetFromSymbolStart = "524">
-               </Location>
-               <Location
-                  uuid = "30F0B5D8-AF5E-494E-9172-B6A73D16EDC0 - 50929ca3194637b8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(extension in Sayyar_PreviewReplacement_RegisterView_6):Sayyar.RegisterView.(__preview__checkFields in _0498E7774F52ACAE7A0DB76550AD6ACF)() -&gt; Swift.Bool"
-                  moduleName = "RegisterView.6.preview-thunk.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Abdalrahim/Tera/Sayyar%20iOS/syyarios/Sayyar/MVC/Views/Registration/RegisterView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "219"
-                  endingLineNumber = "219"
-                  offsetFromSymbolStart = "477">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "31A9C114-1DE9-4E5F-96D3-78EE76078EC6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Sayyar/MVC/Views/Registration/RegisterView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
-            landmarkName = "checkFields()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "31A9C114-1DE9-4E5F-96D3-78EE76078EC6 - 74a6f46a8a3d432a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Sayyar.RegisterView.(checkFields in _7C38930BFF8781F8116C695D637191B0)() -&gt; Swift.Bool"
-                  moduleName = "Sayyar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Abdalrahim/Tera/Sayyar%20iOS/syyarios/Sayyar/MVC/Views/Registration/RegisterView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "221"
-                  endingLineNumber = "221"
-                  offsetFromSymbolStart = "526">
-               </Location>
-               <Location
-                  uuid = "31A9C114-1DE9-4E5F-96D3-78EE76078EC6 - 50929ca3194637b8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(extension in Sayyar_PreviewReplacement_RegisterView_6):Sayyar.RegisterView.(__preview__checkFields in _0498E7774F52ACAE7A0DB76550AD6ACF)() -&gt; Swift.Bool"
-                  moduleName = "RegisterView.6.preview-thunk.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Abdalrahim/Tera/Sayyar%20iOS/syyarios/Sayyar/MVC/Views/Registration/RegisterView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "221"
-                  endingLineNumber = "221"
-                  offsetFromSymbolStart = "602">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

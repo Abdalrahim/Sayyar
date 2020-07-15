@@ -13,10 +13,16 @@ extension RegisterEndPoint {
   func handle(data : Any) -> AnyObject? {
     
     switch self {
-    case .register(_) :
+    case .login(_) :
         let object  = Mapper<UserData>().map(JSONObject: data)
+        print("Access Token: " ,object?.tokenResponse?.accessToken)
         UserSingleton.shared.loggedInUser = object
         return object
+    case .refresh(_):
+        let tokenResponse  = Mapper<TokenResponse>().map(JSONObject: data)
+        print("Access Token Refresh: " ,tokenResponse)
+        UserSingleton.shared.loggedInUser?.tokenResponse = tokenResponse
+        return tokenResponse
     default:
       return data as AnyObject
     }
