@@ -10,7 +10,7 @@ import Alamofire
 
 enum SMSEndPoint {
     
-    case sendSmsto(phone : String?)
+    case sendSmsto(phone : String?, isLogin: Bool)
     
 }
 
@@ -47,8 +47,8 @@ extension SMSEndPoint: Router {
     
     func format() -> OptionalDictionary {
         switch self {
-        case .sendSmsto(phone: let phone):
-            return Parameters.phone.map(values: [phone])
+        case .sendSmsto(phone: let phone, isLogin: let login):
+            return Parameters.phone.map(values: [phone, "\(login)"])
         }
     }
     

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SafariServices
+import SwiftyJSON
 
 struct RegisterView: View {
     
@@ -32,6 +33,7 @@ struct RegisterView: View {
     
     @Binding var showSignIn : Bool
     @Binding var showRegister : Bool
+    @State var showVerify : Bool = false
     
     @State var tosURL = "https://duckduckgo.com"
     @State var privacyPolicyURL = "https://google.com"
@@ -203,11 +205,11 @@ struct RegisterView: View {
                 .padding()
                 
             }.background(RoundedCorners(color: bgColor, tl: 60, tr: 60, bl: 0, br: 0))
+            NavigationLink("", destination:
+                VerifyView(phone: self.phoneNumber, showSmsVerify: self.$showVerify, showSignIn: self.$showSignIn, login: false),
+                       isActive: self.$showVerify)
         }
         .navigationBarHidden(true)
-        
-            
-        
         .edgesIgnoringSafeArea(.all)
     }
     
@@ -216,7 +218,7 @@ struct RegisterView: View {
         self.firstnameCheck = self.firstName.isEmpty
         self.lastnameCheck = self.lastName.isEmpty
         self.phoneCheck = self.phoneNumber.isEmpty
-        if !self.emailCheck || !self.firstnameCheck || !self.lastnameCheck || !self.phoneCheck {
+        if self.emailCheck || self.firstnameCheck || self.lastnameCheck || self.phoneCheck {
             return false
         } else {
             return true
@@ -224,17 +226,43 @@ struct RegisterView: View {
     }
     
     private func registerUser() {
-
+        
         self.apimanager.request(with:
             RegisterEndPoint.register(email: self.email, firstName: self.firstName, lastName: self.lastName, phone: self.phoneNumber, clientType: "passenger")
         ) { (response) in
             switch response {
-            case .success(let success):
-                if let usermdl = success as? UserData {
-                    print("Success", usermdl.toJSON())
+            case .success(let data):
+                
+                if let jsonDict = JSON(data).dictionary {
+                    print(jsonDict)
+                    
+                    if jsonDict ["success"] == false {
+                        // false alert
+                    } else if jsonDict["data"] != nil {
+                         self.sendSms()
+                    }
+                } else {
+                    // false alert
                 }
+                
             case .failure(let fail):
                 print("Fail", fail)
+            }
+        }
+    }
+    
+    private func sendSms() {
+        self.apimanager.request(with:
+            SMSEndPoint.sendSmsto(phone: self.phoneNumber, isLogin: false)
+        ) { (response) in
+            switch response {
+            case .success(let data):
+                let jsonData = JSON(data)
+                print(jsonData)
+                self.showVerify.toggle()
+                break
+            case .failure(let fail):
+                debugPrint("SMSEndPoint", fail as Any)
             }
         }
     }

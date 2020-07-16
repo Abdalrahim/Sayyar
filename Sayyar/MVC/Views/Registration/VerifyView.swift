@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct VerifyView: View {
     
@@ -24,6 +25,8 @@ struct VerifyView: View {
     @State var showResend : Bool = false
     
     @Binding var showSignIn : Bool
+    
+    @State var login : Bool
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -48,6 +51,7 @@ struct VerifyView: View {
             
             PasscodeField { (text, boolean ) in
                 self.pin = text
+                self.smslogin()
                 print(text )
             }
             
@@ -139,7 +143,7 @@ struct VerifyView: View {
     
     private func resendSms() {
         self.apimanager.request(with:
-            SMSEndPoint.sendSmsto(phone: self.phone)
+            SMSEndPoint.sendSmsto(phone: self.phone, isLogin: self.login)
         ) { (response) in
             switch response {
             case .success(_):
@@ -154,7 +158,7 @@ struct VerifyView: View {
 
 struct VerifyView_Previews: PreviewProvider {
     static var previews: some View {
-        VerifyView(phone: "050 000 000", showSmsVerify: .constant(true), showSignIn: .constant(true))
+        VerifyView(phone: "050 000 000", showSmsVerify: .constant(true), showSignIn: .constant(true), login: true)
     }
 }
 
@@ -216,17 +220,17 @@ public struct PasscodeField: View {
         })
         
         return TextField("", text: boundPin, onCommit: submitPin)
-           .accentColor(.clear)
-           .foregroundColor(.clear)
-           .keyboardType(.numberPad)
+//           .accentColor(.clear)
+//           .foregroundColor(.clear)
+//           .keyboardType(.numberPad)
       
-//             .introspectTextField { textField in
-//                 textField.tintColor = .clear
-//                 textField.textColor = .clear
-//                 textField.keyboardType = .numberPad
-//                 textField.becomeFirstResponder()
-//                 textField.isEnabled = !self.isDisabled
-//         }
+             .introspectTextField { textField in
+                 textField.tintColor = .clear
+                 textField.textColor = .clear
+                 textField.keyboardType = .numberPad
+                 textField.becomeFirstResponder()
+                 textField.isHidden = true
+         }
     }
     
     private func submitPin() {

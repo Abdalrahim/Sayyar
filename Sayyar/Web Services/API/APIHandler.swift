@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import SwiftyJSON
 
 extension RegisterEndPoint {
   

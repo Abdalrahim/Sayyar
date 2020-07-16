@@ -140,7 +140,7 @@ struct SignInView: View {
                 .background(RoundedCorners(color: bgColor, tl: 60, tr: 60, bl: 0, br: 0))
                 
                 NavigationLink("", destination:
-                    VerifyView(phone: self.phoneNum, showSmsVerify: self.$showSmsCheck, showSignIn: self.$showSignIn),
+                    VerifyView(phone: self.phoneNum, showSmsVerify: self.$showSmsCheck, showSignIn: self.$showSignIn, login: true),
                                isActive: self.$showSmsCheck)
             }
             .edgesIgnoringSafeArea(.all)
@@ -156,7 +156,7 @@ struct SignInView: View {
     
     private func sendSms() {
         self.apimanager.request(with:
-            SMSEndPoint.sendSmsto(phone: self.phoneNum)
+            SMSEndPoint.sendSmsto(phone: self.phoneNum, isLogin: true)
         ) { (response) in
             switch response {
             case .success(_):

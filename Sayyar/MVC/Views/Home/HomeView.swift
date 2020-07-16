@@ -263,9 +263,9 @@ struct HomeView : View {
     }
     
     private func refreshToken() {
-        if let accessToken = UserSingleton.shared.loggedInUser?.tokenResponse {
-            print("expire in", accessToken.expires_in, accessToken.token_type)
-            RegisterEndPoint.refresh(accessToken: accessToken.token_type).request { (response) in
+        if let accessToken = UserSingleton.shared.loggedInUser?.tokenResponse?.accessToken {
+            print("Token :", accessToken)
+            RegisterEndPoint.refresh(accessToken: accessToken).request { (response) in
                 switch response {
                 case .success(_): break
                 case .failure(let failtxt):

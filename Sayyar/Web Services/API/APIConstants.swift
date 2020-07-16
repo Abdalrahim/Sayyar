@@ -85,6 +85,8 @@ enum Keys : String {
     
     case code = "code"
     
+    case login = "login"
+    
     case accessToken = "access_token"
     
     case phone_no = "phone_no"
@@ -134,7 +136,7 @@ struct Parameters {
     
     static let login : [Keys] = [.phone_no, .code]
     
-    static let phone : [Keys] = [.phone_no]
+    static let phone : [Keys] = [.phone_no, .login]
     
     static let order : [Keys] = [.destination_lat, .destination_lng, .pickup_lat, .pickup_lng]
 }
