@@ -138,6 +138,8 @@ struct Parameters {
     
     static let phone : [Keys] = [.phone_no, .login]
     
+    static let registerSms : [Keys] = [.phone_no]
+    
     static let order : [Keys] = [.destination_lat, .destination_lng, .pickup_lat, .pickup_lng]
 }
 

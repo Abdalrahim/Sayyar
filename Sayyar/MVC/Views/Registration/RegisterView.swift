@@ -38,6 +38,9 @@ struct RegisterView: View {
     @State var tosURL = "https://duckduckgo.com"
     @State var privacyPolicyURL = "https://google.com"
     
+    @State var alertTitle : String = ""
+    @State var showAlert : Bool = false
+    
     var body: some View {
         VStack {
             Image("registerImage")
@@ -206,9 +209,11 @@ struct RegisterView: View {
                 
             }.background(RoundedCorners(color: bgColor, tl: 60, tr: 60, bl: 0, br: 0))
             NavigationLink("", destination:
-                VerifyView(phone: self.phoneNumber, showSmsVerify: self.$showVerify, showSignIn: self.$showSignIn, login: false),
+                VerifyView(phone: self.phoneNumber, showSmsVerify: self.$showVerify, showSignIn: self.$showSignIn, isForLogin: false),
                        isActive: self.$showVerify)
-        }
+        }.alert(isPresented: self.$showAlert, content: {
+            Alert(title: Text("Error"), message: Text(self.alertTitle), dismissButton: .default(Text("Ok")))
+        })
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.all)
     }
@@ -233,38 +238,53 @@ struct RegisterView: View {
             switch response {
             case .success(let data):
                 
-                if let jsonDict = JSON(data).dictionary {
-                    print(jsonDict)
-                    
-                    if jsonDict ["success"] == false {
-                        // false alert
-                    } else if jsonDict["data"] != nil {
-                         self.sendSms()
-                    }
-                } else {
-                    // false alert
+                guard let jsonDict = JSON(data as Any).dictionary else {
+                    self.alertWith(message: JSON(data ?? "" ).stringValue)
+                    return
+                }
+                
+                if jsonDict["success"] == true {
+                    self.sendSms()
+                } else if let message = jsonDict["message"]?.string {
+                    self.alertWith(message: message)
                 }
                 
             case .failure(let fail):
-                print("Fail", fail)
+                self.alertWith(message: fail ?? "")
+                debugPrint("SMSEndPoint", fail as Any)
             }
         }
     }
     
     private func sendSms() {
         self.apimanager.request(with:
-            SMSEndPoint.sendSmsto(phone: self.phoneNumber, isLogin: false)
+            SMSEndPoint.registerSms(phone: self.phoneNumber)
         ) { (response) in
             switch response {
             case .success(let data):
-                let jsonData = JSON(data)
-                print(jsonData)
-                self.showVerify.toggle()
+                guard let jsonDict = JSON(data as Any).dictionary else {
+                    self.alertWith(message: JSON(data ?? "").stringValue)
+                    return
+                }
+                print(jsonDict)
+                
+                if jsonDict["success"] == true {
+                    self.showVerify.toggle()
+                } else if let message = jsonDict["message"]?.string {
+                    self.alertWith(message: message)
+                }
+                
                 break
             case .failure(let fail):
+                self.alertWith(message: fail ?? "")
                 debugPrint("SMSEndPoint", fail as Any)
             }
         }
+    }
+    
+    private func alertWith(message: String) {
+        self.alertTitle = message
+        self.showAlert.toggle()
     }
 }
 

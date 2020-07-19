@@ -78,7 +78,7 @@ struct PaymentMethod: View {
                 
             }
             .alert(isPresented: self.$showNewCupon) {
-                Alert(title: Text("sa"))
+                Alert(title: Text("New Cupon Alert to be added"))
             }
             .navigationBarTitle("payment.method")
         }

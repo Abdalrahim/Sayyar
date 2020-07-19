@@ -74,8 +74,6 @@ extension RegisterEndPoint: Router {
         let accessToken = UserSingleton.shared.loggedInUser?.tokenResponse?.accessToken ?? ""
         
         return [
-            "Content-Type" : "application/json",
-            "Accept" : "application/json",
             "Authorization" : "Bearer \(accessToken)"
         ]
     }

@@ -51,6 +51,9 @@ struct HomeView : View {
     
     @State var showPayment = false
     
+    @State var alertTitle : String = ""
+    @State var showAlert : Bool = false
+    
     @State var selectedPaymentMethod : Method = Method(type: .cash)
     
     @State var polyline = GMSPolyline()
@@ -215,7 +218,7 @@ struct HomeView : View {
                     
                 }
                     //.offset(x: self.showMenu ? geometry.size.width/1.5 : 0)
-                    .disabled(self.showMenu ? true : false)
+                    .disabled(self.showMenu)
                 
                 
                 if self.showMenu {
@@ -259,7 +262,9 @@ struct HomeView : View {
                 NewFavPlaceView(coordination: self.gmap.map.projection.coordinate(for: self.gmap.map.center))
             })
         .onAppear(perform: refreshToken)
-        
+        .alert(isPresented: self.$showAlert, content: {
+            Alert(title: Text("Error"), message: Text(self.alertTitle), dismissButton: .default(Text("Ok")))
+        })
     }
     
     private func refreshToken() {
@@ -269,7 +274,7 @@ struct HomeView : View {
                 switch response {
                 case .success(_): break
                 case .failure(let failtxt):
-                    print("Fail",failtxt ?? "")
+                    print("Fail refreshToken", failtxt)
                 }
             }
         } else {
@@ -360,6 +365,11 @@ struct HomeView : View {
             self.animationPolyline.strokeColor = .darkGray
             self.animationPolyline.map = nil
         }
+    }
+    
+    private func alertWith(message: String) {
+        self.alertTitle = message
+        self.showAlert.toggle()
     }
 }
 

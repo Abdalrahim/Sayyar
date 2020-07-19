@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Combine
+import SwiftyJSON
 
 struct SignInView: View {
     
@@ -24,6 +25,10 @@ struct SignInView: View {
     @State var showSmsCheck : Bool = false
     
     @State var showRegister : Bool = false
+    
+    @State var alertTitle : String = ""
+    
+    @State var showAlert : Bool = false
     
     var body: some View {
         NavigationView {
@@ -140,9 +145,12 @@ struct SignInView: View {
                 .background(RoundedCorners(color: bgColor, tl: 60, tr: 60, bl: 0, br: 0))
                 
                 NavigationLink("", destination:
-                    VerifyView(phone: self.phoneNum, showSmsVerify: self.$showSmsCheck, showSignIn: self.$showSignIn, login: true),
+                    VerifyView(phone: self.phoneNum, showSmsVerify: self.$showSmsCheck, showSignIn: self.$showSignIn, isForLogin: true),
                                isActive: self.$showSmsCheck)
             }
+            .alert(isPresented: self.$showAlert, content: {
+                Alert(title: Text("Error"), message: Text(self.alertTitle), dismissButton: .default(Text("Ok")))
+            })
             .edgesIgnoringSafeArea(.all)
             .navigationBarHidden(true)
         }
@@ -154,13 +162,25 @@ struct SignInView: View {
         return !self.phoneCheck
     }
     
+    
+    
     private func sendSms() {
         self.apimanager.request(with:
-            SMSEndPoint.sendSmsto(phone: self.phoneNum, isLogin: true)
+            SMSEndPoint.loginSms(phone: self.phoneNum, isLogin: true)
         ) { (response) in
             switch response {
-            case .success(_):
-                self.showSmsCheck = true
+            case .success(let data):
+                if let jsonDict = JSON(data).dictionary {
+                    print(jsonDict)
+                    
+                    if jsonDict["success"] == true {
+                        self.showSmsCheck = true
+                    } else if let message = jsonDict["message"]?.string {
+                        self.alertTitle = message
+                        self.showAlert.toggle()
+                    }
+                }
+                
                 break
             case .failure(let fail):
                 debugPrint("SMSEndPoint", fail as Any)
@@ -168,6 +188,17 @@ struct SignInView: View {
         }
     }
 }
+//{
+//    "success": true,
+//    "code": 200,
+//    "message": "success",
+//    "data": [
+//        {
+//            "phone_no": "0530003871",
+//            "active": true
+//        }
+//    ]
+//}
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {

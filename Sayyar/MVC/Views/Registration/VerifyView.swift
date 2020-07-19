@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Introspect
+import SwiftyJSON
 
 struct VerifyView: View {
     
@@ -26,7 +27,10 @@ struct VerifyView: View {
     
     @Binding var showSignIn : Bool
     
-    @State var login : Bool
+    @State var isForLogin : Bool
+    
+    @State var alertTitle : String = ""
+    @State var showAlert : Bool = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -126,137 +130,56 @@ struct VerifyView: View {
                 }
         }
         .navigationBarHidden(true)
+        .alert(isPresented: self.$showAlert, content: {
+            Alert(title: Text("Error"), message: Text(self.alertTitle), dismissButton: .default(Text("Ok")))
+        })
     }
     
     private func smslogin() {
         self.apimanager.request(with: RegisterEndPoint.login(phone: self.phone, code: self.pin)) { (response) in
             switch response {
             case .success(let data):
-                print("data",data)
+                guard let userData = data as? UserData else {
+                    self.alertWith(message: JSON(data ?? "Not User Data").stringValue)
+                    return
+                }
+                
                 self.showSignIn.toggle()
+                
                 break
             case .failure(let fail):
-                debugPrint("SMSEndPoint", fail as Any)
+                self.alertWith(message: fail ?? "")
+                debugPrint("SMSEndPoint.RegisterEndPoint", fail as Any)
             }
         }
     }
     
     private func resendSms() {
         self.apimanager.request(with:
-            SMSEndPoint.sendSmsto(phone: self.phone, isLogin: self.login)
+            isForLogin ? SMSEndPoint.loginSms(phone: self.phone, isLogin: self.isForLogin) : SMSEndPoint.registerSms(phone: self.phone)
         ) { (response) in
             switch response {
             case .success(_):
                 self.seconds = 60
                 break
             case .failure(let fail):
-                debugPrint("SMSEndPoint", fail as Any)
+                self.alertWith(message: fail ?? "")
+                debugPrint(self.isForLogin ? "SMSEndPoint.loginSms" : "SMSEndPoint.registerSms", fail as Any)
             }
         }
+    }
+    
+    private func alertWith(message: String) {
+        self.alertTitle = message
+        self.showAlert.toggle()
     }
 }
 
 struct VerifyView_Previews: PreviewProvider {
     static var previews: some View {
-        VerifyView(phone: "050 000 000", showSmsVerify: .constant(true), showSignIn: .constant(true), login: true)
+        VerifyView(phone: "050 000 000", showSmsVerify: .constant(true), showSignIn: .constant(true), isForLogin: true)
     }
 }
 
-public struct PasscodeField: View {
-    
-    var maxDigits: Int = 4
-    
-    @State var pin: String = ""
-    
-    
-    var handler: (String, (Bool) -> Void) -> Void
-    
-    public var body: some View {
-        VStack(spacing: 20) {
-            ZStack(alignment: .leading) {
-                pinDots
-                backgroundField
-            }
-        }
-        
-    }
-    
-    private var pinDots: some View {
-        HStack(spacing : 0) {
-            Spacer()
-            ForEach(0..<maxDigits) { index in
-                ZStack {
-                    if index >= self.pin.count {
-                        RoundedRectangle(cornerRadius: 5)
-                        .stroke(index >= self.pin.count ? Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)) : purple, lineWidth: 1)
-                        .frame(width: 44, height: 44)
-                    } else {
-                        RoundedRectangle(cornerRadius: 5)
-                        .stroke(index >= self.pin.count ? Color(#colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1)) : purple, lineWidth: 1)
-                        .frame(width: 44, height: 44)
-                        Text(self.pin.digits[index].numberString)
-                        .font(.custom("Cairo-SemiBold", size: 18))
-                    }
-                }
-                Spacer()
-            }
-        }
-    }
-    
-    
-    private var pintxt: some View {
-        HStack(spacing : 0) {
-            ForEach(0..<pin.count) { index in
-                Text(self.pin.digits[index].numberString)
-                    .padding(.leading, UIScreen.main.bounds.width/6.5)
-            }
-        }
-    }
-    
-    private var backgroundField: some View {
-        let boundPin = Binding<String>(get: { self.pin }, set: { newValue in
-            self.pin = newValue
-            self.submitPin()
-        })
-        
-        return TextField("", text: boundPin, onCommit: submitPin)
-//           .accentColor(.clear)
-//           .foregroundColor(.clear)
-//           .keyboardType(.numberPad)
-      
-             .introspectTextField { textField in
-                 textField.tintColor = .clear
-                 textField.textColor = .clear
-                 textField.keyboardType = .numberPad
-                 textField.becomeFirstResponder()
-                 textField.isHidden = true
-         }
-    }
-    
-    private func submitPin() {
-        guard !pin.isEmpty else {
-            return
-        }
-        
-        if pin.count == maxDigits {
-            
-            handler(pin) { isSuccess in
-                if isSuccess {
-                    print("pin matched, go to next page, no action to perfrom here")
-                } else {
-                    pin = ""
-                    print("this has to called after showing toast why is the failure")
-                }
-            }
-        }
-        
-        // this code is never reached under  normal circumstances. If the user pastes a text with count higher than the
-        // max digits, we remove the additional characters and make a recursive call.
-        if pin.count > maxDigits {
-            pin = String(pin.prefix(maxDigits))
-            submitPin()
-        }
-    }
-}
 
 
