@@ -243,7 +243,7 @@ struct RegisterView: View {
                     return
                 }
                 
-                if jsonDict["success"] == true {
+                if jsonDict["code"] == 200 {
                     self.sendSms()
                 } else if let message = jsonDict["message"]?.string {
                     self.alertWith(message: message)
@@ -257,6 +257,7 @@ struct RegisterView: View {
     }
     
     private func sendSms() {
+        
         self.apimanager.request(with:
             SMSEndPoint.registerSms(phone: self.phoneNumber)
         ) { (response) in
@@ -268,7 +269,7 @@ struct RegisterView: View {
                 }
                 print(jsonDict)
                 
-                if jsonDict["success"] == true {
+                if jsonDict["code"] == 200 {
                     self.showVerify.toggle()
                 } else if let message = jsonDict["message"]?.string {
                     self.alertWith(message: message)

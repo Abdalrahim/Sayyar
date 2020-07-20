@@ -19,6 +19,9 @@ struct SummaryView: View {
     @State var pickupText : String
     @State var destinationText : String
     
+    var cancel: () -> ()
+    var createOrder: () -> ()
+    
     var body: some View {
         VStack(spacing: 0) {
             if isSearching {
@@ -101,6 +104,7 @@ struct SummaryView: View {
                     // MARK: Add Pin
                     Button(action: {
                         withAnimation {
+                            self.createOrder()
                             self.isSearching = true
                         }
                         
@@ -118,12 +122,12 @@ struct SummaryView: View {
                         .cornerRadius(10)
                     }
                 } else {
-                    NavigationLink(destination: OfferView()) {
-                        Text("Cancel")
-                        .font(.custom("Cairo-SemiBold", size: 16))
-                        .foregroundColor(.red)
-                    }.padding(.vertical, -5)
-                    
+                    Text("Cancel")
+                    .font(.custom("Cairo-SemiBold", size: 16))
+                    .foregroundColor(.red).padding(.vertical, -5)
+                        .onTapGesture {
+                            self.cancel()
+                    }
                 }
             }
             .padding()
@@ -145,7 +149,11 @@ struct SummaryView_Previews: PreviewProvider {
         return ForEach(supportedLocales, id: \.identifier) { locale in
             
             ForEach([ColorScheme.dark, .light], id: \.self) { scheme in
-                SummaryView(paymentMethod: .constant(.init(type: .visa)), showPaymentType: .constant(true), pickupText: "Azizyah rd", destinationText: "King Faisal Rd")
+                SummaryView(paymentMethod: .constant(.init(type: .visa)), showPaymentType: .constant(true), pickupText: "Azizyah rd", destinationText: "King Faisal Rd", cancel: {
+                    
+                }, createOrder: {
+                    
+                })
                 .previewLayout(.sizeThatFits)
                 .background(Color.gray)
                 .padding()

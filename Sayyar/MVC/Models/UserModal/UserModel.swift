@@ -10,8 +10,7 @@ import Foundation
 import ObjectMapper
 
 
-class UserData : Mappable{
-    var accessToken : String?
+class UserData : NSObject, Mappable{
     var userId : String?
 
     var email : String?
@@ -33,18 +32,15 @@ class UserData : Mappable{
     
     var media : [String]?
     
-    var tokenResponse : TokenResponse?
-    
     required init?(map: Map){}
     
-    init(uid: String?, firstName : String , lastName : String , email: String? , imageUrl: String?, token: TokenResponse?) {
+    init(uid: String?, firstName : String? , lastName : String?, email: String? , imageUrl: String?, token: TokenResponse?) {
         self.userId = uid
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
         
         self.profilePic = imageUrl
-        self.tokenResponse = token
     }
     
     
@@ -59,8 +55,6 @@ class UserData : Mappable{
         
         mobile <- map["mobile"]
         proposals <- map["proposals"]
-        accessToken <- map["access_token"]
-        tokenResponse = TokenResponse(JSON: map.JSON)
     
     }
     
@@ -69,7 +63,7 @@ class UserData : Mappable{
 class TokenResponse: NSObject , Mappable {
     var accessToken : String?
     var token_type : String?
-    var expires_in : String?
+    var expires_in : Int?
     
     required init?(map: Map){}
     

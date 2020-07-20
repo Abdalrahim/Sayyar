@@ -15,14 +15,12 @@ extension RegisterEndPoint {
     
     switch self {
     case .login(_) :
-        let object  = Mapper<UserData>().map(JSONObject: data)
-        print("Access Token: " ,object?.tokenResponse?.accessToken)
-        UserSingleton.shared.loggedInUser = object
-        return object
-    case .refresh(_):
+        let tokenResponse = Mapper<TokenResponse>().map(JSONObject: data)
+        TokenSingleton.shared.currentToken = tokenResponse
+        return tokenResponse
+    case .refresh:
         let tokenResponse  = Mapper<TokenResponse>().map(JSONObject: data)
-        print("Access Token Refresh: " ,tokenResponse)
-        UserSingleton.shared.loggedInUser?.tokenResponse = tokenResponse
+        TokenSingleton.shared.currentToken = tokenResponse
         return tokenResponse
     default:
       return data as AnyObject

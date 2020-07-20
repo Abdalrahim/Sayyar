@@ -43,8 +43,10 @@ class HTTPClient : NSObject {
         debugPrint(fullPath)
         debugPrint(params ?? "")
         debugPrint(api.header)
-        
-        Alamofire.request(fullPath, method: method, parameters: params, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+        debugPrint(api.header)
+        Alamofire.request(fullPath, method: method, parameters: params, encoding: JSONEncoding.init(), headers: nil)
+            .validate(contentType: ["application/json"])
+        .responseJSON { (response) in
             
             guard let data = response.data else {
                 return
@@ -70,13 +72,13 @@ class HTTPClient : NSObject {
 
                 case .badRequest?, .unAuthorizedAccess? , .serverNotFound? , .internalServerError?:
                     failure(json[APIConstants.message.rawValue].stringValue)
-                    print("Failure here: ", json.dictionary, json.stringValue)
+                    print("Failure here: ", json)
                     if json[APIConstants.success.rawValue].stringValue == Validate.invalidAccessToken.rawValue {
                         self.tokenExpired()
                     }
 
                 case .none:
-                   print("Failure here: ", json.dictionary, json.stringValue)
+                   print("Failure here: ", json)
                     failure(json[APIConstants.message.rawValue].stringValue)
                 }
             } else {

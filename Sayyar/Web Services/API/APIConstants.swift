@@ -16,6 +16,16 @@ enum ApplicationPhase {
 
 let application_phase : ApplicationPhase = .dev
 
+var environment : String {
+    get {
+        if application_phase == .dev {
+            return "testing"
+        } else {
+            return ""
+        }
+    }
+}
+
 internal struct APIBasePath {
     
     //Server
@@ -98,6 +108,8 @@ enum Keys : String {
     case pickup_lat = "pickup_lat"
     
     case pickup_lng = "pickup_lng"
+    
+    case enivronment = "enivronment"
 }
 
 enum Validate : String {
@@ -136,9 +148,9 @@ struct Parameters {
     
     static let login : [Keys] = [.phone_no, .code]
     
-    static let phone : [Keys] = [.phone_no, .login]
+    static let loginSms : [Keys] = [.phone_no, .login, .enivronment]
     
-    static let registerSms : [Keys] = [.phone_no]
+    static let registerSms : [Keys] = [.phone_no, .enivronment]
     
     static let order : [Keys] = [.destination_lat, .destination_lng, .pickup_lat, .pickup_lng]
 }

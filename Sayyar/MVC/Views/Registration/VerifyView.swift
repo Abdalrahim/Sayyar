@@ -139,8 +139,8 @@ struct VerifyView: View {
         self.apimanager.request(with: RegisterEndPoint.login(phone: self.phone, code: self.pin)) { (response) in
             switch response {
             case .success(let data):
-                guard let userData = data as? UserData else {
-                    self.alertWith(message: JSON(data ?? "Not User Data").stringValue)
+                guard let token = data as? TokenResponse else {
+                    self.alertWith(message: JSON(data ?? "No Token Data").stringValue)
                     return
                 }
                 

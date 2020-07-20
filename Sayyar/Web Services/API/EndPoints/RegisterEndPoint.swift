@@ -11,7 +11,7 @@ import Alamofire
 enum RegisterEndPoint {
     
     case register(email : String?, firstName: String?, lastName: String?, phone: String?, clientType : String?)
-    case refresh(accessToken : String?)
+    case refresh
     case login(phone : String?, code: String?)
 }
 
@@ -44,7 +44,7 @@ extension RegisterEndPoint: Router {
         case .register(_):
             return APITypes.register
             
-        case .refresh(_):
+        case .refresh:
             return APITypes.refresh
             
         case .login(_):
@@ -57,11 +57,13 @@ extension RegisterEndPoint: Router {
             
         case .register(let email,let firstName,let lastname, let phone, let clientType):
             return Parameters.register.map(values: [email, firstName, lastname, phone, clientType])
-        case .refresh(let accessToken):
-            return Parameters.refresh.map(values: [accessToken])
         case .login(phone: let phone, code: let code):
             return Parameters.login.map(values: [phone, code])
+            
+        default:
+            return OptionalDictionary(nilLiteral: ())
         }
+        
     }
     
     
@@ -71,7 +73,7 @@ extension RegisterEndPoint: Router {
     
     
     var header: [String : String] {
-        let accessToken = UserSingleton.shared.loggedInUser?.tokenResponse?.accessToken ?? ""
+        let accessToken = TokenSingleton.shared.currentToken?.accessToken ?? ""
         
         return [
             "Authorization" : "Bearer \(accessToken)"

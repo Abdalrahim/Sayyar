@@ -173,7 +173,7 @@ struct SignInView: View {
                 if let jsonDict = JSON(data).dictionary {
                     print(jsonDict)
                     
-                    if jsonDict["success"] == true {
+                    if jsonDict["code"] == 200 {
                         self.showSmsCheck = true
                     } else if let message = jsonDict["message"]?.string {
                         self.alertTitle = message

@@ -164,7 +164,11 @@ struct HomeView : View {
                         SummaryView(paymentMethod: self.$selectedPaymentMethod,
                                     showPaymentType: self.$showPayment,
                                     pickupText: "King Fahad Road",
-                                    destinationText: "Orobah Road")
+                                    destinationText: "Orobah Road", cancel: {
+                                        
+                        }, createOrder: {
+                            self.createOrder()
+                        })
                     } else {
                         DestinationView(places: self.places, addedPin: {
                             self.addPin()
@@ -268,9 +272,9 @@ struct HomeView : View {
     }
     
     private func refreshToken() {
-        if let accessToken = UserSingleton.shared.loggedInUser?.tokenResponse?.accessToken {
+        if let accessToken = TokenSingleton.shared.currentToken?.accessToken {
             print("Token :", accessToken)
-            RegisterEndPoint.refresh(accessToken: accessToken).request { (response) in
+            RegisterEndPoint.refresh.request { (response) in
                 switch response {
                 case .success(_): break
                 case .failure(let failtxt):

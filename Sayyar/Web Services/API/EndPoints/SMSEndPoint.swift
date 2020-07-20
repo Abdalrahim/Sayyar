@@ -48,9 +48,9 @@ extension SMSEndPoint: Router {
     func format() -> OptionalDictionary {
         switch self {
         case .loginSms(phone: let phone, isLogin: let login):
-            return Parameters.phone.map(values: [phone, "\(login)"])
+            return Parameters.loginSms.map(values: [phone, "\(login)", environment])
         case .registerSms(phone: let phone):
-            return Parameters.registerSms.map(values: [phone])
+            return Parameters.registerSms.map(values: [phone, environment])
         }
     }
     
@@ -61,7 +61,7 @@ extension SMSEndPoint: Router {
     
     
     var header: [String : String] {
-        let accessToken = UserSingleton.shared.loggedInUser?.tokenResponse?.accessToken ?? ""
+        let accessToken = TokenSingleton.shared.currentToken?.accessToken ?? ""
         
         return ["Authorization" : "Bearer \(accessToken)"]
     }
