@@ -11,17 +11,19 @@ import ObjectMapper
 
 
 class UserData : NSObject, Mappable{
-    var userId : String?
+    var userId : Int?
 
     var email : String?
     var emailVerifiedAt : String?
     
+    var createdAt : String?
+    
     var firstName : String?
     var lastName : String?
-    var userName : String?
+    var displayName : String?
     var mobile : String?
     var age : Int?
-    var nationalId : String?
+    var nationalId : Int?
     
     var profilePic : String?
     var clientType : String?
@@ -34,31 +36,58 @@ class UserData : NSObject, Mappable{
     
     required init?(map: Map){}
     
-    init(uid: String?, firstName : String? , lastName : String?, email: String? , imageUrl: String?, token: TokenResponse?) {
+    init(uid: Int?, firstName : String? , lastName : String?, email: String? , imageUrl: String?, token: TokenResponse?) {
         self.userId = uid
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
-        
         self.profilePic = imageUrl
     }
     
     
     func mapping(map: Map) {
         print("User Data Mapping",map.JSON)
-        userId <- map["id"]
+        createdAt <- map["created_at"]
         
+        userId <- map["id"]
+        email <- map["email"]
         firstName <- map["first_name"]
         lastName <- map["last_name"]
-        email <- map["email"]
-
-        
+        displayName <- map["display_name"]
         mobile <- map["mobile"]
+        age <- map["age"]
+        nationalId <- map["national_id"]
+        
+        clientType <- map["client_type"]
+        status <- map["status"]
         proposals <- map["proposals"]
-    
+        
+        city <- map["city"]
+        car <- map["car"]
+        media <- map["media"]
     }
-    
 }
+
+//{
+//    "id": 5,
+//    "first_name": "abdalrahim",
+//    "last_name": "abdullah",
+//    "email": "rahim@tera-cit.com",
+//    "email_verified_at": null,
+//    "remember_token": null,
+//    "created_at": "2020-07-09T12:50:56.000000Z",
+//    "updated_at": "2020-07-09T12:50:56.000000Z",
+//    "mobile": "0533691336",
+//    "age": 22,
+//    "display_name": "rahim",
+//    "national_id": "1234567890123",
+//    "national_id_pic": null,
+//    "bank_acc_no": "1234567890123",
+//    "status": null,
+//    "client_type": "passenger",
+//    "city": null,
+//    "car": null
+//}
 
 class TokenResponse: NSObject , Mappable {
     var accessToken : String?

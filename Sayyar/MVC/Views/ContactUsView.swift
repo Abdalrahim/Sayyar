@@ -17,6 +17,7 @@ struct ContactUsView: View {
             self.reason = selectedContact?.title.localized ?? ""
         }
     }
+    
     @State var reason : String = "contact.reason".localized
     @State var description : String = ""
     @State var title : String = ""
@@ -135,6 +136,18 @@ struct ContactUsView: View {
         })
             .onAppear {
                 self.tripTitle = self.settings.orderId
+        }
+    }
+    
+    private func sendContact() {
+        AuthEndPoint.contactUs(reason: selectedContact?.title, subject: title, description: description)
+            .request { (response) in
+            switch response {
+            case .success(let tokenRsp):
+                break
+            case .failure(let failtxt):
+                print("Failed sendContact", failtxt)
+            }
         }
     }
 }

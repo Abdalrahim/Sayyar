@@ -233,7 +233,7 @@ struct RegisterView: View {
     private func registerUser() {
         
         self.apimanager.request(with:
-            RegisterEndPoint.register(email: self.email, firstName: self.firstName, lastName: self.lastName, phone: self.phoneNumber, clientType: "passenger")
+            AuthEndPoint.register(email: self.email, firstName: self.firstName, lastName: self.lastName, phone: self.phoneNumber, clientType: "passenger")
         ) { (response) in
             switch response {
             case .success(let data):

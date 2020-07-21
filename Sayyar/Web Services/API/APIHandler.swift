@@ -9,19 +9,23 @@
 import ObjectMapper
 import SwiftyJSON
 
-extension RegisterEndPoint {
+extension AuthEndPoint {
   
   func handle(data : Any) -> AnyObject? {
     
     switch self {
-    case .login(_) :
+    case .login :
         let tokenResponse = Mapper<TokenResponse>().map(JSONObject: data)
         TokenSingleton.shared.currentToken = tokenResponse
         return tokenResponse
     case .refresh:
-        let tokenResponse  = Mapper<TokenResponse>().map(JSONObject: data)
+        let tokenResponse = Mapper<TokenResponse>().map(JSONObject: data)
         TokenSingleton.shared.currentToken = tokenResponse
         return tokenResponse
+    case .me:
+        let userResponse = Mapper<UserData>().map(JSONObject: data)
+        UserSingleton.shared.loggedInUser = userResponse
+        return userResponse
     default:
       return data as AnyObject
     }

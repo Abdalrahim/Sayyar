@@ -52,7 +52,7 @@
 		0F51FB9C24B35C0B004C328C /* APIRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51FB9B24B35C0B004C328C /* APIRoutes.swift */; };
 		0F51FB9E24B35E0E004C328C /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51FB9D24B35E0E004C328C /* APIConstants.swift */; };
 		0F51FBA024B36381004C328C /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51FB9F24B36381004C328C /* HTTPClient.swift */; };
-		0F51FBA324B3756A004C328C /* RegisterEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51FBA224B3756A004C328C /* RegisterEndPoint.swift */; };
+		0F51FBA324B3756A004C328C /* AuthEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51FBA224B3756A004C328C /* AuthEndPoint.swift */; };
 		0F57463424AA41CF002CEA11 /* ContactUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F57463324AA41CF002CEA11 /* ContactUsView.swift */; };
 		0F59396924C61C2B001253B2 /* TokenSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F59396824C61C2B001253B2 /* TokenSingleton.swift */; };
 		0F65D1C823F2C8250024BB51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F65D1CA23F2C8250024BB51 /* Localizable.strings */; };
@@ -142,7 +142,7 @@
 		0F51FB9B24B35C0B004C328C /* APIRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRoutes.swift; sourceTree = "<group>"; };
 		0F51FB9D24B35E0E004C328C /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		0F51FB9F24B36381004C328C /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
-		0F51FBA224B3756A004C328C /* RegisterEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterEndPoint.swift; sourceTree = "<group>"; };
+		0F51FBA224B3756A004C328C /* AuthEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndPoint.swift; sourceTree = "<group>"; };
 		0F57463324AA41CF002CEA11 /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
 		0F59396824C61C2B001253B2 /* TokenSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSingleton.swift; sourceTree = "<group>"; };
 		0F65D1C723F2C8180024BB51 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -416,7 +416,7 @@
 		0F51FBA124B37540004C328C /* EndPoints */ = {
 			isa = PBXGroup;
 			children = (
-				0F51FBA224B3756A004C328C /* RegisterEndPoint.swift */,
+				0F51FBA224B3756A004C328C /* AuthEndPoint.swift */,
 				0F87093424BC95320047416D /* SMSEndPoint.swift */,
 				0F7A640724BDF3CF0001429B /* BookingEndPoint.swift */,
 			);
@@ -763,7 +763,7 @@
 				0F1F0526242A264F00ACEC10 /* SummaryView.swift in Sources */,
 				0F483AD823F99213004DDC29 /* TextNetworkManager.swift in Sources */,
 				0F87093524BC95320047416D /* SMSEndPoint.swift in Sources */,
-				0F51FBA324B3756A004C328C /* RegisterEndPoint.swift in Sources */,
+				0F51FBA324B3756A004C328C /* AuthEndPoint.swift in Sources */,
 				0FBFDEA0240416B5007739A7 /* ConfigRemote.swift in Sources */,
 				0F14DDC8240BEA270075E22B /* OfferCard.swift in Sources */,
 				0FA2CFE623E866B400451EEE /* RatingView.swift in Sources */,

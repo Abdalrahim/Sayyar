@@ -63,7 +63,11 @@ extension SMSEndPoint: Router {
     var header: [String : String] {
         let accessToken = TokenSingleton.shared.currentToken?.accessToken ?? ""
         
-        return ["Authorization" : "Bearer \(accessToken)"]
+        return [
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization" : "Bearer \(accessToken)"
+        ]
     }
     
 }

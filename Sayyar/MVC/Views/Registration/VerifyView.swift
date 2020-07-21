@@ -136,7 +136,7 @@ struct VerifyView: View {
     }
     
     private func smslogin() {
-        self.apimanager.request(with: RegisterEndPoint.login(phone: self.phone, code: self.pin)) { (response) in
+        self.apimanager.request(with: AuthEndPoint.login(phone: self.phone, code: self.pin)) { (response) in
             switch response {
             case .success(let data):
                 guard let token = data as? TokenResponse else {

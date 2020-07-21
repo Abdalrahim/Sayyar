@@ -59,6 +59,10 @@ internal struct APITypes {
     static let smsCheck = "/smsChek"
     
     static let orderCreate = "/order/create"
+    
+    static let me = "/me"
+    
+    static let contactus = "/contactus"
 }
 
 enum Response {
@@ -110,6 +114,31 @@ enum Keys : String {
     case pickup_lng = "pickup_lng"
     
     case enivronment = "enivronment"
+    
+    case reason = "message_reason"
+    
+    case subject = "subject"
+    
+    case description = "description"
+}
+
+
+struct Parameters {
+    
+    /// Mark: Register
+    static let register : [Keys] = [.email, .firstName, .lastName, .mobile, .clientType]
+    
+    static let refresh : [Keys] = [.accessToken]
+    
+    static let login : [Keys] = [.phone_no, .code]
+    
+    static let loginSms : [Keys] = [.phone_no, .login, .enivronment]
+    
+    static let registerSms : [Keys] = [.phone_no, .enivronment]
+    
+    static let order : [Keys] = [.destination_lat, .destination_lng, .pickup_lat, .pickup_lng]
+    
+    static let contactus : [Keys] = [.reason, .subject, .description]
 }
 
 enum Validate : String {
@@ -139,21 +168,6 @@ enum Validate : String {
     }
 }
 
-struct Parameters {
-    
-    /// Mark: Register
-    static let register : [Keys] = [.email, .firstName, .lastName, .mobile, .clientType]
-    
-    static let refresh : [Keys] = [.accessToken]
-    
-    static let login : [Keys] = [.phone_no, .code]
-    
-    static let loginSms : [Keys] = [.phone_no, .login, .enivronment]
-    
-    static let registerSms : [Keys] = [.phone_no, .enivronment]
-    
-    static let order : [Keys] = [.destination_lat, .destination_lng, .pickup_lat, .pickup_lng]
-}
 
 internal struct Routes {
     

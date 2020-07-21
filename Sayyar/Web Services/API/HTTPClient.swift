@@ -34,7 +34,7 @@ enum ResponseStatus : Int { //enum for response status getting from server End
 class HTTPClient : NSObject {
     
     func postRequest(withApi api: Router, success: @escaping HttpClientSuccess, failure: @escaping HttpClientFailure) {
-        
+         
         let params = api.parameters
         let fullPath = api.baseURL + api.route
         let method = api.method
@@ -44,8 +44,8 @@ class HTTPClient : NSObject {
         debugPrint(params ?? "")
         debugPrint(api.header)
         debugPrint(api.header)
-        Alamofire.request(fullPath, method: method, parameters: params, encoding: JSONEncoding.init(), headers: nil)
-            .validate(contentType: ["application/json"])
+        
+        Alamofire.request(fullPath, method: method, parameters: params, encoding: JSONEncoding.init(), headers: api.header)
         .responseJSON { (response) in
             
             guard let data = response.data else {

@@ -8,14 +8,16 @@
 
 import Alamofire
 
-enum RegisterEndPoint {
+enum AuthEndPoint {
     
     case register(email : String?, firstName: String?, lastName: String?, phone: String?, clientType : String?)
     case refresh
+    case me
     case login(phone : String?, code: String?)
+    case contactUs(reason : String?, subject: String?, description: String?)
 }
 
-extension RegisterEndPoint: Router {
+extension AuthEndPoint: Router {
     
     var baseURL: String {
         switch self{
@@ -41,14 +43,20 @@ extension RegisterEndPoint: Router {
         
         switch self {
             
-        case .register(_):
+        case .register:
             return APITypes.register
+            
+        case .me:
+            return APITypes.me
             
         case .refresh:
             return APITypes.refresh
             
-        case .login(_):
+        case .login:
             return APITypes.login
+            
+        case .contactUs:
+            return APITypes.contactus
         }
     }
     
@@ -57,9 +65,10 @@ extension RegisterEndPoint: Router {
             
         case .register(let email,let firstName,let lastname, let phone, let clientType):
             return Parameters.register.map(values: [email, firstName, lastname, phone, clientType])
-        case .login(phone: let phone, code: let code):
+        case .login(let phone, let code):
             return Parameters.login.map(values: [phone, code])
-            
+        case .contactUs(let reason, let subject, let description):
+            return Parameters.contactus.map(values: [reason, subject, description])
         default:
             return OptionalDictionary(nilLiteral: ())
         }
@@ -76,6 +85,8 @@ extension RegisterEndPoint: Router {
         let accessToken = TokenSingleton.shared.currentToken?.accessToken ?? ""
         
         return [
+            "Content-Type": "application/json",
+            "Accept": "application/json",
             "Authorization" : "Bearer \(accessToken)"
         ]
     }

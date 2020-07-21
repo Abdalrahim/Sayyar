@@ -272,20 +272,34 @@ struct HomeView : View {
     }
     
     private func refreshToken() {
-        if let accessToken = TokenSingleton.shared.currentToken?.accessToken {
-            print("Token :", accessToken)
-            RegisterEndPoint.refresh.request { (response) in
-                switch response {
-                case .success(_): break
-                case .failure(let failtxt):
-                    print("Fail refreshToken", failtxt)
+        DispatchQueue.main.async {
+            if (TokenSingleton.shared.currentToken?.accessToken) != nil {
+                AuthEndPoint.refresh.request { (response) in
+                    switch response {
+                    case .success(let tokenRsp):
+                        guard let token = tokenRsp as? TokenResponse else { return }
+                        self.getUser(with: token.accessToken ?? "")
+                        TokenSingleton.shared.currentToken = token
+                        
+                    case .failure(let failtxt):
+                        print("Fail refreshToken", failtxt)
+                    }
                 }
-            }
-        } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            } else {
                 self.showSignIn.toggle()
             }
-            
+        }
+    }
+    
+    private func getUser(with accessToken : String) {
+        AuthEndPoint.me.request { (response) in
+            switch response {
+            case .success(let userRsp):
+                guard let user = userRsp as? UserData else { return }
+                UserSingleton.shared.loggedInUser = user
+            case .failure(let failtxt):
+                print("Fail getUser", failtxt)
+            }
         }
     }
     
