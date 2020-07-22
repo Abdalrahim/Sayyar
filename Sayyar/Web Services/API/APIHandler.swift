@@ -49,3 +49,26 @@ extension BookingEndPoint {
         }
     }
 }
+
+extension GeneralEndPoint {
+    func handle(data: Any) -> AnyObject? {
+        switch self {
+        case .purpose:
+            let responseData = JSON(data)["data"]
+            var reasons : [ReasonData] = []
+            print(responseData.first)
+            for (index, reason) in responseData.enumerated() {
+                let withIndex = responseData[index]
+                print(reason, withIndex)
+                if let mappedReason = Mapper<ReasonData>().map(JSONObject: withIndex) {
+                    reasons.append(mappedReason)
+                }
+                
+            }
+            
+            return reasons as AnyObject
+        default:
+            return data as AnyObject
+        }
+    }
+}

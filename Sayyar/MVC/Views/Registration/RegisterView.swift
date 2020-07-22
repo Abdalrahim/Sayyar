@@ -242,8 +242,8 @@ struct RegisterView: View {
                     self.alertWith(message: JSON(data ?? "" ).stringValue)
                     return
                 }
-                
-                if jsonDict["code"] == 200 {
+                print(jsonDict)
+                if jsonDict["data"]?["client_type"] == "passenger" {
                     self.sendSms()
                 } else if let message = jsonDict["message"]?.string {
                     self.alertWith(message: message)

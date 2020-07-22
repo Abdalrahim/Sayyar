@@ -73,7 +73,7 @@ class HTTPClient : NSObject {
                 case .badRequest?, .unAuthorizedAccess? , .serverNotFound? , .internalServerError?:
                     failure(json[APIConstants.message.rawValue].stringValue)
                     print("Failure here: ", json)
-                    if json[APIConstants.success.rawValue].stringValue == Validate.invalidAccessToken.rawValue {
+                    if json[APIConstants.message.rawValue].stringValue == "Unauthenticated." {
                         self.tokenExpired()
                     }
 

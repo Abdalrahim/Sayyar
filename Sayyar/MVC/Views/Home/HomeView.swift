@@ -20,7 +20,7 @@ let red = Color(#colorLiteral(red: 0.8078431373, green: 0.2784313725, blue: 0.4,
 let dark = Color(#colorLiteral(red: 0.231372549, green: 0.2745098039, blue: 0.3411764706, alpha: 1))
 let gray = Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1))
 let lightgray = Color(#colorLiteral(red: 0.7176470588, green: 0.7058823529, blue: 0.7058823529, alpha: 1))
-let blktxt = Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+let blktxt = Color("blktxt")
 
 struct HomeView : View {
     
@@ -283,6 +283,7 @@ struct HomeView : View {
                         
                     case .failure(let failtxt):
                         print("Fail refreshToken", failtxt)
+                        self.showSignIn.toggle()
                     }
                 }
             } else {

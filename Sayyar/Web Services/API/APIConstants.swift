@@ -63,6 +63,8 @@ internal struct APITypes {
     static let me = "/me"
     
     static let contactus = "/contactus"
+    
+    static let contactpurpose = "/contactpurpose"
 }
 
 enum Response {

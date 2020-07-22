@@ -66,6 +66,7 @@ struct SignInView: View {
                                         TextField("insert.phone".localized, text: self.$phoneNum)
                                             .keyboardType(.numberPad)
                                             .font(.custom("Cairo-SemiBold", size: 15))
+                                            .foregroundColor(blktxt)
                                         Divider()
                                             .background(self.notRegister ? red : Color.clear)
                                         
@@ -122,7 +123,7 @@ struct SignInView: View {
                             }
                             Spacer()
                             NavigationLink(destination:
-                            RegisterView(showSignIn: self.$showSignIn, showRegister: self.$showRegister),isActive: self.$showRegister) {
+                            RegisterView(showSignIn: self.$showSignIn, showRegister: self.$showRegister).navigationBarHidden(true),isActive: self.$showRegister) {
                                 
                                 HStack {
                                     Text("no.account")
@@ -146,13 +147,13 @@ struct SignInView: View {
                 
                 NavigationLink("", destination:
                     VerifyView(phone: self.phoneNum, showSmsVerify: self.$showSmsCheck, showSignIn: self.$showSignIn, isForLogin: true),
-                               isActive: self.$showSmsCheck)
+                               isActive: self.$showSmsCheck).navigationBarHidden(true)
             }
             .alert(isPresented: self.$showAlert, content: {
                 Alert(title: Text("Error"), message: Text(self.alertTitle), dismissButton: .default(Text("Ok")))
             })
             .edgesIgnoringSafeArea(.all)
-            .navigationBarHidden(true)
+            
         }
     }
     

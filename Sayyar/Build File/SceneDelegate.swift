@@ -62,6 +62,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 class DataToTransfer: ObservableObject {
     @Published var orderId : String = "selet.trip".localized
+    @Published var signedIn : Bool = false
 }
 
 struct DismissingKeyboard: ViewModifier {

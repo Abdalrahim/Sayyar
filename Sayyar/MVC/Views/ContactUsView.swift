@@ -136,14 +136,32 @@ struct ContactUsView: View {
         })
             .onAppear {
                 self.tripTitle = self.settings.orderId
+                self.getreasons()
         }
     }
     
     private func sendContact() {
-        AuthEndPoint.contactUs(reason: selectedContact?.title, subject: title, description: description)
+        GeneralEndPoint.contactUs(reason: selectedContact?.title, subject: title, description: description)
             .request { (response) in
             switch response {
             case .success(let tokenRsp):
+                
+                break
+            case .failure(let failtxt):
+                print("Failed sendContact", failtxt)
+            }
+        }
+    }
+    
+    private func getreasons() {
+        GeneralEndPoint.purpose
+            .request { (response) in
+            switch response {
+            case .success(let resonsArray):
+                guard let reasons = resonsArray as? [ReasonData] else { return }
+                reasons.forEachEnumerated { (index, reason) in
+                    print(reason.name_ar)
+                }
                 break
             case .failure(let failtxt):
                 print("Failed sendContact", failtxt)

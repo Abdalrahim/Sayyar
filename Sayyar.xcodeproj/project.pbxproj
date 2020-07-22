@@ -26,6 +26,8 @@
 		0F0E27B423F151AF00283D27 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0F0E27B323F151AF00283D27 /* AlamofireImage */; };
 		0F0E27B723F155B800283D27 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0F0E27B623F155B800283D27 /* Alamofire */; };
 		0F0F75852427510F0001DD94 /* customTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0F75842427510F0001DD94 /* customTextField.swift */; };
+		0F10D7CC24C8760500F51359 /* GeneralEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F10D7CB24C8760500F51359 /* GeneralEndPoint.swift */; };
+		0F10D7CE24C87A0800F51359 /* ReasonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F10D7CD24C87A0800F51359 /* ReasonData.swift */; };
 		0F11ACFB23FC0977002D0552 /* NewFavPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F11ACFA23FC0977002D0552 /* NewFavPlaceView.swift */; };
 		0F14DDC6240BE9F10075E22B /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F14DDC5240BE9F10075E22B /* NotificationView.swift */; };
 		0F14DDC8240BEA270075E22B /* OfferCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F14DDC7240BEA270075E22B /* OfferCard.swift */; };
@@ -115,6 +117,8 @@
 		0F0E27A623F14ECA00283D27 /* mapstyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mapstyle.json; sourceTree = "<group>"; };
 		0F0E27A823F14F2D00283D27 /* FetchDirectionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDirectionsRequest.swift; sourceTree = "<group>"; };
 		0F0F75842427510F0001DD94 /* customTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customTextField.swift; sourceTree = "<group>"; };
+		0F10D7CB24C8760500F51359 /* GeneralEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralEndPoint.swift; sourceTree = "<group>"; };
+		0F10D7CD24C87A0800F51359 /* ReasonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonData.swift; sourceTree = "<group>"; };
 		0F11ACFA23FC0977002D0552 /* NewFavPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFavPlaceView.swift; sourceTree = "<group>"; };
 		0F14DDC5240BE9F10075E22B /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		0F14DDC7240BEA270075E22B /* OfferCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferCard.swift; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 				0F51FBA224B3756A004C328C /* AuthEndPoint.swift */,
 				0F87093424BC95320047416D /* SMSEndPoint.swift */,
 				0F7A640724BDF3CF0001429B /* BookingEndPoint.swift */,
+				0F10D7CB24C8760500F51359 /* GeneralEndPoint.swift */,
 			);
 			path = EndPoints;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 				0FA2CFDF23E84C3100451EEE /* Location.swift */,
 				0F0BEF1423E99FB90008017B /* TextMessage.swift */,
 				0F283C7E2459946600EAA463 /* ReportData.swift */,
+				0F10D7CD24C87A0800F51359 /* ReasonData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -749,6 +755,7 @@
 				0FF555B923EC51390002727A /* L102Language.swift in Sources */,
 				0FA2CFDC23E81DC800451EEE /* LocalNotificationManager.swift in Sources */,
 				0F20723523E70BAA00D89A29 /* Extensions.swift in Sources */,
+				0F10D7CE24C87A0800F51359 /* ReasonData.swift in Sources */,
 				0FD4367624A8E1F00030AC0E /* SafariView.swift in Sources */,
 				0FA2CFCD23E80F4900451EEE /* DestinationView.swift in Sources */,
 				0F2D3A332463F11500F41C4F /* ReportMissingView.swift in Sources */,
@@ -780,6 +787,7 @@
 				0F51FBA024B36381004C328C /* HTTPClient.swift in Sources */,
 				0F2AD35D2456DB50004423E6 /* ReportDetailView.swift in Sources */,
 				0F14DDC6240BE9F10075E22B /* NotificationView.swift in Sources */,
+				0F10D7CC24C8760500F51359 /* GeneralEndPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
