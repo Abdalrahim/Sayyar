@@ -56,13 +56,12 @@ extension GeneralEndPoint {
         case .purpose:
             let responseData = JSON(data)["data"]
             var reasons : [ReasonData] = []
-            print(responseData.first)
+            
             for (index, reason) in responseData.enumerated() {
                 let withIndex = responseData[index]
-                print(reason, withIndex)
-                if let mappedReason = Mapper<ReasonData>().map(JSONObject: withIndex) {
-                    reasons.append(mappedReason)
-                }
+                let mappedReason = ReasonData(json: withIndex)
+                print(mappedReason)
+                reasons.append(mappedReason)
                 
             }
             

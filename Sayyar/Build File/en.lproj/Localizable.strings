@@ -113,3 +113,4 @@
 "driver" = "A Driver";
 "faq.q" = "FAQ and General";
 "provide.info" = "Please provide a detailed description.";
+"contact.sent" = "Successfully sent";

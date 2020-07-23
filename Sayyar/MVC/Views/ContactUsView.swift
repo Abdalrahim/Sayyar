@@ -8,18 +8,21 @@
 
 import SwiftUI
 import UIKit
-
+ 
 struct ContactUsView: View {
     
+     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var selectedContact : ContactOption? {
+    @State var selectedContact : ReasonData? {
         didSet {
-            self.reason = selectedContact?.title.localized ?? ""
+            self.reason = (L102Language.isRTL ? selectedContact?.name_ar : selectedContact?.name_en) ?? ""
         }
     }
     
     @State var reason : String = "contact.reason".localized
+    
     @State var description : String = ""
+    
     @State var title : String = ""
     
     @State var tripTitle : String = ""
@@ -28,12 +31,13 @@ struct ContactUsView: View {
     
     @State var showOptions = false
     
-    @State var options : [ContactOption] = [
-        ContactOption(title: "tech.issue", type: .tech),
-        ContactOption(title: "money.issue", type: .money),
-        ContactOption(title: "driver", type: .driver),
-        ContactOption(title: "faq.q", type: .faq),
-    ]
+    @State var alertTitle : String = ""
+    
+    @State var alertMessage : String = ""
+    
+    @State var showAlert : Bool = false
+    
+    @State var options : [ReasonData] = []
     
     var settings = DataToTransfer()
     
@@ -57,16 +61,17 @@ struct ContactUsView: View {
                     withAnimation {
                         HStack {
                             List() {
-                                ForEach(self.options) { option in
-                                    Text(option.title.localized)
+                                
+                                ForEach(0..<options.count) { index in
+                                    Text(L102Language.isRTL ? "\(self.options[index].name_ar ?? "")" : "\(self.options[index].name_en ?? "")")
                                         .onTapGesture {
-                                            self.selectedContact = option
+                                            self.selectedContact = self.options[index]
                                             withAnimation {
                                                 self.showOptions.toggle()
                                             }
                                     }
                                 }
-                            }
+                            }.frame(height: CGFloat(50 * options.count))
                             .font(.custom("Cairo-Regular", size: 14))
                             
                             Spacer()
@@ -97,7 +102,7 @@ struct ContactUsView: View {
                     .foregroundColor(Color(#colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)))
             }
             
-            if self.selectedContact?.type == .driver {
+            if self.selectedContact?.id == 2 {
                 PurpleSquare(text: $tripTitle, title: "trip".localized)
                     .onTapGesture {
                         self.showHistory.toggle()
@@ -109,7 +114,7 @@ struct ContactUsView: View {
             
             Button(action: {
                 withAnimation {
-                    self.showOptions.toggle()
+                    self.sendContact()
                 }
             }) {
                 HStack(alignment: .center) {
@@ -136,32 +141,41 @@ struct ContactUsView: View {
         })
             .onAppear {
                 self.tripTitle = self.settings.orderId
-                self.getreasons()
+                self.getReasons()
         }
+        .alert(isPresented: self.$showAlert, content: {
+            Alert(title: Text("Sent"), message: Text(self.alertMessage),
+                  dismissButton: .default(Text("Ok"), action: {
+                    self.presentationMode.wrappedValue.dismiss()
+            }))
+        })
     }
     
     private func sendContact() {
-        GeneralEndPoint.contactUs(reason: selectedContact?.title, subject: title, description: description)
+        GeneralEndPoint.contactUs(reason: selectedContact?.id, subject: title, description: description)
             .request { (response) in
             switch response {
             case .success(let tokenRsp):
-                
+                self.alertTitle = "contact.sent".localized
+                self.alertMessage = ""
+                self.showAlert.toggle()
                 break
             case .failure(let failtxt):
                 print("Failed sendContact", failtxt)
+                self.alertTitle = "Failed sendContact"
+                self.alertMessage = failtxt ?? ""
+                self.showAlert.toggle()
             }
         }
     }
     
-    private func getreasons() {
+    private func getReasons() {
         GeneralEndPoint.purpose
             .request { (response) in
             switch response {
             case .success(let resonsArray):
                 guard let reasons = resonsArray as? [ReasonData] else { return }
-                reasons.forEachEnumerated { (index, reason) in
-                    print(reason.name_ar)
-                }
+                self.options = reasons
                 break
             case .failure(let failtxt):
                 print("Failed sendContact", failtxt)

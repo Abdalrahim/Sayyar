@@ -10,7 +10,7 @@ import Alamofire
 
 enum GeneralEndPoint {
     
-    case contactUs(reason : String?, subject: String?, description: String?)
+    case contactUs(reason : Int?, subject: String?, description: String?)
     case purpose
 }
 

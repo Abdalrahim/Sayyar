@@ -98,7 +98,7 @@ struct Sidemenu: View {
                     SideMenuButton(image: Image("trip log"), text: "trip.log")
                 }.padding()
                 
-                NavigationLink(destination: OrderView()) {
+                NavigationLink(destination: PaymentMethod()) {
                     SideMenuButton(image: Image(systemName: "creditcard.fill"), text: "payment.method")
                 }.padding()
                 
