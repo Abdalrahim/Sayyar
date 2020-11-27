@@ -279,7 +279,10 @@ struct HomeView : View {
                     case .success(let tokenRsp):
                         guard let token = tokenRsp as? TokenResponse else { return }
                         self.getUser(with: token.accessToken ?? "")
+                        
                         TokenSingleton.shared.currentToken = token
+                        
+                        // Mark: Create a local notification to refresh token
                         
                     case .failure(let failtxt):
                         print("Fail refreshToken", failtxt)
@@ -290,6 +293,17 @@ struct HomeView : View {
                 self.showSignIn.toggle()
             }
         }
+    }
+    
+    func createLocalNotifications(model : NotificationModel) {
+        let manager = LocalNotificationManager()
+        manager.listScheduledNotifications()
+        
+        manager.notifications = [
+            model
+        ]
+
+        manager.schedule()
     }
     
     private func getUser(with accessToken : String) {
@@ -324,8 +338,6 @@ struct HomeView : View {
             self.onFetch()
         }
         
-        
-        //createLocalNotifications()
     }
     
     private func createOrder() {

@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/hackiftekhar/IQKeyboardManager.git",
         "state": {
           "branch": null,
-          "revision": "b0f0a127cca6bb39378447baa2afff74123abd09",
-          "version": "6.5.5"
+          "revision": "4dc6bc7d1c9747bd0c261c8c055903f9fdef91f7",
+          "version": "6.5.6"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/airbnb/lottie-ios.git",
         "state": {
           "branch": null,
-          "revision": "8f81de8d81da8631fd95ff81a9db133b76e13ea4",
-          "version": "3.1.6"
+          "revision": "e02e82c7c1b472e85e641a7624e99c855e21add1",
+          "version": "3.1.9"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/nachonavarro/Pages.git",
         "state": {
           "branch": null,
-          "revision": "8e4755a627092784326af996f15f77c05b31a76d",
-          "version": "0.1.3"
+          "revision": "4cdbe4ff2f9ddbfda8cf0376a2acb678a1a0a0a2",
+          "version": "0.1.5"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
           "branch": null,
-          "revision": "aa7ff6f060d8f34d2c66a716aefff1a3bc9ef816",
-          "version": "5.5.2"
+          "revision": "e857b78ca4c8afe616b794aeb090d40f4e348072",
+          "version": "5.10.0"
         }
       }
     ]

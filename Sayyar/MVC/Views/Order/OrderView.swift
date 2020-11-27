@@ -140,7 +140,6 @@ struct OrderView: View {
         locations.append(coordinate)
         
         gmap.addMarker(marker: marker)
-        //createLocalNotifications()
     }
     
     func onFetch() {

@@ -17,6 +17,7 @@ enum SingletonKeys : String {
   case isGuestLogin = "isGuestLogin"
   case notificationCount =  "notificationCount"
   case token = "token"
+  case fcmToken = "fcmToken"
 }
 
 

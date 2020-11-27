@@ -948,7 +948,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sayyar/Sayyar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Sayyar/Preview Content\"";
-				DEVELOPMENT_TEAM = 77VYNS6333;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Sayyar/Build File/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -956,7 +956,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.teracit.Sayyar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rahim.sayyar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -971,7 +971,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sayyar/Sayyar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Sayyar/Preview Content\"";
-				DEVELOPMENT_TEAM = 77VYNS6333;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Sayyar/Build File/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -979,7 +979,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.teracit.Sayyar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rahim.sayyar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

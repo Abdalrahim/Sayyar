@@ -11,6 +11,7 @@ import GoogleMaps
 import Firebase
 import IQKeyboardManagerSwift
 import UserNotifications
+
 let GMSApiKey = "AIzaSyBYrozEJFm7MjTGed7ZqtXVObMgZzchYEo"
 
 @UIApplicationMain
@@ -65,7 +66,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate , MessagingDelegate {
             
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
-                completionHandler: {_, _ in })
+                completionHandler: { (didAllow, error) in
+                    
+            })
+            
             
         } else {
             
@@ -76,6 +80,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate , MessagingDelegate {
         }
         
         application.registerForRemoteNotifications()
+        
     }
     
     
@@ -103,12 +108,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate , MessagingDelegate {
         let userInfos = notification.request.content.userInfo
         
         // Print full message.
-        print(userInfos)
+        print("userNotificationCenter", userInfos)
         
         if let userInfo = userInfos as? [String : Any] {
             
             // Print full message.
-            print(userInfo)
+            print("userNotificationCenter",userInfo)
             
             
             completionHandler([])

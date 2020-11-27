@@ -2,25 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Just adding some photos</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We just want your location for testing</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We just want your location for testing</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We just want your location for testing</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Cairo-Bold.ttf</string>
-		<string>Cairo-Black.ttf</string>
-		<string>Cairo-ExtraLight.ttf</string>
-		<string>Cairo-Light.ttf</string>
-		<string>Cairo-Regular.ttf</string>
-		<string>Cairo-SemiBold.ttf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -44,6 +25,23 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We just want your location for testing</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We just want your location for testing</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We just want your location for testing</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Just adding some photos</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Cairo-Bold.ttf</string>
+		<string>Cairo-Black.ttf</string>
+		<string>Cairo-ExtraLight.ttf</string>
+		<string>Cairo-Light.ttf</string>
+		<string>Cairo-Regular.ttf</string>
+		<string>Cairo-SemiBold.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -85,5 +83,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>
