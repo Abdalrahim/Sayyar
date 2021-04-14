@@ -21,6 +21,7 @@ struct SummaryView: View {
     
     var cancel: () -> ()
     var createOrder: () -> ()
+    var tripEnded: () -> ()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -122,7 +123,12 @@ struct SummaryView: View {
                         .cornerRadius(10)
                     }
                 } else {
-                    Text("Cancel")
+                    
+                    NavigationLink(destination: OfferView(tripEnded: {
+                        self.tripEnded()
+                    })) {
+                        Text("Cancel")
+                    }
                     .font(.custom("Cairo-SemiBold", size: 16))
                     .foregroundColor(.red).padding(.vertical, -5)
                         .onTapGesture {
@@ -153,7 +159,7 @@ struct SummaryView_Previews: PreviewProvider {
                     
                 }, createOrder: {
                     
-                })
+                }, tripEnded: {})
                 .previewLayout(.sizeThatFits)
                 .background(Color.gray)
                 .padding()

@@ -25,5 +25,6 @@ target 'Sayyar' do
   pod 'SwiftMessages'
   pod 'SwiftyJSON'
   pod "Introspect"
+  pod 'Alamofire', '~> 4.9.0'
   
 end

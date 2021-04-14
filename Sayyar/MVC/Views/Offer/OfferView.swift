@@ -83,7 +83,7 @@ struct OfferView: View {
     @State var screen = UIScreen.main.bounds.width - 30
     @State var op : CGFloat = 0
 //    var clusterManager     : GMUClusterManager?
-    
+    var tripEnded: () -> ()
     let gmap = MapView()
     
     var body: some View {
@@ -99,7 +99,9 @@ struct OfferView: View {
                 VStack(spacing: 10) {
                 scrollbar(selected: self.$index, page: offers.count).frame(height: 5)
                     
-                Carousel(width: UIScreen.main.bounds.width, page: self.$index, height: 250, count: offers.count)
+                    Carousel(width: UIScreen.main.bounds.width, page: self.$index, height: 250, count: offers.count, tripEnded: {
+                        self.tripEnded()
+                    })
                 
                 }
                 .frame(height: 250)
@@ -143,7 +145,7 @@ struct OfferView_Previews: PreviewProvider {
         
         return ForEach(supportedLocales, id: \.identifier) { locale in
             
-            OfferView()
+            OfferView(tripEnded: {})
             .environment(\.locale, locale)
             .previewDisplayName(Locale.current.localizedString(forIdentifier: locale.identifier))
         }
@@ -168,12 +170,15 @@ struct Listing : View {
     
     @Binding var page : Int
     
+    var tripEnded: () -> ()
     var body: some View{
         
         HStack(spacing: 0){
             
             ForEach(offers){i in
-                OfferCard(offer: i, page: self.$page, width: UIScreen.main.bounds.width)
+                OfferCard(offer: i, page: self.$page, tripEnded: {
+                    self.tripEnded()
+                }, width: UIScreen.main.bounds.width)
             }
         }
     }

@@ -14,6 +14,7 @@ import SpriteKit
 struct OfferCard: View {
     @State var offer : OfferData
     @Binding var page : Int
+    var tripEnded: () -> ()
     var width : CGFloat
     
     var body: some View {
@@ -101,7 +102,9 @@ struct OfferCard: View {
             }
             .padding(.horizontal)
             
-            NavigationLink(destination: OrderView()) {
+            NavigationLink(destination: OrderView(tripEnded: {
+                self.tripEnded()
+            })) {
                 Text("accept.offer")
                     .font(.custom("Cairo-SemiBold", size: 12))
                     .foregroundColor(Color.white)
@@ -155,7 +158,9 @@ struct OfferCard_Previews: PreviewProvider {
                 VStack {
                     
                     Spacer()
-                    OfferCard(offer: offer, page: .constant(0), width: 300)
+                    OfferCard(offer: offer, page: .constant(0), tripEnded: {
+                        
+                    }, width: 300)
                 }
                 .padding()
                 .background(gray.edgesIgnoringSafeArea(.all))

@@ -14,6 +14,8 @@ struct RatingView: View {
     
     @State var textRating : String
     
+    @Binding var showRating : Bool
+    
     var body: some View {
         VStack {
             Text("how.was.trip?")
@@ -34,7 +36,7 @@ struct RatingView: View {
                 .frame(height: 100).padding(.all, 10).accentColor(purple)
             
             Button(action: {
-                print(self.rate.hashValue)
+                self.showRating.toggle()
             }, label: {
                 Text("send").font(.custom("Cairo-Bold", size: 12)).foregroundColor((rate.rate() != 0) ? purple : Color.gray)
                 
@@ -49,7 +51,7 @@ struct RatingView: View {
 }
 struct RatingView_Previews: PreviewProvider {
     static var previews: some View {
-        RatingView(rate: Rating(rawValue: 1)!, textRating: "Pls Rate").padding()
+        RatingView(rate: Rating(rawValue: 1)!, textRating: "Pls Rate", showRating: .constant(false)).padding()
             .previewLayout(.sizeThatFits)
     }
 }

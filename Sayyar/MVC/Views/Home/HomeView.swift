@@ -85,7 +85,7 @@ struct HomeView : View {
     
     var selectedPlace : FavPlace?
     
-    var bartTitle : String {
+    var barTitle : String {
         if locations.isEmpty {
             return "select.destination".localized
         } else if locations.count == 1 {
@@ -159,7 +159,7 @@ struct HomeView : View {
                         .offset(y: (self.locations.count == 2) ? self.gmap.map.center.y - 50 : -10)
                     
                     if self.showRating {
-                        RatingView(rate: self.rate, textRating: self.textRating)
+                        RatingView(rate: self.rate, textRating: self.textRating, showRating : self.$showRating)
                     } else if self.locations.count == 2 {
                         SummaryView(paymentMethod: self.$selectedPaymentMethod,
                                     showPaymentType: self.$showPayment,
@@ -168,6 +168,10 @@ struct HomeView : View {
                                         
                         }, createOrder: {
                             self.createOrder()
+                        }, tripEnded: {
+                            self.locations = []
+                            self.showRating.toggle()
+                            self.gmap.map.clear()
                         })
                     } else {
                         DestinationView(places: self.places, addedPin: {
@@ -239,9 +243,9 @@ struct HomeView : View {
                 }
             }.sheet(isPresented: self.$showSignIn, content: {
                 SignInView(showSignIn: self.$showSignIn)
-                    .onDisappear {
-                        self.refreshToken()
-                }
+//                    .onDisappear {
+//                        self.refreshToken()
+//                }
             })
             .gesture(drag)
             .navigationBarItems(
@@ -257,7 +261,7 @@ struct HomeView : View {
                         .imageScale(.large)
                         .scaleEffect(CGSize(width: 1.3, height: 1.7))
                 }.offset(x: self.showMenu ? UIScreen.main.bounds.width/1.5 : 0))
-                .navigationBarTitle(Text(self.showMenu ? "" : self.bartTitle), displayMode: .inline)
+                .navigationBarTitle(Text(self.showMenu ? "" : self.barTitle), displayMode: .inline)
                 .accentColor(purple)
                 .edgesIgnoringSafeArea(.all)
         }
@@ -335,6 +339,9 @@ struct HomeView : View {
             marker.icon = UIImage(named: "pin")?.withTintColor(.red)
             locations.append(coordinate)
             gmap.addMarker(marker: marker)
+            let bounds = GMSCoordinateBounds.init(coordinate: locations[0], coordinate: locations[1])
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
+            self.gmap.map.animate(with: update)
             self.onFetch()
         }
         

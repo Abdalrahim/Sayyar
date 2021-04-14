@@ -12,7 +12,7 @@ import Firebase
 import IQKeyboardManagerSwift
 import UserNotifications
 
-let GMSApiKey = "AIzaSyBYrozEJFm7MjTGed7ZqtXVObMgZzchYEo"
+let GMSApiKey = "AIzaSyAwxC7qPqtwI0lhGiJjYh0gzOQ37Scze4k"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

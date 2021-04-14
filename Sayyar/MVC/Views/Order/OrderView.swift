@@ -30,6 +30,8 @@ struct OrderView: View {
     
     @State var room = ""
     
+    var tripEnded: () -> ()
+    
     var btnBack : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -133,7 +135,8 @@ struct OrderView: View {
         } else if locations.count == 1 {
             marker.icon = UIImage(named: "toPin")?.withTintColor(.red)
         } else if locations.count == 2 {
-            self.onFetch()
+            self.tripEnded()
+//            self.onFetch()
             return
         }
         
@@ -188,7 +191,9 @@ struct OrderView: View {
 
 struct OrderView_Previews: PreviewProvider {
     static var previews: some View {
-        OrderView()
+        OrderView(tripEnded: {
+            
+        })
     }
 }
 

@@ -158,6 +158,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Alamofire (4.9.1)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
@@ -339,6 +340,7 @@ PODS:
   - SZTextView (1.3.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.9.0)
   - Charts
   - Crashlytics
   - EZSwiftExtensions (from `https://github.com/goktugyil/EZSwiftExtensions.git`, branch `ceeyang-Swift5.0`)
@@ -362,6 +364,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - Alamofire
     - BoringSSL-GRPC
     - Charts
     - Crashlytics
@@ -411,11 +414,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
-  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  Crashlytics: 9220f5bc89e7a618df411b4f639389dbfb0e03d2
   EZSwiftExtensions: f73648a591e529a1dbd83c22b19fd3e57df6fb7d
-  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
+  Fabric: ea977e3cd9c20425516d3dafd3bf8c941c51223f
   Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
   FirebaseABTesting: 0d10f3cdc3fa00f3f175b5b56c1003c8e888299f
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
@@ -449,6 +453,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
 
-PODFILE CHECKSUM: b38f186fedec6c835be159c2ecf82988163ddc46
+PODFILE CHECKSUM: 09ba5cab79b45d228bcc6c22952414d4488f064a
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.0

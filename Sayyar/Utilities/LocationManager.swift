@@ -90,6 +90,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         if self.latitude != 0 && self.longitude != 0 {
             getUserCurrentCity()
         }
+        self.locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {

@@ -18,6 +18,7 @@ struct Carousel : UIViewRepresentable {
     @Binding var page : Int
     var height : CGFloat
     @State var count : Int
+    var tripEnded: () -> ()
     
     func makeUIView(context: Context) -> UIScrollView{
         
@@ -36,7 +37,9 @@ struct Carousel : UIViewRepresentable {
         
         // Now Going to  embed swiftUI View Into UIView...
         
-        let view1 = UIHostingController(rootView: Listing(page: self.$page))
+        let view1 = UIHostingController(rootView: Listing(page: self.$page, tripEnded: {
+            self.tripEnded()
+        }))
         view1.view.frame = CGRect(x: 0, y: 0, width: total, height: self.height)
         view1.view.backgroundColor = .clear
         
